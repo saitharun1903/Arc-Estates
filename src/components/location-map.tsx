@@ -1,152 +1,174 @@
 "use client";
 
-import React from "react";
-import { MapPin, Navigation, Phone, MessageSquare, ExternalLink } from "lucide-react";
+import React, { useState } from "react";
+import {
+  MapPin,
+  Navigation,
+  Phone,
+  MessageSquare,
+  ExternalLink,
+} from "lucide-react";
+import { officeLocation } from "@/lib/location";
 
 interface LocationMapProps {
+  title?: string;
+  subtitle?: string;
   address?: string;
   phone?: string;
   whatsapp?: string;
+  className?: string;
 }
 
 export default function LocationMap({
-  address = "HOME, Doolapally Rd, beside KNR Apartments, Bahadurpally, Hyderabad, Telangana 500043",
-  phone = "080085 32333",
-  whatsapp = "+918008532333",
+  title = "Visit ARC Avenue",
+  subtitle = "Our office is located on Doolapally Road, Bahadurpally, Hyderabad. Call us or send a WhatsApp message to plan your visit.",
+  address = officeLocation.address,
+  phone = officeLocation.phone,
+  whatsapp = officeLocation.whatsapp,
+  className = "",
 }: LocationMapProps) {
-  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    "ARC AVENUE HOME Doolapally Rd beside KNR Apartments Bahadurpally Hyderabad Telangana 500043"
-  )}`;
+  const [mapLoaded, setMapLoaded] = useState(false);
+
+  // Determine Google Maps URLs
+  const isDefaultOffice = address === officeLocation.address;
+  const directionsUrl = isDefaultOffice
+    ? officeLocation.googleMapsDirectionsUrl
+    : officeLocation.getDirectionsUrlForAddress(address);
+  const embedUrl = isDefaultOffice
+    ? officeLocation.googleMapsEmbedUrl
+    : officeLocation.getEmbedUrlForAddress(address);
 
   const cleanPhone = phone.replace(/\s+/g, "");
   const cleanWhatsApp = whatsapp.replace(/[^0-9]/g, "");
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background border-t border-border relative transition-colors duration-300">
-      <div className="max-w-7xl mx-auto space-y-12">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
-          <div>
-            <div className="flex items-center space-x-2 text-xs font-mono tracking-[0.25em] text-accent uppercase">
-              <span>LOCATION &amp; SITE OFFICE</span>
+    <section
+      className={`py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#0C0E10] dark:bg-[#0C0E10] light:bg-[#F8F6F0] text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] border-t border-[#1C1F24] dark:border-[#1C1F24] light:border-[#E5E0D8] transition-colors duration-300 ${className}`}
+    >
+      <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12">
+        {/* Section Header with Natural, Honest Copy */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#1C1F24] dark:border-[#1C1F24] light:border-[#E5E0D8] pb-8">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center space-x-2 text-xs font-mono tracking-[0.25em] text-[#C5A880] dark:text-[#C5A880] light:text-[#9E7D4C] uppercase">
+              <span>LOCATION &amp; OFFICE</span>
               <span>//</span>
-              <span>HYDERABAD CORRIDOR</span>
+              <span>BAHADURPALLY, HYDERABAD</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold text-foreground mt-2">
-              Visit Our Registered Site Office
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
+              {title}
             </h2>
           </div>
-          <p className="text-sm text-foreground-muted max-w-md font-light leading-relaxed">
-            Positioned at the epicenter of North Hyderabad’s infrastructure surge. Connect with our
-            chief structural directors and inspect active construction on site.
+          <p className="text-sm sm:text-base text-[#A29E95] dark:text-[#A29E95] light:text-[#585B62] max-w-md font-light leading-relaxed">
+            {subtitle}
           </p>
         </div>
 
-        {/* Map Grid Container */}
+        {/* 2-Column Responsive Layout: Left Info, Right Real Map */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left: Interactive Details & Directions Card */}
-          <div className="lg:col-span-5 bg-card border border-border rounded-xl p-8 flex flex-col justify-between space-y-8 shadow-md">
+          {/* LEFT: Office Information & Structured Contact Actions */}
+          <div className="lg:col-span-5 bg-[#101317] dark:bg-[#101317] light:bg-[#FFFFFF] border border-[#262A30] dark:border-[#262A30] light:border-[#DDD7CC] rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-8 shadow-sm">
             <div className="space-y-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-lg bg-accent/20 border border-accent flex items-center justify-center text-accent">
+              {/* Monogram / Header Badge */}
+              <div className="flex items-start space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-[#181C22] dark:bg-[#181C22] light:bg-[#F4F1EA] border border-[#C5A880]/30 dark:border-[#C5A880]/30 light:border-[#C5A880]/50 flex items-center justify-center text-[#C5A880] dark:text-[#C5A880] light:text-[#9E7D4C] shrink-0 shadow-sm">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-lg text-foreground">ARC AVENUE</h3>
-                  <p className="text-xs font-mono text-accent">Corporate &amp; Project Office</p>
+                  <h3 className="font-serif text-xl font-medium text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
+                    {officeLocation.name}
+                  </h3>
+                  <p className="text-xs font-mono text-[#C5A880] dark:text-[#C5A880] light:text-[#9E7D4C] mt-0.5">
+                    {officeLocation.tagline}
+                  </p>
                 </div>
               </div>
 
-              <div className="space-y-3 text-sm text-foreground-secondary">
-                <p className="leading-relaxed font-light">{address}</p>
-                <div className="p-3.5 rounded bg-surface-elevated border border-border text-xs text-foreground-muted space-y-1">
-                  <div className="font-mono text-[11px] text-accent uppercase tracking-wider">
-                    Landmark Navigation Guide
-                  </div>
-                  <div>Directly beside KNR Apartments on Doolapally Road.</div>
-                  <div>7 Minutes from Outer Ring Road (ORR Exit 5).</div>
-                  <div>12 Minutes from Tech Mahindra Bahadurpally Campus.</div>
+              {/* Verified Office Address */}
+              <div className="space-y-2 pt-2">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-[#78756E] dark:text-[#78756E] light:text-[#7A7D85]">
+                  Verified Address
+                </div>
+                <p className="text-sm text-[#CCC7BC] dark:text-[#CCC7BC] light:text-[#3D4046] leading-relaxed font-light">
+                  {address}
+                </p>
+              </div>
+
+              {/* Simple Landmark Reference (Honest, Unembellished) */}
+              <div className="p-3.5 rounded-xl bg-[#14171D] dark:bg-[#14171D] light:bg-[#F8F6F0] border border-[#22262D] dark:border-[#22262D] light:border-[#E5E0D8] text-xs text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58] space-y-1 font-mono">
+                <div className="text-[10px] uppercase tracking-wider text-[#C5A880] dark:text-[#C5A880] light:text-[#9E7D4C]">
+                  Location Guide
+                </div>
+                <div className="font-sans text-xs text-[#CCC7BC] dark:text-[#CCC7BC] light:text-[#3D4046]">
+                  Beside KNR Apartments on Doolapally Road, Bahadurpally.
                 </div>
               </div>
             </div>
 
-            {/* Quick Action Buttons */}
-            <div className="space-y-3 pt-4 border-t border-border">
+            {/* Structured Action Hierarchy: 1. Directions, 2. Call, 3. WhatsApp */}
+            <div className="space-y-3 pt-4 border-t border-[#1C1F24] dark:border-[#1C1F24] light:border-[#E5E0D8]">
+              {/* Primary Action: Directions */}
               <a
                 href={directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center space-x-2 py-3.5 px-4 bg-accent hover:bg-accent-hover text-accent-foreground font-bold text-xs uppercase tracking-wider rounded transition-all shadow-md"
+                aria-label="Open ARC Avenue office location in Google Maps for directions"
+                className="w-full inline-flex items-center justify-center space-x-2 py-3.5 px-4 bg-[#C5A880] hover:bg-[#D4BC96] dark:bg-[#C5A880] dark:hover:bg-[#D4BC96] light:bg-[#9E7D4C] light:hover:bg-[#8B6E40] text-[#0C0E10] font-mono text-xs font-semibold uppercase tracking-[0.15em] rounded-xl transition-colors duration-200 shadow-sm"
               >
                 <Navigation className="w-4 h-4" />
-                <span>Get Google Maps Directions</span>
-                <ExternalLink className="w-3.5 h-3.5 ml-1" />
+                <span>Get Directions</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
               </a>
 
-              <div className="grid grid-cols-2 gap-3">
+              {/* Secondary Actions: Call & WhatsApp */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a
                   href={`tel:${cleanPhone}`}
-                  className="flex items-center justify-center space-x-2 py-3 px-3 border border-border hover:border-accent text-xs font-semibold text-foreground rounded transition-colors"
+                  aria-label="Call ARC Avenue office"
+                  className="inline-flex items-center justify-center space-x-2 py-3 px-3 bg-[#16191F] dark:bg-[#16191F] light:bg-[#F4F1EA] hover:bg-[#1D2129] dark:hover:bg-[#1D2129] light:hover:bg-[#ECE8E0] border border-[#262A30] dark:border-[#262A30] light:border-[#DDD7CC] hover:border-[#C5A880]/50 text-xs font-mono uppercase tracking-wider text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] rounded-xl transition-colors duration-200"
                 >
-                  <Phone className="w-3.5 h-3.5 text-accent" />
+                  <Phone className="w-3.5 h-3.5 text-[#C5A880] dark:text-[#C5A880] light:text-[#9E7D4C]" />
                   <span>Call Office</span>
                 </a>
 
                 <a
-                  href={`https://wa.me/${cleanWhatsApp}?text=Hello%20ARC%20Avenue,%20I%20am%20heading%20to%20your%20Bahadurpally%20site.`}
+                  href={`https://wa.me/${cleanWhatsApp}?text=Hello%20ARC%20Avenue,%20I%20would%20like%20to%20visit%20your%20office%20in%20Bahadurpally.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center space-x-2 py-3 px-3 bg-[#1BD741]/10 hover:bg-[#1BD741]/20 border border-[#1BD741]/40 text-[#1BD741] text-xs font-semibold rounded transition-colors"
+                  aria-label="Contact ARC Avenue via WhatsApp"
+                  className="inline-flex items-center justify-center space-x-2 py-3 px-3 bg-[#1BD741]/10 hover:bg-[#1BD741]/20 border border-[#1BD741]/30 hover:border-[#1BD741]/60 text-[#1BD741] dark:text-[#1BD741] light:text-[#128C2E] text-xs font-mono uppercase tracking-wider rounded-xl transition-colors duration-200"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
-                  <span>WhatsApp Desk</span>
+                  <span>WhatsApp</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Right: Architectural Map Frame with Directions Mockup */}
-          <div className="lg:col-span-7 bg-card border border-border rounded-xl overflow-hidden shadow-md relative min-h-[380px] flex items-center justify-center group">
-            {/* Embed / Styled Map Canvas */}
-            <div className="absolute inset-0 bg-surface-muted bg-blueprint-grid">
-              {/* Satellite / Stylized Map Background */}
-              <div
-                className="w-full h-full opacity-60 bg-cover bg-center grayscale contrast-125"
-                style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1600&q=80')",
-                }}
-              />
-            </div>
-
-            {/* Tint overlay adapted to background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-background/70" />
-
-            {/* Visual Pin & Radar Effect */}
-            <div className="relative z-10 flex flex-col items-center text-center p-6 space-y-4 max-w-sm">
-              <div className="relative">
-                <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center text-accent ring-4 ring-accent/30 animate-pulse">
-                  <MapPin className="w-8 h-8" />
+          {/* RIGHT: Real Interactive Google Map */}
+          <div className="lg:col-span-7 bg-[#101317] dark:bg-[#101317] light:bg-[#FFFFFF] border border-[#262A30] dark:border-[#262A30] light:border-[#DDD7CC] rounded-2xl overflow-hidden shadow-sm relative min-h-[360px] sm:min-h-[420px] flex items-center justify-center">
+            {/* Loading Architectural Skeleton */}
+            {!mapLoaded && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#101317] dark:bg-[#101317] light:bg-[#F8F6F0] space-y-3">
+                <div className="w-8 h-8 rounded-full border-2 border-[#C5A880]/30 border-t-[#C5A880] animate-spin" />
+                <div className="text-xs font-mono text-[#78756E] uppercase tracking-wider">
+                  Loading Map...
                 </div>
               </div>
+            )}
 
-              <div className="p-4 rounded-xl bg-surface/95 backdrop-blur-md border border-border text-xs shadow-lg">
-                <div className="font-serif font-bold text-sm text-foreground">ARC AVENUE HEADQUARTERS</div>
-                <div className="text-[11px] text-accent font-mono mt-0.5">Bahadurpally, Hyderabad</div>
-                <div className="text-[10px] text-foreground-muted mt-2">
-                  Doolapally Rd, beside KNR Apartments, Telangana 500043
-                </div>
-                <a
-                  href={directionsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center space-x-1 text-accent hover:underline font-mono text-[11px]"
-                >
-                  <span>Open in Navigation App</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
+            {/* Real Google Maps Embed Iframe */}
+            <iframe
+              title="ARC Avenue Office Location Map"
+              src={embedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              onLoad={() => setMapLoaded(true)}
+              className="w-full h-full min-h-[360px] sm:min-h-[420px] rounded-2xl"
+            />
           </div>
         </div>
       </div>

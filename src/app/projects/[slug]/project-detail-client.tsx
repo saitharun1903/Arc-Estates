@@ -404,6 +404,8 @@ export default function ProjectDetailClient({
         {/* SECTION: Location */}
         <section id="location" className="space-y-8 scroll-mt-28 border-t border-white/10 dark:border-white/10 light:border-[#DDD7CC] pt-16">
           <LocationMap
+            title={`Location & Accessibility — ${project.name}`}
+            subtitle={`Situated in ${project.location}. Connect with our advisory desk or get direct navigation to inspect the site in person.`}
             address={project.location}
             phone={settings.phone}
             whatsapp={settings.whatsapp}
