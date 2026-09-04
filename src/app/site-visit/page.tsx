@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getProjects, getSiteSettings } from "@/lib/data-service";
 import SiteVisitClient from "./site-visit-client";
 
 export const dynamic = "force-dynamic";
@@ -11,18 +11,8 @@ export const metadata = {
 
 export default async function SiteVisitPage() {
   const [projectsRaw, settings] = await Promise.all([
-    prisma.project.findMany({
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        location: true,
-      },
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.siteSettings.findUnique({
-      where: { id: "default" },
-    }),
+    getProjects(),
+    getSiteSettings(),
   ]);
 
   const projects = projectsRaw.map((p) => ({

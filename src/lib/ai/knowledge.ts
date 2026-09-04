@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getSiteSettings, getProjects } from "@/lib/data-service";
 
 export interface ProjectKnowledge {
   id: string;
@@ -34,68 +34,43 @@ export interface CompanyKnowledge {
 }
 
 export async function getCompanyKnowledge(): Promise<CompanyKnowledge> {
-  try {
-    const settings = await prisma.siteSettings.findUnique({
-      where: { id: "default" },
-    });
-    return {
-      companyName: settings?.companyName || "ARC AVENUE",
-      tagline: settings?.tagline || "Real Estate Builders & Construction Company",
-      address: settings?.address || "HOME, Doolapally Rd, beside KNR Apartments, Bahadurpally, Hyderabad, Telangana 500043",
-      phone: settings?.phone || "080085 32333",
-      whatsapp: settings?.whatsapp || "+918008532333",
-      email: settings?.email || "connect@arcavenue.in",
-      googleRating: settings?.googleRating || "5.0",
-      googleReviewsCount: settings?.googleReviewsCount || "14",
-    };
-  } catch {
-    return {
-      companyName: "ARC AVENUE",
-      tagline: "Real Estate Builders & Construction Company",
-      address: "HOME, Doolapally Rd, beside KNR Apartments, Bahadurpally, Hyderabad, Telangana 500043",
-      phone: "080085 32333",
-      whatsapp: "+918008532333",
-      email: "connect@arcavenue.in",
-      googleRating: "5.0",
-      googleReviewsCount: "14",
-    };
-  }
+  const settings = await getSiteSettings();
+  return {
+    companyName: settings.companyName,
+    tagline: settings.tagline,
+    address: settings.address,
+    phone: settings.phone,
+    whatsapp: settings.whatsapp,
+    email: settings.email,
+    googleRating: settings.googleRating,
+    googleReviewsCount: settings.googleReviewsCount,
+  };
 }
 
 export async function getVerifiedProjects(): Promise<ProjectKnowledge[]> {
   try {
-    const rawProjects = await prisma.project.findMany({
-      include: {
-        floorPlans: {
-          select: {
-            name: true,
-            bhk: true,
-            areaSqFt: true,
-            facing: true,
-          },
-        },
-      },
-      orderBy: { createdAt: "asc" },
-    });
+    const rawProjects = await getProjects();
 
     return rawProjects.map((p) => {
       let amenities: string[] = [];
       try {
-        amenities = JSON.parse(p.amenities);
+        amenities = typeof p.amenities === "string" ? JSON.parse(p.amenities) : (p.amenities || []);
       } catch {
         amenities = [];
       }
 
       let specifications: Array<{ category: string; items: string[] }> = [];
       try {
-        specifications = JSON.parse(p.specifications);
+        specifications = typeof p.specifications === "string" ? JSON.parse(p.specifications) : (p.specifications || []);
       } catch {
         specifications = [];
       }
 
       let milestones: Array<{ phase: string; status: string; date: string }> = [];
       try {
-        if (p.progressMilestones) milestones = JSON.parse(p.progressMilestones);
+        if (p.progressMilestones) {
+          milestones = typeof p.progressMilestones === "string" ? JSON.parse(p.progressMilestones) : p.progressMilestones;
+        }
       } catch {
         milestones = [];
       }
@@ -119,11 +94,16 @@ export async function getVerifiedProjects(): Promise<ProjectKnowledge[]> {
         specifications,
         constructionProgress: p.constructionProgress,
         milestones,
-        floorPlans: p.floorPlans,
+        floorPlans: p.floorPlans.map((fp) => ({
+          name: fp.name,
+          bhk: fp.bhk,
+          areaSqFt: fp.areaSqFt,
+          facing: fp.facing,
+        })),
       };
     });
   } catch (error) {
-    console.error("Failed to fetch verified projects from database:", error);
+    console.error("Failed to fetch verified projects:", error);
     return [];
   }
 }

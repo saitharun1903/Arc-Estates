@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import prisma from "@/lib/db";
+import { getSiteSettings } from "@/lib/data-service";
 import LayoutClientWrapper from "./layout-client-wrapper";
 import { ThemeProvider } from "@/context/theme-context";
 
@@ -66,14 +66,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let settings = null;
-  try {
-    settings = await prisma.siteSettings.findUnique({
-      where: { id: "default" },
-    });
-  } catch {
-    // Database fallback if building prior to migration
-  }
+  const settings = await getSiteSettings();
 
   const serializedSettings = {
     companyName: settings?.companyName || "ARC AVENUE",

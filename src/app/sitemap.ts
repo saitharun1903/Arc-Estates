@@ -1,23 +1,21 @@
 import { MetadataRoute } from "next";
-import prisma from "@/lib/db";
+import { getProjects } from "@/lib/data-service";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://lunor.co.in";
 
   let projectUrls: MetadataRoute.Sitemap = [];
   try {
-    const projects = await prisma.project.findMany({
-      select: { slug: true, updatedAt: true },
-    });
+    const projects = await getProjects();
 
     projectUrls = projects.map((p) => ({
       url: `${baseUrl}/projects/${p.slug}`,
-      lastModified: p.updatedAt,
+      lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
   } catch {
-    // fallback if DB not available at build time
+    // fallback if error
   }
 
   const staticPages = [

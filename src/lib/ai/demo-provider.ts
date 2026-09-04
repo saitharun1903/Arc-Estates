@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getProjects } from "@/lib/data-service";
 import { ChatMessage, ConsultantContext, IAIProvider, AIProviderResponse } from "./types";
 
 export class DemoAIProvider implements IAIProvider {
@@ -9,21 +9,8 @@ export class DemoAIProvider implements IAIProvider {
   ): Promise<AIProviderResponse> {
     const text = userMessage.toLowerCase();
 
-    // Fetch active projects from database for real-time recommendations
-    const allProjects = await prisma.project.findMany({
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        tagline: true,
-        priceRange: true,
-        bedrooms: true,
-        heroImage: true,
-        projectType: true,
-        location: true,
-        status: true,
-      },
-    });
+    // Fetch active projects safely for real-time recommendations
+    const allProjects = await getProjects();
 
     // 1. Phone number extraction
     const phoneMatch = userMessage.match(/(\+?91[\s-]?)?[6-9]\d{9}/);

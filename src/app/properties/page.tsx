@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getProperties } from "@/lib/data-service";
 import PropertiesClient from "./properties-client";
 
 export const dynamic = "force-dynamic";
@@ -10,14 +10,7 @@ export const metadata = {
 };
 
 export default async function PropertiesPage() {
-  const propertiesRaw = await prisma.property.findMany({
-    include: {
-      project: {
-        select: { name: true, slug: true, location: true },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  const propertiesRaw = await getProperties();
 
   const properties = propertiesRaw.map((p) => ({
     id: p.id,

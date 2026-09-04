@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getFAQs, getSiteSettings } from "@/lib/data-service";
 import FAQClient from "./faq-client";
 
 export const dynamic = "force-dynamic";
@@ -11,13 +11,8 @@ export const metadata = {
 
 export default async function FAQPage() {
   const [faqsRaw, settings] = await Promise.all([
-    prisma.fAQ.findMany({
-      where: { active: true },
-      orderBy: { order: "asc" },
-    }),
-    prisma.siteSettings.findUnique({
-      where: { id: "default" },
-    }),
+    getFAQs(),
+    getSiteSettings(),
   ]);
 
   const faqs = faqsRaw.map((f) => ({

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Compass, ShieldCheck, Ruler, ArrowRight, MapPin, Building } from "lucide-react";
-import prisma from "@/lib/db";
+import { getSiteSettings } from "@/lib/data-service";
 
 export const dynamic = "force-dynamic";
 
@@ -12,9 +12,7 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const settings = await prisma.siteSettings.findUnique({
-    where: { id: "default" },
-  });
+  const settings = await getSiteSettings();
 
   return (
     <div className="pt-28 pb-24 px-4 sm:px-6 lg:px-8 bg-[#0C0E10] text-[#F4F1EA]">

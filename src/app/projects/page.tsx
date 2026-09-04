@@ -1,5 +1,4 @@
-import prisma from "@/lib/db";
-import { sortProjectsCanonically } from "@/lib/projects-order";
+import { getProjects } from "@/lib/data-service";
 import ProjectsClient from "./projects-client";
 
 export const dynamic = "force-dynamic";
@@ -11,15 +10,9 @@ export const metadata = {
 };
 
 export default async function ProjectsPage() {
-  const projectsRaw = await prisma.project.findMany({
-    include: {
-      floorPlans: true,
-      brochures: true,
-    },
-  });
+  const projectsRaw = await getProjects();
 
-  const projects = sortProjectsCanonically(
-    projectsRaw.map((p) => ({
+  const projects = projectsRaw.map((p) => ({
     id: p.id,
     name: p.name,
     slug: p.slug,
@@ -36,8 +29,7 @@ export default async function ProjectsPage() {
     totalUnits: p.totalUnits,
     constructionProgress: p.constructionProgress,
     demo: p.demo,
-  }))
-);
+  }));
 
   return <ProjectsClient initialProjects={projects} />;
 }

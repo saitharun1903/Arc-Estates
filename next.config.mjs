@@ -17,6 +17,11 @@ const nextConfig = {
       }
     ],
   },
+  experimental: {
+    outputFileTracingIncludes: {
+      '/**': ['./prisma/**/*'],
+    },
+  },
 };
 
 export default nextConfig;

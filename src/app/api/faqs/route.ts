@@ -1,17 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getAdminSession } from "@/lib/auth";
+import { getFAQs } from "@/lib/data-service";
 
 export async function GET() {
   try {
     const faqs = await prisma.fAQ.findMany({
       orderBy: { order: "asc" },
     });
-    return NextResponse.json({ faqs });
+    if (faqs && faqs.length > 0) {
+      return NextResponse.json({ faqs });
+    }
   } catch (error) {
-    console.error("FAQs GET Error:", error);
-    return NextResponse.json({ error: "Failed to fetch FAQs" }, { status: 500 });
+    console.warn("FAQs GET DB query failed, using canonical fallback:", error);
   }
+
+  const fallbackFaqs = await getFAQs();
+  return NextResponse.json({ faqs: fallbackFaqs });
 }
 
 export async function POST(req: NextRequest) {

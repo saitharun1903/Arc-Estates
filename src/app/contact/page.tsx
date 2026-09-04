@@ -1,4 +1,4 @@
-import prisma from "@/lib/db";
+import { getSiteSettings } from "@/lib/data-service";
 import ContactClient from "./contact-client";
 
 export const dynamic = "force-dynamic";
@@ -10,9 +10,7 @@ export const metadata = {
 };
 
 export default async function ContactPage() {
-  const settings = await prisma.siteSettings.findUnique({
-    where: { id: "default" },
-  });
+  const settings = await getSiteSettings();
 
   return (
     <ContactClient

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getAdminSession } from "@/lib/auth";
+import { getProjects } from "@/lib/data-service";
 
 export async function GET() {
   try {
@@ -15,11 +16,15 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json({ projects });
+    if (projects && projects.length > 0) {
+      return NextResponse.json({ projects });
+    }
   } catch (error) {
-    console.error("Projects GET Error:", error);
-    return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 });
+    console.warn("Projects GET DB query failed, using canonical fallback:", error);
   }
+
+  const fallbackProjects = await getProjects();
+  return NextResponse.json({ projects: fallbackProjects });
 }
 
 export async function POST(req: NextRequest) {

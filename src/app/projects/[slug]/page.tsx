@@ -1,13 +1,11 @@
-import prisma from "@/lib/db";
+import { getProjectBySlug, getSiteSettings } from "@/lib/data-service";
 import { notFound } from "next/navigation";
 import ProjectDetailClient from "./project-detail-client";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = await prisma.project.findUnique({
-    where: { slug: params.slug },
-  });
+  const project = await getProjectBySlug(params.slug);
 
   if (!project) return { title: "Project Not Found | ARC AVENUE" };
 
@@ -23,18 +21,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const [projectRaw, settingsRaw] = await Promise.all([
-    prisma.project.findUnique({
-      where: { slug: params.slug },
-      include: {
-        floorPlans: true,
-        brochures: true,
-        properties: true,
-      },
-    }),
-    prisma.siteSettings.findUnique({
-      where: { id: "default" },
-    }),
+  const [projectRaw, settings] = await Promise.all([
+    getProjectBySlug(params.slug),
+    getSiteSettings(),
   ]);
 
   if (!projectRaw) {
@@ -101,7 +90,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       description: fp.description,
       demo: fp.demo,
     })),
-    brochures: projectRaw.brochures.map((b) => ({
+    brochures: (projectRaw.brochures || []).map((b) => ({
       id: b.id,
       title: b.title,
       fileUrl: b.fileUrl,
@@ -110,11 +99,11 @@ export default async function ProjectPage({ params }: { params: { slug: string }
     demo: projectRaw.demo,
   };
 
-  const settings = {
-    phone: settingsRaw?.phone || "080085 32333",
-    whatsapp: settingsRaw?.whatsapp || "+918008532333",
-    address: settingsRaw?.address || "HOME, Doolapally Rd, beside KNR Apartments, Bahadurpally, Hyderabad, Telangana 500043",
+  const projectSettings = {
+    phone: settings?.phone || "080085 32333",
+    whatsapp: settings?.whatsapp || "+918008532333",
+    address: settings?.address || "HOME, Doolapally Rd, beside KNR Apartments, Bahadurpally, Hyderabad, Telangana 500043",
   };
 
-  return <ProjectDetailClient project={project} settings={settings} />;
+  return <ProjectDetailClient project={project} settings={projectSettings} />;
 }
