@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="100%" height="100%" class="cad-blueprint" aria-label="ARC Terrace 3 BHK Stepped Residence CAD Blueprint">
+  <defs>
+    <!-- Hatching pattern for concrete shear walls -->
+    <pattern id="wallHatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.2" />
+    </pattern>
+    <!-- Subtle architectural drafting grid -->
+    <pattern id="draftingGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="40" y2="0" stroke="currentColor" stroke-opacity="0.06" stroke-width="0.75" />
+      <line x1="0" y1="0" x2="0" y2="40" stroke="currentColor" stroke-opacity="0.06" stroke-width="0.75" />
+      <circle cx="0" cy="0" r="1.5" fill="currentColor" fill-opacity="0.15" />
+    </pattern>
+    <pattern id="majorGrid" width="200" height="200" patternUnits="userSpaceOnUse">
+      <rect width="200" height="200" fill="url(#draftingGrid)" />
+      <line x1="0" y1="0" x2="200" y2="0" stroke="currentColor" stroke-opacity="0.12" stroke-width="1.2" stroke-dasharray="4,4" />
+      <line x1="0" y1="0" x2="0" y2="200" stroke="currentColor" stroke-opacity="0.12" stroke-width="1.2" stroke-dasharray="4,4" />
+    </pattern>
+    <!-- North Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="currentColor" />
+    </marker>
+  </defs>
+  
+  <style>
+    .cad-blueprint { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .dim-line { stroke: currentColor; stroke-opacity: 0.4; stroke-width: 0.8; stroke-dasharray: 2,2; }
+    .dim-text { font-size: 11px; fill: currentColor; fill-opacity: 0.65; letter-spacing: 0.05em; font-family: ui-monospace, monospace; }
+    .room-title { font-family: 'Cinzel', serif, Georgia; font-size: 14px; font-weight: 600; fill: currentColor; fill-opacity: 0.95; letter-spacing: 0.12em; }
+    .room-sub { font-size: 10px; fill: currentColor; fill-opacity: 0.55; letter-spacing: 0.08em; font-family: ui-monospace, monospace; }
+    .wall-solid { stroke: currentColor; stroke-width: 3.5; fill: url(#wallHatch); }
+    .wall-interior { stroke: currentColor; stroke-width: 2.2; fill: none; }
+    .door-arc { stroke: currentColor; stroke-opacity: 0.45; stroke-width: 1; stroke-dasharray: 3,2; fill: none; }
+    .fixture { stroke: currentColor; stroke-opacity: 0.4; stroke-width: 1.2; fill: none; }
+    .column { fill: #C5A880; stroke: currentColor; stroke-width: 1.5; }
+    .title-block { stroke: currentColor; stroke-opacity: 0.25; stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Background Drafting Grid -->
+  <rect width="1200" height="820" fill="url(#majorGrid)" />
+
+    <!-- Grid Reference Axes -->
+    <g class="dim-line">
+      <line x1="80" y1="120" x2="1120" y2="120" />
+      <line x1="80" y1="360" x2="1120" y2="360" />
+      <line x1="80" y1="580" x2="1120" y2="580" />
+      <line x1="80" y1="720" x2="1120" y2="720" />
+      
+      <line x1="120" y1="80" x2="120" y2="760" />
+      <line x1="400" y1="80" x2="400" y2="760" />
+      <line x1="750" y1="80" x2="750" y2="760" />
+      <line x1="1060" y1="80" x2="1060" y2="760" />
+    </g>
+
+    <!-- Structural Columns -->
+    <g class="column">
+      <rect x="112" y="112" width="16" height="20" rx="1" />
+      <rect x="392" y="112" width="16" height="20" rx="1" />
+      <rect x="742" y="112" width="16" height="20" rx="1" />
+      <rect x="1052" y="112" width="16" height="20" rx="1" />
+
+      <rect x="112" y="352" width="16" height="20" rx="1" />
+      <rect x="392" y="352" width="16" height="20" rx="1" />
+      <rect x="742" y="352" width="16" height="20" rx="1" />
+      <rect x="1052" y="352" width="16" height="20" rx="1" />
+
+      <rect x="112" y="572" width="16" height="20" rx="1" />
+      <rect x="392" y="572" width="16" height="20" rx="1" />
+      <rect x="742" y="572" width="16" height="20" rx="1" />
+      <rect x="1052" y="572" width="16" height="20" rx="1" />
+
+      <rect x="112" y="712" width="16" height="20" rx="1" />
+      <rect x="392" y="712" width="16" height="20" rx="1" />
+      <rect x="742" y="712" width="16" height="20" rx="1" />
+      <rect x="1052" y="712" width="16" height="20" rx="1" />
+    </g>
+
+    <!-- Outer Structural Perimeter with Stepped Terrace -->
+    <path class="wall-solid" d="
+      M 120 120 
+      L 1060 120 
+      L 1060 480 
+      L 1140 480 
+      L 1140 720 
+      L 120 720 
+      Z
+    " />
+
+    <!-- Stepped Cantilevered Terrace Garden -->
+    <g>
+      <rect x="750" y="480" width="390" height="240" stroke="#C5A880" stroke-width="2" stroke-dasharray="6,4" fill="none" />
+      <!-- Timber Pergola lines -->
+      <line x1="770" y1="480" x2="770" y2="720" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1" />
+      <line x1="810" y1="480" x2="810" y2="720" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1" />
+      <line x1="850" y1="480" x2="850" y2="720" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1" />
+      <line x1="890" y1="480" x2="890" y2="720" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1" />
+      <line x1="930" y1="480" x2="930" y2="720" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1" />
+      <line x1="970" y1="480" x2="970" y2="720" stroke="#C5A880" stroke-opacity="0.3" stroke-width="1" />
+      
+      <text x="945" y="600" class="room-title" text-anchor="middle" fill="#C5A880">STEPPED TERRACE GARDEN</text>
+      <text x="945" y="618" class="room-sub" text-anchor="middle">24'-0" × 9'-0" · TIMBER PERGOLA</text>
+    </g>
+
+    <!-- Interior Layout -->
+    <g class="wall-interior">
+      <line x1="120" y1="360" x2="400" y2="360" />
+      <line x1="400" y1="120" x2="400" y2="360" />
+      <line x1="750" y1="120" x2="750" y2="480" />
+      <line x1="400" y1="520" x2="750" y2="520" />
+    </g>
+
+    <g>
+      <text x="260" y="240" class="room-title" text-anchor="middle">KITCHEN &amp; DINING</text>
+      <text x="260" y="256" class="room-sub" text-anchor="middle">16'-0" × 12'-0"</text>
+
+      <text x="575" y="320" class="room-title" text-anchor="middle">EXPANSIVE LIVING ROOM</text>
+      <text x="575" y="336" class="room-sub" text-anchor="middle">22'-0" × 15'-0" · CROSS-VENTILATED</text>
+
+      <text x="905" y="240" class="room-title" text-anchor="middle">MASTER SUITE</text>
+      <text x="905" y="256" class="room-sub" text-anchor="middle">18'-0" × 14'-0" · GARDEN FACING</text>
+
+      <text x="260" y="540" class="room-title" text-anchor="middle">BEDROOM 02</text>
+      <text x="260" y="556" class="room-sub" text-anchor="middle">14'-0" × 13'-0"</text>
+
+      <text x="575" y="620" class="room-title" text-anchor="middle">BEDROOM 03 / STUDIO</text>
+      <text x="575" y="636" class="room-sub" text-anchor="middle">13'-0" × 11'-6"</text>
+    </g>
+  
+  <!-- North Arrow Indicator -->
+  <g transform="translate(1100, 180)">
+    <circle cx="0" cy="0" r="26" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.2" fill="none" />
+    <circle cx="0" cy="0" r="23" stroke="currentColor" stroke-opacity="0.15" stroke-width="0.75" stroke-dasharray="2,2" fill="none" />
+    <!-- Compass Pointer -->
+    <polygon points="0,-22 5,-4 0,0 -5,-4" fill="#C5A880" />
+    <polygon points="0,22 5,4 0,0 -5,4" fill="currentColor" fill-opacity="0.3" />
+    <text x="0" y="-28" text-anchor="middle" font-size="12" font-weight="700" fill="#C5A880" font-family="monospace">N</text>
+    <text x="0" y="34" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.5" font-family="monospace">VASTU COMPLIANT</text>
+  </g>
+
+  <!-- Architectural Title Block -->
+  <g transform="translate(80, 670)">
+    <rect width="320" height="120" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.2" fill="none" />
+    <line x1="0" y1="36" x2="320" y2="36" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+    <line x1="0" y1="80" x2="320" y2="80" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+    <line x1="160" y1="80" x2="160" y2="120" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+    
+    <text x="14" y="24" font-family="'Cinzel', serif" font-size="14" font-weight="700" fill="#C5A880" letter-spacing="0.15em">ARC TERRACE // HYDERABAD</text>
+    <text x="14" y="56" class="room-title" font-size="12">TERRACE SUITE — 3 BHK</text>
+    <text x="14" y="72" class="room-sub">3 BEDROOM BOUTIQUE STEPPED RESIDENCE</text>
+    
+    <text x="14" y="96" class="room-sub">CARPET / USABLE</text>
+    <text x="14" y="112" font-family="monospace" font-size="12" font-weight="700" fill="currentColor">1,980 SQ.FT (1,540 NET CARPET)</text>
+    
+    <text x="174" y="96" class="room-sub">ORIENTATION / SCALE</text>
+    <text x="174" y="112" font-family="monospace" font-size="12" font-weight="700" fill="#C5A880">NORTH FACING ENTRY · 1:50 @ A1</text>
+  </g>
+
+</svg>

@@ -1,0 +1,208 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id                   String       @id @default(uuid())
+  name                 String
+  slug                 String       @unique
+  tagline              String
+  description          String
+  location             String
+  status               String       @default("Ongoing") // Upcoming, Ongoing, Completed, Ready to Move
+  projectType          String       @default("Residential") // Residential, Villa, Commercial, Mixed Use
+  heroImage            String
+  galleryImages        String       @default("[]") // JSON string array of URLs
+  areaRange            String
+  bedrooms             String
+  totalUnits           String
+  priceRange           String
+  completionYear       String
+  featured             Boolean      @default(false)
+  demo                 Boolean      @default(true) // Transparently flags demo data
+  amenities            String       @default("[]") // JSON string array
+  specifications       String       @default("[]") // JSON string array of { category, items: [] }
+  constructionProgress Int          @default(45)   // 0 to 100 percentage
+  progressMilestones   String?      // JSON string array of { phase, date, status, description }
+  floorPlans           FloorPlan[]
+  properties           Property[]
+  brochures            Brochure[]
+  siteVisits           SiteVisit[]
+  leads                Lead[]
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+}
+
+model FloorPlan {
+  id          String   @id @default(uuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  bhk         String
+  areaSqFt    String
+  facing      String
+  imageUrl    String
+  description String?
+  demo        Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Property {
+  id            String   @id @default(uuid())
+  projectId     String?
+  project       Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  title         String
+  unitNumber    String?
+  propertyType  String   // Apartment, Villa, Penthouse, Commercial
+  bedrooms      Int
+  bathrooms     Int
+  areaSqFt      Int
+  price         String
+  status        String   @default("Available") // Available, Reserved, Sold
+  floor         String?
+  facing        String?
+  featuredImage String
+  demo          Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Lead {
+  id           String    @id @default(uuid())
+  name         String
+  phone        String
+  email        String?
+  interest     String?
+  projectId    String?
+  project      Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  budget       String?
+  propertyType String?
+  bedrooms     String?
+  message      String?
+  source       String    @default("Website") // Website, AI Assistant, WhatsApp, Site Visit, Contact Form
+  status       String    @default("New")     // New, Contacted, Qualified, Site Visit, Interested, Converted, Lost
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model SiteVisit {
+  id            String   @id @default(uuid())
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  visitorName   String
+  visitorPhone  String
+  visitorEmail  String?
+  visitDate     String
+  visitTimeSlot String
+  notes         String?
+  status        String   @default("Pending") // Pending, Confirmed, Completed, Cancelled
+  leadId        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model AIConversation {
+  id               String      @id @default(uuid())
+  visitorSessionId String
+  visitorName      String?
+  visitorPhone     String?
+  leadCaptured     Boolean     @default(false)
+  leadId           String?
+  messages         AIMessage[]
+  summary          String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model AIMessage {
+  id             String         @id @default(uuid())
+  conversationId String
+  conversation   AIConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         String         // 'user' or 'assistant'
+  text           String
+  intent         String?
+  metadata       String?
+  createdAt      DateTime       @default(now())
+}
+
+model FAQ {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  category  String   @default("General") // General, Construction, Booking, Legal
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id               String   @id @default(uuid())
+  clientName       String
+  role             String?
+  content          String
+  rating           Int      @default(5)
+  projectMentioned String?
+  verified         Boolean  @default(true)
+  demo             Boolean  @default(true)
+  createdAt        DateTime @default(now())
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  title     String
+  category  String   // Project, Construction, Gallery, FloorPlan, Brand
+  fileUrl   String
+  fileType  String   @default("image")
+  altText   String?
+  tags      String?
+  createdAt DateTime @default(now())
+}
+
+model Brochure {
+  id             String   @id @default(uuid())
+  projectId      String?
+  project        Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  title          String
+  fileUrl        String
+  fileSize       String?
+  downloadsCount Int      @default(0)
+  createdAt      DateTime @default(now())
+}
+
+model SiteSettings {
+  id                 String   @id @default("default")
+  companyName        String   @default("ARC AVENUE")
+  tagline            String   @default("Real Estate Builders & Construction Company")
+  address            String   @default("HOME, Doolapally Rd, beside KNR Apartments, Bahadurpally, Hyderabad, Telangana 500043")
+  phone              String   @default("080085 32333")
+  whatsapp           String   @default("+918008532333")
+  email              String   @default("connect@arcavenue.in")
+  googleRating       String   @default("5.0")
+  googleReviewsCount String   @default("14")
+  heroHeadline       String   @default("BUILDING SPACES THAT MOVE PEOPLE.")
+  heroSubhead        String   @default("Real Estate Builders & Construction Company — Bahadurpally, Hyderabad")
+  aboutSnippet       String   @default("At ARC Avenue, architectural precision converges with structural integrity. We engineer enduring residential environments rooted in timeless design, verified craftsmanship, and unwavering transparency.")
+  whyArcPoints       String?  // JSON string
+  instagramUrl       String?  @default("https://instagram.com")
+  linkedinUrl        String?  @default("https://linkedin.com")
+  facebookUrl        String?  @default("https://facebook.com")
+  youtubeUrl         String?  @default("https://youtube.com")
+  updatedAt          DateTime @updatedAt
+}

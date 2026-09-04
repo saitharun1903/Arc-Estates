@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="100%" height="100%" class="cad-blueprint" aria-label="ARC Vista 3 BHK CAD Blueprint">
+  <defs>
+    <!-- Hatching pattern for concrete shear walls -->
+    <pattern id="wallHatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.2" />
+    </pattern>
+    <!-- Subtle architectural drafting grid -->
+    <pattern id="draftingGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="40" y2="0" stroke="currentColor" stroke-opacity="0.06" stroke-width="0.75" />
+      <line x1="0" y1="0" x2="0" y2="40" stroke="currentColor" stroke-opacity="0.06" stroke-width="0.75" />
+      <circle cx="0" cy="0" r="1.5" fill="currentColor" fill-opacity="0.15" />
+    </pattern>
+    <pattern id="majorGrid" width="200" height="200" patternUnits="userSpaceOnUse">
+      <rect width="200" height="200" fill="url(#draftingGrid)" />
+      <line x1="0" y1="0" x2="200" y2="0" stroke="currentColor" stroke-opacity="0.12" stroke-width="1.2" stroke-dasharray="4,4" />
+      <line x1="0" y1="0" x2="0" y2="200" stroke="currentColor" stroke-opacity="0.12" stroke-width="1.2" stroke-dasharray="4,4" />
+    </pattern>
+    <!-- North Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="currentColor" />
+    </marker>
+  </defs>
+  
+  <style>
+    .cad-blueprint { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .dim-line { stroke: currentColor; stroke-opacity: 0.4; stroke-width: 0.8; stroke-dasharray: 2,2; }
+    .dim-text { font-size: 11px; fill: currentColor; fill-opacity: 0.65; letter-spacing: 0.05em; font-family: ui-monospace, monospace; }
+    .room-title { font-family: 'Cinzel', serif, Georgia; font-size: 14px; font-weight: 600; fill: currentColor; fill-opacity: 0.95; letter-spacing: 0.12em; }
+    .room-sub { font-size: 10px; fill: currentColor; fill-opacity: 0.55; letter-spacing: 0.08em; font-family: ui-monospace, monospace; }
+    .wall-solid { stroke: currentColor; stroke-width: 3.5; fill: url(#wallHatch); }
+    .wall-interior { stroke: currentColor; stroke-width: 2.2; fill: none; }
+    .door-arc { stroke: currentColor; stroke-opacity: 0.45; stroke-width: 1; stroke-dasharray: 3,2; fill: none; }
+    .fixture { stroke: currentColor; stroke-opacity: 0.4; stroke-width: 1.2; fill: none; }
+    .column { fill: #C5A880; stroke: currentColor; stroke-width: 1.5; }
+    .title-block { stroke: currentColor; stroke-opacity: 0.25; stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Background Drafting Grid -->
+  <rect width="1200" height="820" fill="url(#majorGrid)" />
+
+    <!-- Grid Reference Axes -->
+    <g class="dim-line">
+      <!-- Horizontal Grid Lines -->
+      <line x1="80" y1="120" x2="1120" y2="120" />
+      <line x1="80" y1="340" x2="1120" y2="340" />
+      <line x1="80" y1="560" x2="1120" y2="560" />
+      <line x1="80" y1="720" x2="1120" y2="720" />
+      
+      <!-- Vertical Grid Lines -->
+      <line x1="120" y1="80" x2="120" y2="760" />
+      <line x1="380" y1="80" x2="380" y2="760" />
+      <line x1="720" y1="80" x2="720" y2="760" />
+      <line x1="1040" y1="80" x2="1040" y2="760" />
+    </g>
+
+    <!-- Column Grid Circles (A, B, C, D / 1, 2, 3, 4) -->
+    <g font-family="monospace" font-size="11" fill="currentColor" text-anchor="middle" dominant-baseline="central">
+      <circle cx="120" cy="60" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="120" y="60">A</text>
+      <circle cx="380" cy="60" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="380" y="60">B</text>
+      <circle cx="720" cy="60" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="720" y="60">C</text>
+      <circle cx="1040" cy="60" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="1040" y="60">D</text>
+
+      <circle cx="50" cy="120" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="50" y="120">01</text>
+      <circle cx="50" cy="340" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="50" y="340">02</text>
+      <circle cx="50" cy="560" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="50" y="560">03</text>
+      <circle cx="50" cy="720" r="12" stroke="currentColor" stroke-opacity="0.4" fill="none" />
+      <text x="50" y="720">04</text>
+    </g>
+
+    <!-- Structural Columns (RCC 450x600mm) -->
+    <g class="column">
+      <rect x="112" y="112" width="16" height="20" rx="1" />
+      <rect x="372" y="112" width="16" height="20" rx="1" />
+      <rect x="712" y="112" width="16" height="20" rx="1" />
+      <rect x="1032" y="112" width="16" height="20" rx="1" />
+
+      <rect x="112" y="332" width="16" height="20" rx="1" />
+      <rect x="372" y="332" width="16" height="20" rx="1" />
+      <rect x="712" y="332" width="16" height="20" rx="1" />
+      <rect x="1032" y="332" width="16" height="20" rx="1" />
+
+      <rect x="112" y="552" width="16" height="20" rx="1" />
+      <rect x="372" y="552" width="16" height="20" rx="1" />
+      <rect x="712" y="552" width="16" height="20" rx="1" />
+      <rect x="1032" y="552" width="16" height="20" rx="1" />
+
+      <rect x="112" y="712" width="16" height="20" rx="1" />
+      <rect x="372" y="712" width="16" height="20" rx="1" />
+      <rect x="712" y="712" width="16" height="20" rx="1" />
+      <rect x="1032" y="712" width="16" height="20" rx="1" />
+    </g>
+
+    <!-- Outer Structural Perimeter Walls -->
+    <path class="wall-solid" d="
+      M 120 120 
+      L 1040 120 
+      L 1040 460 
+      L 1120 460 
+      L 1120 680 
+      L 1040 680 
+      L 1040 720 
+      L 120 720 
+      Z
+    " />
+
+    <!-- Balcony / Sunset Terrace (Extending out) -->
+    <!-- Glass Balustrade & Cantilever Slab Line -->
+    <g>
+      <rect x="1040" y="460" width="80" height="220" stroke="#C5A880" stroke-width="1.8" stroke-dasharray="6,4" fill="none" />
+      <line x1="1120" y1="460" x2="1120" y2="680" stroke="#C5A880" stroke-width="2.5" />
+      <text x="1080" y="575" class="room-title" font-size="11" text-anchor="middle" transform="rotate(-90 1080 575)">SUNSET TERRACE</text>
+      <text x="1096" y="575" class="room-sub" text-anchor="middle" transform="rotate(-90 1096 575)">22'-0" × 8'-0"</text>
+    </g>
+
+    <!-- Interior Room Partitions -->
+    <!-- Entrance Foyer & Shoe Vestibule -->
+    <g class="wall-interior">
+      <!-- Foyer to Living -->
+      <line x1="120" y1="260" x2="280" y2="260" />
+      <line x1="280" y1="120" x2="280" y2="260" />
+      
+      <!-- Kitchen Enclosure -->
+      <line x1="120" y1="480" x2="380" y2="480" />
+      <line x1="380" y1="480" x2="380" y2="720" />
+      <line x1="260" y1="480" x2="260" y2="720" /> <!-- Utility wash partition -->
+
+      <!-- Living / Dining to Bed 02 & Bed 03 corridor -->
+      <line x1="720" y1="120" x2="720" y2="440" />
+      <line x1="720" y1="280" x2="1040" y2="280" />
+      
+      <!-- Master Suite Enclosure (Bottom Right) -->
+      <line x1="660" y1="440" x2="1040" y2="440" />
+      <line x1="660" y1="440" x2="660" y2="720" />
+      <line x1="660" y1="580" x2="790" y2="580" /> <!-- Master walk-in closet -->
+      <line x1="790" y1="580" x2="790" y2="720" /> <!-- Master ensuite bath -->
+
+      <!-- Bedroom 02 Ensuite -->
+      <line x1="720" y1="200" x2="840" y2="200" />
+      <line x1="840" y1="120" x2="840" y2="200" />
+    </g>
+
+    <!-- Door Swings & Openings -->
+    <g class="door-arc">
+      <!-- Main Entrance Door -->
+      <path d="M 120 180 A 50 50 0 0 1 170 130" />
+      <line x1="120" y1="180" x2="120" y2="130" stroke="currentColor" stroke-width="1.5" />
+      
+      <!-- Master Bedroom Door -->
+      <path d="M 660 490 A 45 45 0 0 1 705 445" />
+      
+      <!-- Bed 02 Door -->
+      <path d="M 720 230 A 45 45 0 0 1 765 185" />
+      
+      <!-- Bed 03 / Study Door -->
+      <path d="M 675 330 A 45 45 0 0 1 720 375" />
+
+      <!-- Terrace Sliding Glass Aperture -->
+      <line x1="1040" y1="480" x2="1040" y2="660" stroke="#C5A880" stroke-width="3" stroke-dasharray="12,4" />
+    </g>
+
+    <!-- Interior Layout Accents / Fixtures -->
+    <g class="fixture">
+      <!-- Kitchen Countertop & Island -->
+      <rect x="130" y="490" width="120" height="210" stroke="currentColor" stroke-opacity="0.3" fill="none" />
+      <circle cx="180" cy="550" r="14" />
+      <circle cx="180" cy="550" r="10" />
+      <circle cx="180" cy="620" r="14" />
+      <circle cx="180" cy="620" r="10" />
+      <!-- Island Counter -->
+      <rect x="300" y="520" width="60" height="140" stroke="#C5A880" stroke-opacity="0.5" rx="3" fill="none" />
+      
+      <!-- Living Room Sofa Setting -->
+      <rect x="420" y="240" width="220" height="150" stroke="currentColor" stroke-opacity="0.25" rx="4" fill="none" stroke-dasharray="4,4" />
+      <circle cx="530" cy="315" r="28" stroke="#C5A880" stroke-opacity="0.4" fill="none" />
+
+      <!-- Master Bed Placement -->
+      <rect x="830" y="510" width="160" height="150" stroke="currentColor" stroke-opacity="0.3" rx="2" fill="none" />
+      <rect x="850" y="520" width="50" height="30" stroke="currentColor" stroke-opacity="0.2" fill="none" />
+      <rect x="920" y="520" width="50" height="30" stroke="currentColor" stroke-opacity="0.2" fill="none" />
+
+      <!-- Bed 02 Placement -->
+      <rect x="850" y="300" width="140" height="120" stroke="currentColor" stroke-opacity="0.25" rx="2" fill="none" />
+      
+      <!-- Bed 03 Placement -->
+      <rect x="420" y="140" width="140" height="110" stroke="currentColor" stroke-opacity="0.25" rx="2" fill="none" />
+    </g>
+
+    <!-- Room Labels & Dimensions -->
+    <g>
+      <!-- Foyer -->
+      <text x="140" y="160" class="room-title">ENTRY FOYER</text>
+      <text x="140" y="176" class="room-sub">8'-0" × 6'-6"</text>
+
+      <!-- Living & Dining Salon -->
+      <text x="530" y="415" class="room-title" text-anchor="middle">GRAND LIVING &amp; DINING SALON</text>
+      <text x="530" y="432" class="room-sub" text-anchor="middle">26'-0" × 16'-6" · CLEAR HEIGHT 10'-6"</text>
+
+      <!-- Master Bedroom Suite -->
+      <text x="910" y="685" class="room-title" text-anchor="middle">MASTER BEDROOM SUITE</text>
+      <text x="910" y="700" class="room-sub" text-anchor="middle">18'-0" × 14'-6" · HARDWOOD FINISH</text>
+
+      <!-- Walk-in Closet & Master Bath -->
+      <text x="725" y="620" class="room-sub" text-anchor="middle">WALK-IN</text>
+      <text x="725" y="660" class="room-sub" text-anchor="middle">ENSUITE 01</text>
+
+      <!-- Bedroom 02 -->
+      <text x="880" y="240" class="room-title" text-anchor="middle">BEDROOM 02</text>
+      <text x="880" y="256" class="room-sub" text-anchor="middle">14'-0" × 13'-0" · EAST ORIENTED</text>
+
+      <!-- Bedroom 03 / Study -->
+      <text x="490" y="180" class="room-title" text-anchor="middle">BEDROOM 03 / STUDY</text>
+      <text x="490" y="196" class="room-sub" text-anchor="middle">13'-6" × 12'-0"</text>
+
+      <!-- Chef's Kitchen & Utility -->
+      <text x="290" y="690" class="room-title" text-anchor="middle">CHEF'S KITCHEN</text>
+      <text x="290" y="704" class="room-sub" text-anchor="middle">14'-0" × 10'-0"</text>
+      <text x="185" y="690" class="room-sub" text-anchor="middle">UTILITY</text>
+    </g>
+  
+  <!-- North Arrow Indicator -->
+  <g transform="translate(1110, 190)">
+    <circle cx="0" cy="0" r="26" stroke="currentColor" stroke-opacity="0.3" stroke-width="1.2" fill="none" />
+    <circle cx="0" cy="0" r="23" stroke="currentColor" stroke-opacity="0.15" stroke-width="0.75" stroke-dasharray="2,2" fill="none" />
+    <!-- Compass Pointer -->
+    <polygon points="0,-22 5,-4 0,0 -5,-4" fill="#C5A880" />
+    <polygon points="0,22 5,4 0,0 -5,4" fill="currentColor" fill-opacity="0.3" />
+    <text x="0" y="-28" text-anchor="middle" font-size="12" font-weight="700" fill="#C5A880" font-family="monospace">N</text>
+    <text x="0" y="34" text-anchor="middle" font-size="9" fill="currentColor" fill-opacity="0.5" font-family="monospace">VASTU COMPLIANT</text>
+  </g>
+
+  <!-- Architectural Title Block -->
+  <g transform="translate(80, 670)">
+    <rect width="320" height="120" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.2" fill="none" />
+    <line x1="0" y1="36" x2="320" y2="36" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+    <line x1="0" y1="80" x2="320" y2="80" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+    <line x1="160" y1="80" x2="160" y2="120" stroke="currentColor" stroke-opacity="0.2" stroke-width="1" />
+    
+    <text x="14" y="24" font-family="'Cinzel', serif" font-size="14" font-weight="700" fill="#C5A880" letter-spacing="0.15em">ARC VISTA // HYDERABAD</text>
+    <text x="14" y="56" class="room-title" font-size="12">PLAN 3A — SKY RESIDENCE</text>
+    <text x="14" y="72" class="room-sub">3 BEDROOM + MAID UTILITY + SUNSET TERRACE</text>
+    
+    <text x="14" y="96" class="room-sub">CARPET / USABLE</text>
+    <text x="14" y="112" font-family="monospace" font-size="12" font-weight="700" fill="currentColor">2,150 SQ.FT (1,680 NET CARPET)</text>
+    
+    <text x="174" y="96" class="room-sub">ORIENTATION / SCALE</text>
+    <text x="174" y="112" font-family="monospace" font-size="12" font-weight="700" fill="#C5A880">EAST FACING · 1:50 @ A1</text>
+  </g>
+
+</svg>
