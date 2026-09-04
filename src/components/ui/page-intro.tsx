@@ -11,8 +11,18 @@ interface PageIntroProps {
 }
 
 export default function PageIntro({ onComplete }: PageIntroProps) {
-  const [introState, setIntroState] = useState<IntroState>("entering");
   const pathname = usePathname();
+
+  // If not on homepage, do not render intro at all
+  if (pathname !== "/") {
+    return null;
+  }
+
+  return <PageIntroInner onComplete={onComplete} />;
+}
+
+function PageIntroInner({ onComplete }: PageIntroProps) {
+  const [introState, setIntroState] = useState<IntroState>("entering");
   const containerRef = useRef<HTMLDivElement>(null);
   const brandBoxRef = useRef<HTMLDivElement>(null);
   const monogramRef = useRef<HTMLDivElement>(null);
@@ -36,7 +46,9 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
 
     // Inform hero and any other components that intro has finished
     if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("arc-intro-reveal"));
       window.dispatchEvent(new CustomEvent("arc-intro-complete"));
+      document.body.style.overflow = "";
     }
 
     if (onComplete) onComplete();
@@ -60,12 +72,6 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Intro is exclusively for the homepage experience
-    if (pathname !== "/") {
-      completeIntro();
-      return;
-    }
-
     let alreadyViewed = false;
     try {
       alreadyViewed = sessionStorage.getItem("arc_intro_viewed") === "true";
@@ -84,17 +90,17 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
 
     setIntroState("animating");
 
-    // FAILSAFE 1: Hard timeout at 1800ms guarantees the homepage is ALWAYS reachable
+    // FAILSAFE: Hard timeout at 1200ms guarantees the homepage is ALWAYS reachable
     const failsafeTimer = setTimeout(() => {
       completeIntro();
-    }, 1800);
+    }, 1200);
 
-    // FAILSAFE 2: User click, touch, or keydown immediately dismisses the intro cleanly
+    // INSTANT DISMISSAL: User click, touch, or keydown immediately dismisses the intro cleanly
     const handleUserDismiss = () => {
       completeIntro();
     };
 
-    // FAILSAFE 3: If user switches tabs, complete immediately so they never return to a frozen frame
+    // TAB SWITCH: If user switches tabs, complete immediately so they never return to a frozen frame
     const handleVisibilityChange = () => {
       if (document.hidden) {
         completeIntro();
@@ -128,12 +134,12 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
     const tagline = taglineRef.current;
 
     // Initial state
-    gsap.set(brandBox, { opacity: 0, y: 12 });
-    gsap.set(monogram, { opacity: 0, scale: 0.92 });
+    gsap.set(brandBox, { opacity: 0, y: 10 });
+    gsap.set(monogram, { opacity: 0, scale: 0.94 });
     gsap.set(title, { opacity: 0, y: 8 });
     gsap.set(line, { scaleX: 0, transformOrigin: "center center" });
-    gsap.set(location, { opacity: 0, y: 6 });
-    gsap.set(tagline, { opacity: 0, y: 6 });
+    gsap.set(location, { opacity: 0, y: 5 });
+    gsap.set(tagline, { opacity: 0, y: 5 });
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -144,10 +150,10 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
           window.dispatchEvent(new CustomEvent("arc-intro-reveal"));
         }
 
-        // Smooth fade-out of the intro curtain (0.35s)
+        // Smooth fade-out of the intro curtain (0.28s)
         gsap.to(container, {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.28,
           ease: "power2.inOut",
           onComplete: () => {
             completeIntro();
@@ -158,12 +164,12 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
 
     timelineRef.current = tl;
 
-    // Timeline steps (Total duration ~ 0.9s before curtain fade):
+    // Timeline steps (Total duration ~ 0.8s before curtain fade):
     tl.to([brandBox, monogram], {
       opacity: 1,
       y: 0,
       scale: 1,
-      duration: 0.3,
+      duration: 0.25,
       ease: "power2.out",
     })
       .to(
@@ -171,7 +177,7 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
         {
           opacity: 1,
           y: 0,
-          duration: 0.28,
+          duration: 0.25,
           ease: "power2.out",
         },
         "-=0.1"
@@ -180,7 +186,7 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
         line,
         {
           scaleX: 1,
-          duration: 0.35,
+          duration: 0.28,
           ease: "expo.out",
         },
         "-=0.15"
@@ -190,19 +196,19 @@ export default function PageIntro({ onComplete }: PageIntroProps) {
         {
           opacity: 1,
           y: 0,
-          stagger: 0.06,
-          duration: 0.25,
+          stagger: 0.05,
+          duration: 0.22,
           ease: "power2.out",
         },
-        "-=0.2"
+        "-=0.18"
       )
       // Brief pause for brand registration
-      .to({}, { duration: 0.18 })
+      .to({}, { duration: 0.15 })
       // Brand lifts and begins curtain reveal
       .to(brandBox, {
-        y: -14,
+        y: -12,
         opacity: 0,
-        duration: 0.25,
+        duration: 0.20,
         ease: "power2.in",
       });
 

@@ -31,120 +31,241 @@ export default function HeroSection({
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
-  // 8-Step GSAP Hero Sequence (~1.5s total) + Scroll-Handoff Transition
+  // Coordinated Hero Sequence + Non-Conflicting Scroll Exit
   useGSAP(
     () => {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReducedMotion) return;
+      if (prefersReducedMotion) {
+        gsap.set(
+          [
+            titleLine1Ref.current,
+            titleLine2Ref.current,
+            eyebrowRef.current,
+            metaRef.current,
+            ctaRef.current,
+            scrollIndicatorRef.current,
+          ],
+          { opacity: 1, y: 0 }
+        );
+        gsap.set(bgImageRef.current, { opacity: 0.35, scale: 1 });
+        return;
+      }
 
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      let alreadyViewed = false;
+      try {
+        alreadyViewed = sessionStorage.getItem("arc_intro_viewed") === "true";
+      } catch {
+        alreadyViewed = false;
+      }
+      const skipParam = typeof window !== "undefined" && window.location.search.includes("skip_intro=true");
 
-      // Step 1: Background scale settling
-      tl.fromTo(
-        bgImageRef.current,
-        { scale: 1.08, opacity: 0 },
-        { scale: 1, opacity: 0.35, duration: 1.6, ease: "power2.out" },
-        0
+      let entranceStarted = false;
+      let entranceFinished = false;
+
+      // Initialize the scrubbed scroll exit ONLY after the hero is fully visible
+      const initScrollExit = () => {
+        if (!containerRef.current || !bgImageRef.current || !titleLine1Ref.current) return;
+        ScrollTrigger.getById("hero-scroll-handoff")?.kill();
+
+        const scrollTl = gsap.timeline({
+          id: "hero-scroll-handoff",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Background subtle scale & parallax with explicit baseline
+        scrollTl.fromTo(
+          bgImageRef.current,
+          { scale: 1, yPercent: 0, opacity: 0.35 },
+          { scale: 1.10, yPercent: 12, opacity: 0.16, ease: "none" },
+          0
+        );
+
+        // Headline subtle upward movement and soft fade with explicit baseline
+        scrollTl.fromTo(
+          [titleLine1Ref.current, titleLine2Ref.current],
+          { y: 0, opacity: 1 },
+          { y: -40, opacity: 0.18, ease: "none" },
+          0
+        );
+
+        // Eyebrow, subtitle, and CTAs gently fade out with explicit baseline
+        scrollTl.fromTo(
+          [eyebrowRef.current, metaRef.current, ctaRef.current, scrollIndicatorRef.current],
+          { y: 0, opacity: 1 },
+          { y: -28, opacity: 0, ease: "none" },
+          0
+        );
+      };
+
+      // Entrance animation routine
+      const runEntrance = () => {
+        if (entranceStarted) return;
+        entranceStarted = true;
+
+        const tl = gsap.timeline({
+          defaults: { ease: "power3.out" },
+          onComplete: () => {
+            entranceFinished = true;
+            initScrollExit();
+
+            if (scrollIndicatorRef.current) {
+              gsap.to(scrollIndicatorRef.current, {
+                y: 6,
+                duration: 1.8,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut",
+              });
+            }
+          },
+        });
+
+        // Background subtle scale settling
+        tl.fromTo(
+          bgImageRef.current,
+          { scale: 1.05, opacity: 0 },
+          { scale: 1, opacity: 0.35, duration: 0.9, ease: "power2.out" },
+          0
+        );
+
+        // Eyebrow and hairlines
+        tl.fromTo(
+          eyebrowRef.current,
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.45 },
+          0.05
+        );
+
+        // Headline lines rise smoothly
+        tl.fromTo(
+          titleLine1Ref.current,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.55 },
+          0.12
+        );
+        tl.fromTo(
+          titleLine2Ref.current,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.55 },
+          0.20
+        );
+
+        // Meta subtitle
+        tl.fromTo(
+          metaRef.current,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4 },
+          0.28
+        );
+
+        // CTAs rise
+        tl.fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.4 },
+          0.36
+        );
+
+        // Scroll indicator
+        tl.fromTo(
+          scrollIndicatorRef.current,
+          { opacity: 0, y: -6 },
+          { opacity: 1, y: 0, duration: 0.4 },
+          0.44
+        );
+      };
+
+      // FAST PATH: If already viewed in current session or skip requested, show immediately!
+      if (alreadyViewed || skipParam) {
+        entranceStarted = true;
+        entranceFinished = true;
+        gsap.set(
+          [
+            titleLine1Ref.current,
+            titleLine2Ref.current,
+            eyebrowRef.current,
+            metaRef.current,
+            ctaRef.current,
+            scrollIndicatorRef.current,
+          ],
+          { opacity: 1, y: 0 }
+        );
+        gsap.set(bgImageRef.current, { opacity: 0.35, scale: 1 });
+        initScrollExit();
+
+        if (scrollIndicatorRef.current) {
+          gsap.to(scrollIndicatorRef.current, {
+            y: 6,
+            duration: 1.8,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+          });
+        }
+        return;
+      }
+
+      // FIRST-VISIT PATH: Initial invisible state until curtain lifts
+      gsap.set(
+        [
+          titleLine1Ref.current,
+          titleLine2Ref.current,
+          eyebrowRef.current,
+          metaRef.current,
+          ctaRef.current,
+          scrollIndicatorRef.current,
+          bgImageRef.current,
+        ],
+        { opacity: 0 }
       );
 
-      // Step 2 & 3: Eyebrow and hairlines
-      tl.fromTo(
-        eyebrowRef.current,
-        { opacity: 0, y: -15 },
-        { opacity: 1, y: 0, duration: 0.7 },
-        0.2
-      );
+      // Listen for intro reveal signal from PageIntro
+      const handleIntroSignal = () => {
+        runEntrance();
+      };
 
-      // Step 4 & 5: Headline lines rise
-      tl.fromTo(
-        titleLine1Ref.current,
-        { opacity: 0, y: 35 },
-        { opacity: 1, y: 0, duration: 0.8 },
-        0.35
-      );
-      tl.fromTo(
-        titleLine2Ref.current,
-        { opacity: 0, y: 35 },
-        { opacity: 1, y: 0, duration: 0.8 },
-        0.48
-      );
+      window.addEventListener("arc-intro-reveal", handleIntroSignal, { once: true });
+      window.addEventListener("arc-intro-complete", handleIntroSignal, { once: true });
 
-      // Step 6: Meta subtitle
-      tl.fromTo(
-        metaRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        0.65
-      );
+      // ZERO-HANG FAILSAFE 1: If no signal within 750ms, start entrance automatically
+      const safetyTimer = setTimeout(() => {
+        runEntrance();
+      }, 750);
 
-      // Step 7: CTAs rise
-      tl.fromTo(
-        ctaRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        0.78
-      );
+      // ZERO-HANG FAILSAFE 2: Hard recovery at 1200ms guarantees 100% visibility under ANY circumstance
+      const hardRecoveryTimer = setTimeout(() => {
+        if (!entranceFinished) {
+          entranceStarted = true;
+          entranceFinished = true;
+          gsap.set(
+            [
+              titleLine1Ref.current,
+              titleLine2Ref.current,
+              eyebrowRef.current,
+              metaRef.current,
+              ctaRef.current,
+              scrollIndicatorRef.current,
+            ],
+            { opacity: 1, y: 0, clearProps: "transform" }
+          );
+          gsap.set(bgImageRef.current, { opacity: 0.35, scale: 1 });
+          initScrollExit();
+        }
+      }, 1200);
 
-      // Step 8: Scroll indicator float
-      tl.fromTo(
-        scrollIndicatorRef.current,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        0.95
-      );
-
-      gsap.to(scrollIndicatorRef.current, {
-        y: 6,
-        duration: 1.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-        delay: 1.5,
-      });
-
-      // Signature Moment #1: Hero Scroll Exit & Chapter Hand-off
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.6,
-        },
-      });
-
-      // Background subtle scale & parallax
-      scrollTl.to(
-        bgImageRef.current,
-        {
-          scale: 1.10,
-          yPercent: 12,
-          opacity: 0.16,
-          ease: "none",
-        },
-        0
-      );
-
-      // Headline subtle upward movement and soft fade
-      scrollTl.to(
-        [titleLine1Ref.current, titleLine2Ref.current],
-        {
-          y: -40,
-          opacity: 0.18,
-          ease: "none",
-        },
-        0
-      );
-
-      // Eyebrow, subtitle, and CTAs gently fade out
-      scrollTl.to(
-        [eyebrowRef.current, metaRef.current, ctaRef.current, scrollIndicatorRef.current],
-        {
-          y: -28,
-          opacity: 0,
-          ease: "none",
-        },
-        0
-      );
+      return () => {
+        clearTimeout(safetyTimer);
+        clearTimeout(hardRecoveryTimer);
+        window.removeEventListener("arc-intro-reveal", handleIntroSignal);
+        window.removeEventListener("arc-intro-complete", handleIntroSignal);
+        ScrollTrigger.getById("hero-scroll-handoff")?.kill();
+      };
     },
     { scope: containerRef }
   );
