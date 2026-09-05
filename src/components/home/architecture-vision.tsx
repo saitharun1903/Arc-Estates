@@ -33,8 +33,8 @@ export default function ArchitectureVision() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: headerRef.current,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );
@@ -51,8 +51,8 @@ export default function ArchitectureVision() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: diagramRef.current,
-              start: "top 78%",
-              toggleActions: "play none none reverse",
+              start: "top 80%",
+              once: true,
             },
           }
         );
@@ -70,8 +70,8 @@ export default function ArchitectureVision() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: cardsRef.current,
-              start: "top 82%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );

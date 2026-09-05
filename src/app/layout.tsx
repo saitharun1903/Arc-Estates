@@ -84,7 +84,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark scroll-smooth ${cormorant.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      className={`dark ${cormorant.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <script

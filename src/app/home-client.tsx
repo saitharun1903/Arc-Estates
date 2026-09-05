@@ -91,6 +91,13 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
     setAnimatedCount(filteredProjects.length);
   }, [filteredProjects.length]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 400);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Integrated Scroll Motion Choreography
   useGSAP(
     () => {
@@ -102,8 +109,8 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         const thesisTl = gsap.timeline({
           scrollTrigger: {
             trigger: thesisSectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            start: "top 85%",
+            once: true,
           },
           defaults: { ease: "power2.out" },
         });
@@ -141,8 +148,8 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         const projTl = gsap.timeline({
           scrollTrigger: {
             trigger: projectsSectionRef.current,
-            start: "top 78%",
-            toggleActions: "play none none reverse",
+            start: "top 80%",
+            once: true,
           },
           defaults: { ease: "power2.out" },
         });
@@ -189,8 +196,8 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         const discTl = gsap.timeline({
           scrollTrigger: {
             trigger: discoverSectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            start: "top 85%",
+            once: true,
           },
           defaults: { ease: "power2.out" },
         });

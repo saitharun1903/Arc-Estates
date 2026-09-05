@@ -52,7 +52,7 @@ export default function HeroSection({
   const controlsRef = useRef<HTMLDivElement>(null);
 
   const [blueprintMode, setBlueprintMode] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollProgressRef = useRef(0);
   const [assemblyComplete, setAssemblyComplete] = useState(false);
 
   // GSAP ScrollTrigger Integration for 3D Camera & Text Handoff
@@ -66,7 +66,7 @@ export default function HeroSection({
         end: "bottom top",
         scrub: true,
         onUpdate: (self) => {
-          setScrollProgress(self.progress);
+          scrollProgressRef.current = self.progress;
         },
       });
 
@@ -154,7 +154,7 @@ export default function HeroSection({
       <div className="absolute inset-0 z-0">
         <ArchitecturalCanvas
           blueprintMode={blueprintMode}
-          scrollProgress={scrollProgress}
+          scrollProgressRef={scrollProgressRef}
           onAssemblyComplete={() => setAssemblyComplete(true)}
         />
       </div>

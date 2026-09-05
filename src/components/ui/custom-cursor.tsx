@@ -13,9 +13,11 @@ export default function CustomCursor() {
   const mousePos = useRef({ x: -100, y: -100 });
   const ringPos = useRef({ x: -100, y: -100 });
   const animFrameId = useRef<number | null>(null);
+  const currentCursorTypeRef = useRef<"default" | "link" | "view" | "explore" | "3d">("default");
+  const isVisibleRef = useRef(false);
+  const lastTargetRef = useRef<EventTarget | null>(null);
 
   useEffect(() => {
-    // Disable on touch / mobile devices
     if (typeof window === "undefined") return;
     const hasTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
     if (hasTouch) {
@@ -25,38 +27,57 @@ export default function CustomCursor() {
     setIsTouch(false);
 
     const onMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
 
-      // Check hovered element for cursor type
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
+
+      // Avoid redundant DOM hierarchy scans if mouse is on the same target
+      if (e.target === lastTargetRef.current) return;
+      lastTargetRef.current = e.target;
+
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
+      let newType: "default" | "link" | "view" | "explore" | "3d" = "default";
       const cursorAttr = target.closest("[data-cursor]")?.getAttribute("data-cursor");
       if (cursorAttr === "view") {
-        setCursorType("view");
+        newType = "view";
       } else if (cursorAttr === "explore") {
-        setCursorType("explore");
+        newType = "explore";
       } else if (cursorAttr === "3d") {
-        setCursorType("3d");
+        newType = "3d";
       } else if (target.closest("a, button, input, select, textarea, [role='button']")) {
-        setCursorType("link");
-      } else {
-        setCursorType("default");
+        newType = "link";
+      }
+
+      if (newType !== currentCursorTypeRef.current) {
+        currentCursorTypeRef.current = newType;
+        setCursorType(newType);
       }
     };
 
-    const onMouseLeave = () => setIsVisible(false);
-    const onMouseEnter = () => setIsVisible(true);
+    const onMouseLeave = () => {
+      isVisibleRef.current = false;
+      setIsVisible(false);
+    };
+
+    const onMouseEnter = () => {
+      isVisibleRef.current = true;
+      setIsVisible(true);
+    };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
-    document.addEventListener("mouseleave", onMouseLeave);
-    document.addEventListener("mouseenter", onMouseEnter);
+    document.addEventListener("mouseleave", onMouseLeave, { passive: true });
+    document.addEventListener("mouseenter", onMouseEnter, { passive: true });
 
-    // Smooth trailing ring animation loop
+    // Smooth trailing ring animation loop (Passive 60fps interpolation)
     const updateRing = () => {
-      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.18;
-      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.18;
+      ringPos.current.x += (mousePos.current.x - ringPos.current.x) * 0.22;
+      ringPos.current.y += (mousePos.current.y - ringPos.current.y) * 0.22;
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) translate(-50%, -50%)`;
@@ -76,7 +97,7 @@ export default function CustomCursor() {
       document.removeEventListener("mouseenter", onMouseEnter);
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
     };
-  }, [isVisible]);
+  }, []);
 
   if (isTouch) return null;
 
@@ -85,7 +106,7 @@ export default function CustomCursor() {
 
   return (
     <div
-      className={`pointer-events-none fixed inset-0 z-[99999] transition-opacity duration-300 ${
+      className={`pointer-events-none fixed inset-0 z-[99999] transition-opacity duration-200 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       aria-hidden="true"
@@ -93,43 +114,43 @@ export default function CustomCursor() {
       {/* Precision Center Dot */}
       <div
         ref={dotRef}
-        className={`fixed top-0 left-0 rounded-full transition-[width,height,background-color] duration-150 ${
+        className={`fixed top-0 left-0 rounded-full transition-[width,height,background-color] duration-150 will-change-transform ${
           isExpanded
             ? "w-0 h-0 opacity-0"
             : isLink
             ? "w-2 h-2 bg-[#C5A880]"
-            : "w-1.5 h-1.5 bg-[#F4F1EA]"
+            : "w-1.5 h-1.5 bg-[#C5A880]/90"
         }`}
       />
 
-      {/* Smooth Fluid Follower Ring */}
+      {/* Fluid Follower Ring */}
       <div
         ref={ringRef}
-        className={`fixed top-0 left-0 rounded-full border flex items-center justify-center transition-[width,height,background-color,border-color] duration-200 backdrop-blur-[1px] ${
+        className={`fixed top-0 left-0 rounded-full flex items-center justify-center pointer-events-none transition-[width,height,border-color,background-color] duration-200 will-change-transform ${
           cursorType === "3d"
-            ? "w-16 h-16 bg-[#C5A880]/15 border-[#C5A880]/80 shadow-[0_0_20px_rgba(197,168,128,0.25)]"
+            ? "w-16 h-16 border border-[#56CCF2]/60 bg-[#061B2E]/40 text-[#56CCF2] shadow-[0_0_15px_rgba(86,204,242,0.2)]"
             : cursorType === "view"
-            ? "w-16 h-16 bg-[#0A0C0E]/80 border-[#C5A880] shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+            ? "w-14 h-14 border border-[#C5A880] bg-[#C5A880]/20 text-white"
             : cursorType === "explore"
-            ? "w-20 h-20 bg-[#C5A880]/90 border-white/20 text-[#0C0E10]"
+            ? "w-16 h-16 border border-[#C5A880] bg-[#C5A880]/25 text-[#0A0C0E] font-bold"
             : isLink
-            ? "w-9 h-9 border-[#C5A880]/60 bg-[#C5A880]/10 scale-110"
-            : "w-8 h-8 border-white/30 bg-transparent"
+            ? "w-10 h-10 border border-[#C5A880]/80 bg-[#C5A880]/10"
+            : "w-7 h-7 border border-[#C5A880]/30 bg-transparent"
         }`}
       >
+        {cursorType === "3d" && (
+          <span className="text-[7.5px] font-mono tracking-widest uppercase font-bold text-center leading-none">
+            DRAG
+          </span>
+        )}
         {cursorType === "view" && (
-          <span className="text-[9px] font-mono tracking-[0.2em] font-bold text-[#C5A880] uppercase select-none">
+          <span className="text-[8px] font-mono tracking-wider uppercase font-semibold text-white">
             VIEW
           </span>
         )}
         {cursorType === "explore" && (
-          <span className="text-[9px] font-mono tracking-[0.2em] font-bold text-[#0C0E10] uppercase select-none">
-            EXPLORE
-          </span>
-        )}
-        {cursorType === "3d" && (
-          <span className="text-[8px] font-mono tracking-[0.2em] font-bold text-[#C5A880] uppercase select-none">
-            ORBIT
+          <span className="text-[7.5px] font-mono tracking-widest uppercase text-white font-bold">
+            OPEN
           </span>
         )}
       </div>

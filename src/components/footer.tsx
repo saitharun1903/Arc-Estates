@@ -34,31 +34,36 @@ export default function Footer({ settings }: FooterProps) {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (prefersReducedMotion || !footerRef.current) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 90%",
-          toggleActions: "play none none reverse",
-        },
-        defaults: { ease: "power2.out" },
-      });
-
       if (topLineRef.current) {
-        tl.fromTo(
+        gsap.fromTo(
           topLineRef.current,
           { scaleX: 0, transformOrigin: "left center" },
-          { scaleX: 1, duration: 0.8 },
-          0
+          {
+            scaleX: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: "top bottom",
+              once: true,
+            },
+          }
         );
       }
 
       if (colsRef.current) {
-        tl.fromTo(
-          colsRef.current.children,
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 },
-          0.15
-        );
+        gsap.from(colsRef.current.children, {
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top bottom",
+            once: true,
+          },
+        });
       }
     },
     { scope: footerRef }
