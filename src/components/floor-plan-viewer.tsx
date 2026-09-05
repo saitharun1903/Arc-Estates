@@ -138,7 +138,7 @@ export default function FloorPlanViewer({ floorPlans, projectName }: FloorPlanVi
       {/* Blueprint Stage Canvas (Occupies 85%+ of Visual Area) */}
       <div
         ref={containerRef}
-        className={`relative rounded-xl border border-white/10 dark:border-white/10 light:border-[#D5CFC4] overflow-hidden transition-all bg-[#080A0C] dark:bg-[#080A0C] light:bg-[#FAF8F5] text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D] ${
+        className={`relative rounded-xl border border-white/10 overflow-hidden transition-all bg-[#121315] text-[#FAF8F5] ${
           isFullscreen
             ? "fixed inset-0 z-50 rounded-none border-none p-6 flex flex-col justify-between"
             : "min-h-[520px] sm:min-h-[640px] flex flex-col justify-between p-4 sm:p-6"

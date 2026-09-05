@@ -102,7 +102,7 @@ export default function ProjectDetailClient({
     STRUCTURAL_MAP[project.slug] || "Reinforced Concrete Frame Structure";
 
   return (
-    <div className="bg-[#080A0C] dark:bg-[#080A0C] light:bg-[#F8F6F0] text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] min-h-screen transition-colors duration-300">
+    <div className="bg-[#121315] text-[#FAF8F5] min-h-screen transition-colors duration-300">
       {/* Back Button */}
       <div className="pt-28 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
         <Link
@@ -211,7 +211,7 @@ export default function ProjectDetailClient({
       </section>
 
       {/* Sticky Sub-Navigation Bar */}
-      <div className="sticky top-[68px] z-30 bg-[#080A0C]/90 dark:bg-[#080A0C]/90 light:bg-[#F8F6F0]/90 backdrop-blur-md border-y border-white/10 dark:border-white/10 light:border-[#DDD7CC] px-4 sm:px-6 lg:px-12 mt-12">
+      <div className="sticky top-[68px] z-30 bg-[#121315]/90 backdrop-blur-md border-y border-white/10 px-4 sm:px-6 lg:px-12 mt-12">
         <div className="max-w-7xl mx-auto flex items-center space-x-8 overflow-x-auto no-scrollbar py-3 text-xs">
           {navSections.map((item) => (
             <button
@@ -371,14 +371,14 @@ export default function ProjectDetailClient({
           </div>
 
           {/* Progress Bar */}
-          <div className="p-6 bg-[#101317] dark:bg-[#101317] light:bg-[#EFECE5] border border-white/10 dark:border-white/10 light:border-[#DDD7CC] rounded-2xl space-y-4 shadow-sm">
+          <div className="p-6 bg-[#18191C] border border-white/10 rounded-2xl space-y-4 shadow-sm">
             <div className="flex justify-between text-xs font-mono">
-              <span className="text-[#8C8983] dark:text-[#8C8983] light:text-[#656056]">Superstructure &amp; Finishes</span>
-              <span className="text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858] font-bold">{project.constructionProgress}%</span>
+              <span className="text-[#8E887E]">Superstructure &amp; Finishes</span>
+              <span className="text-[#C9A86A] font-bold">{project.constructionProgress}%</span>
             </div>
-            <div className="w-full h-2.5 bg-[#080A0C] dark:bg-[#080A0C] light:bg-[#FAF8F5] rounded-full overflow-hidden p-0.5 border border-white/10 dark:border-white/10 light:border-[#DDD7CC]">
+            <div className="w-full h-2.5 bg-[#121315] rounded-full overflow-hidden p-0.5 border border-white/10">
               <div
-                className="h-full bg-gradient-to-r from-[#8C6D3F] to-[#C5A880] dark:to-[#C5A880] light:to-[#A88858] rounded-full transition-all duration-1000"
+                className="h-full bg-gradient-to-r from-[#8C6D3F] to-[#C9A86A] rounded-full transition-all duration-1000"
                 style={{ width: `${project.constructionProgress}%` }}
               />
             </div>

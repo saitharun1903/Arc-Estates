@@ -76,11 +76,11 @@ export default function ArchitecturalCanvas({
     // 1. Scene & Atmosphere
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    const bgDark = new THREE.Color(0x131210);
+    const bgDark = new THREE.Color(0x121315);
     const bgBlueprint = new THREE.Color(0x0a1622);
     const currentBg = bgDark.clone();
     scene.background = currentBg;
-    scene.fog = new THREE.FogExp2(0x131210, 0.016);
+    scene.fog = new THREE.FogExp2(0x121315, 0.015);
 
     // Helper to calculate responsive camera properties based on aspect ratio
     const getResponsiveConfig = (w: number, h: number) => {
@@ -120,58 +120,58 @@ export default function ArchitecturalCanvas({
     renderer.setSize(width, height);
     renderer.setPixelRatio(dprCap);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
 
     // 4. Lighting System (Warm Dusk & Golden Hour Architectural Illumination)
-    const ambientLight = new THREE.AmbientLight(0xfff6ea, 0.65);
+    const ambientLight = new THREE.AmbientLight(0xffeedd, 0.75);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xffebd2, 2.2);
-    sunLight.position.set(24, 40, 20);
+    const sunLight = new THREE.DirectionalLight(0xffd8a8, 2.5);
+    sunLight.position.set(24, 38, 20);
     scene.add(sunLight);
 
-    const rimLight = new THREE.DirectionalLight(0xd0d7de, 0.9);
-    rimLight.position.set(-20, 25, -20);
+    const rimLight = new THREE.DirectionalLight(0x8aa8c4, 1.1);
+    rimLight.position.set(-22, 22, -22);
     scene.add(rimLight);
 
-    const groundBounceLight = new THREE.DirectionalLight(0xd4be99, 0.7);
+    const groundBounceLight = new THREE.DirectionalLight(0xcfa978, 0.85);
     groundBounceLight.position.set(0, -10, 10);
     scene.add(groundBounceLight);
 
     // 5. Materials (Warm Natural Stone, Smoked Glass, and Champagne Bronze)
     const concreteMaterial = new THREE.MeshStandardMaterial({
-      color: 0x32302b,
-      roughness: 0.82,
-      metalness: 0.05,
+      color: 0x3e3a34,
+      roughness: 0.76,
+      metalness: 0.04,
     });
 
     const darkPodiumMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1c1a17,
-      roughness: 0.88,
-      metalness: 0.15,
+      color: 0x18191c,
+      roughness: 0.86,
+      metalness: 0.12,
     });
 
     const bronzeTrimMaterial = new THREE.MeshStandardMaterial({
       color: 0xc9a86a,
-      roughness: 0.38,
-      metalness: 0.72,
+      roughness: 0.35,
+      metalness: 0.75,
     });
 
     const glassMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xdce0db,
+      color: 0xe2e6ea,
       transparent: true,
-      opacity: 0.32,
-      roughness: 0.1,
+      opacity: 0.35,
+      roughness: 0.08,
       metalness: 0.1,
-      transmission: 0.65,
+      transmission: 0.7,
       ior: 1.5,
     });
 
     const poolMaterial = new THREE.MeshStandardMaterial({
-      color: 0x12171c,
-      roughness: 0.15,
-      metalness: 0.75,
+      color: 0x121417,
+      roughness: 0.12,
+      metalness: 0.85,
     });
 
     const wireframeLineMaterial = new THREE.LineBasicMaterial({

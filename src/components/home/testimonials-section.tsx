@@ -52,11 +52,11 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#131210] text-[#FBF9F5] border-b border-white/10 relative overflow-hidden"
+      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#121315] section-charcoal text-[#FBF9F5] border-b border-white/[0.08] relative overflow-hidden"
     >
       <div className="max-w-6xl mx-auto space-y-16 relative z-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-white/[0.08]">
           <div className="space-y-3">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#C9A86A]">
               RESIDENT VOICES // HYDERABAD
@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
           <div className="flex items-center space-x-3">
             <button
               onClick={handlePrev}
-              className="w-11 h-11 rounded-full border border-white/15 hover:border-[#C9A86A] flex items-center justify-center text-[#CCC5B9] hover:text-[#C9A86A] transition-colors"
+              className="w-11 h-11 rounded-full border border-white/10 hover:border-[#C9A86A] bg-[#18191C] flex items-center justify-center text-[#CCC5B9] hover:text-[#C9A86A] transition-colors"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -79,7 +79,7 @@ export default function TestimonialsSection() {
             </span>
             <button
               onClick={handleNext}
-              className="w-11 h-11 rounded-full border border-white/15 hover:border-[#C9A86A] flex items-center justify-center text-[#CCC5B9] hover:text-[#C9A86A] transition-colors"
+              className="w-11 h-11 rounded-full border border-white/10 hover:border-[#C9A86A] bg-[#18191C] flex items-center justify-center text-[#CCC5B9] hover:text-[#C9A86A] transition-colors"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Large Editorial Quote Composition */}
-        <div className="relative p-8 sm:p-14 lg:p-16 rounded-2xl bg-[#1C1A17] border border-white/10 shadow-2xl">
+        <div className="relative p-8 sm:p-14 lg:p-16 rounded-2xl bg-[#18191C] border border-white/[0.08] shadow-2xl">
           <Quote className="w-12 h-12 text-[#C9A86A]/25 mb-8" />
 
           <div className="space-y-8">
@@ -96,7 +96,7 @@ export default function TestimonialsSection() {
               “{current.quote}”
             </blockquote>
 
-            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center space-x-2 text-amber-400/90">
                   {[...Array(current.rating)].map((_, i) => (

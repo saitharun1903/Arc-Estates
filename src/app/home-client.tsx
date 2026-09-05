@@ -241,20 +241,20 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
   const origin = projects.find((p) => p.slug === "arc-origin") || projects[3];
 
   return (
-    <div ref={pageContainerRef} className="space-y-0 bg-[#131210] text-[#FBF9F5]">
-      {/* 1. CINEMATIC 3D ARCHITECTURAL OPENING & HERO */}
+    <div ref={pageContainerRef} className="space-y-0 bg-[#121315] text-[#FBF9F5]">
+      {/* 1. CINEMATIC 3D ARCHITECTURAL OPENING & HERO (DEEP CHARCOAL) */}
       <HeroSection
         onOpenAI={() => setAiOpen(true)}
         headline={settings.heroHeadline}
         subhead={settings.heroSubhead}
       />
 
-      {/* 2. THE THESIS / EDITORIAL STATEMENT */}
+      {/* 2. THE THESIS / EDITORIAL STATEMENT (WARM IVORY) */}
       <section
         ref={thesisSectionRef}
-        className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 section-light-stone border-b border-[#E2DDD3] relative overflow-hidden transition-colors duration-300"
+        className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 section-ivory border-b border-[#E8E3D8] relative overflow-hidden transition-colors duration-300"
       >
-        <div ref={thesisLineRef} className="max-w-6xl mx-auto h-[1px] bg-[#E2DDD3] mb-12 sm:mb-16 origin-left" />
+        <div ref={thesisLineRef} className="max-w-6xl mx-auto h-[1px] bg-[#E8E3D8] mb-12 sm:mb-16 origin-left" />
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-8 space-y-6 sm:space-y-8">
             <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-[#A88656] font-semibold">
@@ -264,13 +264,13 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
 
             <blockquote
               ref={thesisQuoteRef}
-              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#1A1815] leading-[1.15]"
+              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#161513] leading-[1.15]"
             >
               “Good spaces don&apos;t ask for attention. <br />
               <span className="italic text-[#A88656]">They earn it.</span>”
             </blockquote>
 
-            <p className="text-sm sm:text-base md:text-lg text-[#4A463F] max-w-2xl leading-relaxed font-light">
+            <p className="text-sm sm:text-base md:text-lg text-[#4A453E] max-w-2xl leading-relaxed font-light">
               We build residences and commercial landmarks in Bahadurpally shaped around how people actually live: how natural daylight enters the living suite, how breeze circulates through open breezeways, and how solid engineering outlasts passing trends.
             </p>
 
@@ -293,23 +293,23 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
               alt="ARC Estates Architectural Detail"
               className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#F5F2EB]/80 via-transparent to-transparent opacity-60" />
-            <div className="absolute bottom-4 left-4 right-4 text-[10.5px] font-mono text-[#4A463F] uppercase tracking-wider font-medium">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5]/80 via-transparent to-transparent opacity-60" />
+            <div className="absolute bottom-4 left-4 right-4 text-[10.5px] font-mono text-[#4A453E] uppercase tracking-wider font-medium">
               Bahadurpally • Natural Light Axis &amp; Concrete Detail
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. FEATURED DEVELOPMENTS (Asymmetric Showcase) */}
+      {/* 3. FEATURED DEVELOPMENTS (WARM STONE) */}
       <section
         id="projects"
         ref={projectsSectionRef}
-        className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 section-light-stone border-b border-[#E2DDD3] space-y-16 transition-colors duration-300"
+        className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 section-stone border-b border-[#DDD7CC] space-y-16 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
-          <div ref={projectsLineRef} className="h-[1px] w-full bg-[#E2DDD3] origin-left" />
-          <div ref={projectsHeaderRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#E2DDD3]">
+          <div ref={projectsLineRef} className="h-[1px] w-full bg-[#DDD7CC] origin-left" />
+          <div ref={projectsHeaderRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#DDD7CC]">
             <div className="space-y-2">
               <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-[#A88656] font-semibold">
                 <span>PORTFOLIO ARCHIVE // 4 DEVELOPMENTS</span>
@@ -318,7 +318,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 Featured Developments
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-[#7A756B] max-w-sm font-light leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#7D776C] max-w-sm font-light leading-relaxed">
               Monolithic shear walls, open-to-sky lightwells, and human-scale density across Hyderabad&apos;s northern corridor.
             </p>
           </div>
@@ -354,14 +354,14 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         </div>
       </section>
 
-      {/* 4. ARCHITECTURE SECTION (Designed with Intention) */}
+      {/* 4. ARCHITECTURE SECTION (DEEP CHARCOAL) */}
       <ArchitectureVision />
 
-      {/* 5. FLOATING PROPERTY DISCOVERY INTERFACE */}
+      {/* 5. FLOATING PROPERTY DISCOVERY INTERFACE (DEEP GRAPHITE ELEVATED) */}
       <section
         id="discover"
         ref={discoverSectionRef}
-        className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-[#141311] border-t border-b border-white/[0.08] relative"
+        className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-[#18191C] border-t border-b border-white/[0.08] relative"
       >
         <div className="max-w-5xl mx-auto space-y-10">
           <div ref={discoverHeaderRef} className="text-center space-y-3">
@@ -378,7 +378,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
 
           <div
             ref={discoverCardRef}
-            className="p-8 sm:p-12 rounded-2xl bg-[#1C1A17] border border-white/10 shadow-2xl space-y-8 backdrop-blur-md"
+            className="p-8 sm:p-12 rounded-2xl bg-[#1C1E22] border border-white/10 shadow-2xl space-y-8 backdrop-blur-md"
           >
             <div className="font-serif text-xl sm:text-2xl md:text-3xl text-[#CCC5B9] leading-relaxed">
               <span>“I am exploring </span>
@@ -386,7 +386,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 <select
                   value={finderType}
                   onChange={(e) => setFinderType(e.target.value)}
-                  className="appearance-none bg-[#24221D] border-b-2 border-[#C9A86A] text-[#FBF9F5] font-serif font-medium px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
+                  className="appearance-none bg-[#24262B] border-b-2 border-[#C9A86A] text-[#FBF9F5] font-serif font-medium px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
                 >
                   <option value="ALL">residential or commercial</option>
                   <option value="High-Rise">a sky residence</option>
@@ -400,7 +400,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 <select
                   value={finderBhk}
                   onChange={(e) => setFinderBhk(e.target.value)}
-                  className="appearance-none bg-[#24221D] border-b-2 border-[#C9A86A] text-[#FBF9F5] font-serif font-medium px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
+                  className="appearance-none bg-[#24262B] border-b-2 border-[#C9A86A] text-[#FBF9F5] font-serif font-medium px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
                 >
                   <option value="ALL">any configuration</option>
                   <option value="2 BHK">2 bedrooms</option>
@@ -414,7 +414,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 <select
                   value={finderStatus}
                   onChange={(e) => setFinderStatus(e.target.value)}
-                  className="appearance-none bg-[#24221D] border-b-2 border-[#C9A86A] text-[#FBF9F5] font-serif font-medium px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
+                  className="appearance-none bg-[#24262B] border-b-2 border-[#C9A86A] text-[#FBF9F5] font-serif font-medium px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
                 >
                   <option value="ALL">available now or under build</option>
                   <option value="Ready to Move">ready for possession</option>
@@ -452,7 +452,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 )}
                 <Link
                   href="/properties"
-                  className="block px-6 py-3 bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-mono uppercase tracking-wider font-semibold rounded-full transition-colors text-center shadow-lg"
+                  className="block px-6 py-3 bg-[#C9A86A] hover:bg-[#D8B77D] text-[#121315] text-xs font-mono uppercase tracking-wider font-semibold rounded-full transition-colors text-center shadow-lg"
                   data-cursor="explore"
                 >
                   Browse Floor Plans →
@@ -463,32 +463,32 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         </div>
       </section>
 
-      {/* 6. LIFESTYLE SECTION (The Architecture of Living) */}
+      {/* 6. LIFESTYLE SECTION (WARM IVORY) */}
       <LifestyleSection />
 
-      {/* 7. WHY ARC ESTATES (Interactive Bento Composition) */}
+      {/* 7. WHY ARC ESTATES (DEEP CHARCOAL) */}
       <WhyArcBento />
 
-      {/* 8. TESTIMONIALS SECTION (Resident Voices) */}
+      {/* 8. TESTIMONIALS SECTION (DEEP CHARCOAL WITH WARM ACCENTS) */}
       <TestimonialsSection />
 
-      {/* 9. DIGITAL ADVISORY & SITE VISIT SECTION */}
-      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-[#131210] border-b border-white/[0.08] relative">
+      {/* 9. DIGITAL ADVISORY & SITE VISIT SECTION (WARM STONE CHAPTER) */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 section-stone border-b border-[#DDD7CC] relative">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Card A: Gemini AI Concierge */}
           <div
             id="concierge"
-            className="p-8 sm:p-12 rounded-2xl bg-[#181714] border border-white/10 flex flex-col justify-between space-y-6 hover:border-[#C9A86A]/50 transition-all duration-300 shadow-xl"
+            className="p-8 sm:p-12 rounded-2xl bg-[#FFFFFF] border border-[#DDD7CC] flex flex-col justify-between space-y-6 hover:border-[#A88656] transition-all duration-300 shadow-md"
           >
             <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#C9A86A] font-semibold">
+              <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#A88656] font-semibold">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>DIGITAL ADVISORY // GROUNDED IN REAL DATA</span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl font-normal text-[#FBF9F5]">
+              <h3 className="font-serif text-3xl sm:text-4xl font-normal text-[#1A1815]">
                 ARC AI Property Concierge
               </h3>
-              <p className="text-xs sm:text-sm text-[#8E887E] leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#4E4942] leading-relaxed font-light">
                 Consult our verified AI assistant regarding real-time unit pricing, floor plate specifications, construction milestones, and statutory clearances across our Bahadurpally portfolio.
               </p>
             </div>
@@ -496,7 +496,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
               <button
                 type="button"
                 onClick={() => setAiOpen(true)}
-                className="inline-flex items-center space-x-2 px-7 py-3.5 bg-[#22201C] hover:bg-[#2A2722] border border-white/15 hover:border-[#C9A86A] text-xs font-mono uppercase tracking-[0.18em] text-[#FBF9F5] rounded-full transition-all duration-300 shadow-sm"
+                className="inline-flex items-center space-x-2 px-7 py-3.5 bg-[#18191C] hover:bg-[#24262B] text-xs font-mono uppercase tracking-[0.18em] text-[#FBF9F5] rounded-full transition-all duration-300 shadow-sm"
               >
                 <span>Consult AI Assistant</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#C9A86A]" />

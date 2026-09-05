@@ -7,35 +7,42 @@
    ============================================================ */
 
 :root, [data-theme="dark"], .dark {
-  --background: #131210;
-  --background-secondary: #171613;
-  --surface: #1C1A17;
-  --surface-elevated: #22201C;
-  --surface-muted: #2A2722;
-  --card-background: #181714;
-  --footer-background: #0F0E0C;
+  --background: #121315;
+  --background-secondary: #18191C;
+  --surface: #1C1E22;
+  --surface-elevated: #24262B;
+  --surface-muted: #2D3036;
+  --card-background: #18191C;
+  --footer-background: #101113;
   --footer-foreground: #B5AFA6;
-  --header-background: rgba(19, 18, 16, 0.82);
-  --header-gradient: linear-gradient(to bottom, rgba(19, 18, 16, 0.90), rgba(19, 18, 16, 0.45), transparent);
+  --header-background: rgba(18, 19, 21, 0.82);
+  --header-gradient: linear-gradient(to bottom, rgba(18, 19, 21, 0.92), rgba(18, 19, 21, 0.45), transparent);
   --foreground: #FBF9F5;
   --foreground-secondary: #CCC5B9;
   --foreground-muted: #8E887E;
-  --border: rgba(225, 215, 200, 0.09);
-  --border-strong: rgba(225, 215, 200, 0.16);
+  --border: rgba(225, 215, 200, 0.08);
+  --border-strong: rgba(225, 215, 200, 0.15);
   --border-subtle: rgba(225, 215, 200, 0.04);
   --accent: #C9A86A;
   --accent-hover: #D8B77D;
-  --accent-foreground: #131210;
+  --accent-foreground: #121315;
   --accent-subtle: rgba(201, 168, 106, 0.12);
   --accent-bronze: #A88656;
   --accent-sage: #7E8D79;
-  --input: #1C1A17;
+  --bg-charcoal: #121315;
+  --bg-charcoal-elevated: #18191C;
+  --bg-charcoal-card: #1C1E22;
+  --bg-ivory: #FAF8F5;
+  --bg-ivory-surface: #FFFFFF;
+  --bg-stone: #EDE8DF;
+  --bg-stone-surface: #F5F2EB;
+  --input: #1C1E22;
   --input-foreground: #FBF9F5;
   --input-border: rgba(225, 215, 200, 0.12);
-  --overlay: rgba(15, 14, 12, 0.75);
-  --image-overlay: rgba(19, 18, 16, 0.55);
-  --hero-gradient-overlay: linear-gradient(to bottom, rgba(19, 18, 16, 0.82), rgba(19, 18, 16, 0.50), #131210);
-  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #131210 85%);
+  --overlay: rgba(14, 15, 17, 0.75);
+  --image-overlay: rgba(18, 19, 21, 0.55);
+  --hero-gradient-overlay: linear-gradient(to bottom, rgba(18, 19, 21, 0.85), rgba(18, 19, 21, 0.50), #121315);
+  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #121315 85%);
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
   --shadow-md: 0 4px 14px 0 rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 12px 32px 0 rgba(0, 0, 0, 0.45);
@@ -46,21 +53,21 @@
 }
 
 [data-theme="light"], .light {
-  --background: #F8F6F1;
-  --background-secondary: #F2EFEB;
+  --background: #FAF8F5;
+  --background-secondary: #F5F2EB;
   --surface: #FFFFFF;
   --surface-elevated: #FAF8F4;
   --surface-muted: #EBE7DF;
   --card-background: #FFFFFF;
-  --footer-background: #ECE8DE;
+  --footer-background: #EDE8DF;
   --footer-foreground: #4E4942;
-  --header-background: rgba(248, 246, 241, 0.90);
-  --header-gradient: linear-gradient(to bottom, rgba(248, 246, 241, 0.95), rgba(248, 246, 241, 0.60), transparent);
-  --foreground: #1A1815;
-  --foreground-secondary: #4E4942;
-  --foreground-muted: #7D776C;
-  --border: rgba(26, 24, 21, 0.09);
-  --border-strong: rgba(26, 24, 21, 0.18);
+  --header-background: rgba(250, 248, 245, 0.90);
+  --header-gradient: linear-gradient(to bottom, rgba(250, 248, 245, 0.95), rgba(250, 248, 245, 0.60), transparent);
+  --foreground: #161513;
+  --foreground-secondary: #4A453E;
+  --foreground-muted: #7A756B;
+  --border: rgba(26, 24, 21, 0.08);
+  --border-strong: rgba(26, 24, 21, 0.16);
   --border-subtle: rgba(26, 24, 21, 0.04);
   --accent: #A88656;
   --accent-hover: #967445;
@@ -68,13 +75,20 @@
   --accent-subtle: rgba(168, 134, 86, 0.12);
   --accent-bronze: #8C6A3C;
   --accent-sage: #6B7B66;
+  --bg-charcoal: #121315;
+  --bg-charcoal-elevated: #18191C;
+  --bg-charcoal-card: #1C1E22;
+  --bg-ivory: #FAF8F5;
+  --bg-ivory-surface: #FFFFFF;
+  --bg-stone: #EDE8DF;
+  --bg-stone-surface: #F5F2EB;
   --input: #FFFFFF;
-  --input-foreground: #1A1815;
+  --input-foreground: #161513;
   --input-border: rgba(26, 24, 21, 0.12);
   --overlay: rgba(26, 24, 21, 0.40);
-  --image-overlay: rgba(248, 246, 241, 0.25);
-  --hero-gradient-overlay: linear-gradient(to bottom, rgba(248, 246, 241, 0.85), rgba(248, 246, 241, 0.65), #F8F6F1);
-  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #F8F6F1 85%);
+  --image-overlay: rgba(250, 248, 245, 0.25);
+  --hero-gradient-overlay: linear-gradient(to bottom, rgba(250, 248, 245, 0.85), rgba(250, 248, 245, 0.65), #FAF8F5);
+  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #FAF8F5 85%);
   --shadow-sm: 0 1px 3px 0 rgba(26, 24, 21, 0.05);
   --shadow-md: 0 4px 16px 0 rgba(26, 24, 21, 0.07);
   --shadow-lg: 0 12px 32px 0 rgba(26, 24, 21, 0.09);
@@ -353,33 +367,34 @@ button, input, select, textarea {
 /* Luxury Architectural Button Tokens */
 .btn-champagne-primary {
   background-color: var(--accent);
-  color: var(--accent-foreground);
+  color: #121315 !important;
   font-family: var(--font-mono), monospace;
   font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
   border-radius: 9999px;
-  box-shadow: 0 4px 18px rgba(201, 168, 106, 0.24);
+  box-shadow: 0 4px 18px rgba(201, 168, 106, 0.25);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
 }
 
 .btn-champagne-primary:hover {
   background-color: var(--accent-hover);
-  box-shadow: 0 6px 26px rgba(201, 168, 106, 0.38);
+  box-shadow: 0 6px 26px rgba(201, 168, 106, 0.40);
   transform: translateY(-1.5px);
 }
 
 .btn-charcoal-secondary {
-  background-color: rgba(28, 26, 23, 0.75);
-  border: 1px solid rgba(225, 215, 200, 0.16);
-  color: var(--foreground);
+  background-color: rgba(26, 28, 32, 0.85);
+  border: 1px solid rgba(225, 215, 200, 0.15);
+  color: #FBF9F5 !important;
   font-family: var(--font-mono), monospace;
   font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 500;
   border-radius: 9999px;
@@ -392,60 +407,168 @@ button, input, select, textarea {
 
 .btn-charcoal-secondary:hover {
   border-color: var(--accent);
-  background-color: rgba(36, 33, 29, 0.90);
-  color: #FFFFFF;
+  background-color: rgba(36, 38, 44, 0.95);
+  color: #FFFFFF !important;
   transform: translateY(-1px);
 }
 
-.light .btn-charcoal-secondary {
-  background-color: rgba(255, 255, 255, 0.90) !important;
-  border: 1px solid var(--border) !important;
-  color: var(--foreground) !important;
+.btn-stone-secondary {
+  background-color: #FFFFFF;
+  border: 1px solid #DDD7CC;
+  color: #161513 !important;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.light .btn-charcoal-secondary:hover {
-  border-color: var(--accent) !important;
+.btn-stone-secondary:hover {
+  border-color: #A88656;
+  color: #000000 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   ARCHITECTURAL SECTION COLOR ENVIRONMENTS
+   ============================================================ */
+
+/* 1. DEEP CHARCOAL CHAPTER */
+.section-charcoal {
+  background-color: #121315 !important;
+  color: #FBF9F5 !important;
+  border-color: rgba(225, 215, 200, 0.08) !important;
+}
+
+.section-charcoal h1,
+.section-charcoal h2,
+.section-charcoal h3,
+.section-charcoal h4 {
+  color: #FBF9F5;
+}
+
+.section-charcoal p {
+  color: #CCC5B9;
+}
+
+.section-charcoal .text-muted,
+.section-charcoal .text-foreground-muted {
+  color: #8E887E !important;
+}
+
+/* 2. WARM IVORY CHAPTER */
+.section-ivory {
+  background-color: #FAF8F5 !important;
+  color: #161513 !important;
+  border-color: #E8E3D8 !important;
+}
+
+.section-ivory h1,
+.section-ivory h2,
+.section-ivory h3,
+.section-ivory h4,
+.section-ivory .text-foreground {
+  color: #161513 !important;
+}
+
+.section-ivory p,
+.section-ivory .text-foreground-secondary {
+  color: #4A453E !important;
+}
+
+.section-ivory .text-foreground-muted,
+.section-ivory .text-muted {
+  color: #7A756B !important;
+}
+
+.section-ivory .border-border,
+.section-ivory .border-white\/10,
+.section-ivory .border-white\/5 {
+  border-color: #E8E3D8 !important;
+}
+
+.section-ivory .bg-card,
+.section-ivory .bg-\[\#1C1A17\],
+.section-ivory .bg-\[\#181714\] {
   background-color: #FFFFFF !important;
+  border-color: #E8E3D8 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  color: #161513 !important;
 }
 
-/* Warm Stone Light Editorial Section Hierarchy */
+.section-ivory .bg-card h3,
+.section-ivory .bg-card h4,
+.section-ivory .bg-\[\#1C1A17\] h3,
+.section-ivory .bg-\[\#1C1A17\] h4 {
+  color: #161513 !important;
+}
+
+.section-ivory .bg-card p,
+.section-ivory .bg-\[\#1C1A17\] p {
+  color: #4A453E !important;
+}
+
+/* 3. WARM STONE CHAPTER */
+.section-stone,
 .section-light-stone {
-  background-color: #F5F2EB !important;
+  background-color: #EDE8DF !important;
   color: #1A1815 !important;
-  border-color: #E2DDD3 !important;
+  border-color: #DDD7CC !important;
 }
 
-.section-light-stone .text-foreground,
+.section-stone h1,
+.section-stone h2,
+.section-stone h3,
+.section-stone h4,
+.section-stone .text-foreground,
+.section-light-stone h1,
 .section-light-stone h2,
-.section-light-stone h3 {
+.section-light-stone h3,
+.section-light-stone h4,
+.section-light-stone .text-foreground {
   color: #1A1815 !important;
 }
 
-.section-light-stone .text-foreground-secondary,
-.section-light-stone p {
+.section-stone p,
+.section-stone .text-foreground-secondary,
+.section-light-stone p,
+.section-light-stone .text-foreground-secondary {
   color: #4E4942 !important;
 }
 
-.section-light-stone .text-foreground-muted {
+.section-stone .text-foreground-muted,
+.section-stone .text-muted,
+.section-light-stone .text-foreground-muted,
+.section-light-stone .text-muted {
   color: #7D776C !important;
 }
 
+.section-stone .border-border,
+.section-stone .border-white\/10,
+.section-stone .border-white\/5,
 .section-light-stone .border-border,
 .section-light-stone .border-white\/10,
 .section-light-stone .border-white\/5 {
-  border-color: rgba(26, 24, 21, 0.10) !important;
+  border-color: #DDD7CC !important;
 }
 
-.section-light-stone .bg-background {
-  background-color: #F5F2EB !important;
-}
-
+.section-stone .bg-card,
+.section-stone .bg-\[\#101317\],
+.section-stone .bg-\[\#121519\],
+.section-stone .bg-\[\#14171D\],
 .section-light-stone .bg-card,
 .section-light-stone .bg-\[\#101317\],
 .section-light-stone .bg-\[\#121519\],
 .section-light-stone .bg-\[\#14171D\] {
   background-color: #FFFFFF !important;
-  border-color: #E2DDD3 !important;
+  border-color: #DDD7CC !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
 
@@ -457,82 +580,6 @@ button, input, select, textarea {
   -webkit-background-clip: text;
   background-clip: text;
   animation: shine 4s linear infinite;
-}
-
-/* ============================================================
-   ARCHITECTURAL BUTTON & SECTION UTILITIES
-   ============================================================ */
-
-.btn-champagne-primary {
-  background-color: #C9A86A;
-  color: #131210;
-  font-family: var(--font-jetbrains-mono), monospace;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  transition: all 0.25s ease;
-}
-.btn-champagne-primary:hover {
-  background-color: #D8B77D;
-  box-shadow: 0 4px 20px rgba(201, 168, 106, 0.25);
-}
-
-.btn-charcoal-secondary {
-  background-color: rgba(28, 26, 23, 0.7);
-  border: 1px solid rgba(225, 215, 200, 0.15);
-  color: #FBF9F5;
-  font-family: var(--font-jetbrains-mono), monospace;
-  transition: all 0.25s ease;
-}
-.btn-charcoal-secondary:hover {
-  background-color: rgba(36, 34, 29, 0.9);
-  border-color: rgba(201, 168, 106, 0.5);
-  color: #C9A86A;
-}
-
-/* Editorial Light Stone Chapter (Alternating Rhythm) */
-.section-light-stone {
-  background-color: #F5F2EB !important;
-  color: #1A1815;
-  border-color: #E2DDD3 !important;
-}
-.section-light-stone > div {
-  color: #1A1815;
-}
-.section-light-stone .text-foreground {
-  color: #1A1815 !important;
-}
-.section-light-stone .text-foreground-secondary {
-  color: #4A463F !important;
-}
-.section-light-stone .text-foreground-muted {
-  color: #7A756B !important;
-}
-.section-light-stone .border-border,
-.section-light-stone .border-border\/40 {
-  border-color: #E2DDD3 !important;
-}
-
-/* Ensure dark cards nested inside light stone chapters preserve their crisp light tones */
-.section-light-stone .bg-\[\#181714\],
-.section-light-stone .bg-\[\#1C1A17\] {
-  color: #FBF9F5;
-}
-.section-light-stone .bg-\[\#181714\] h3,
-.section-light-stone .bg-\[\#1C1A17\] h3 {
-  color: #FBF9F5 !important;
-}
-.section-light-stone .bg-\[\#181714\] .text-\[\#FBF9F5\],
-.section-light-stone .bg-\[\#1C1A17\] .text-\[\#FBF9F5\] {
-  color: #FBF9F5 !important;
-}
-.section-light-stone .bg-\[\#181714\] .text-\[\#8E887E\],
-.section-light-stone .bg-\[\#1C1A17\] .text-\[\#8E887E\] {
-  color: #8E887E !important;
-}
-.section-light-stone .bg-\[\#181714\] .text-\[\#CCC5B9\],
-.section-light-stone .bg-\[\#1C1A17\] .text-\[\#CCC5B9\] {
-  color: #CCC5B9 !important;
 }
 
 @keyframes shine {

@@ -56,7 +56,7 @@ export default function PropertiesClient({ initialProperties }: PropertiesClient
   });
 
   return (
-    <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-12 bg-[#080A0C] dark:bg-[#080A0C] light:bg-[#F8F6F0] text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] min-h-screen transition-colors duration-300">
+    <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-12 bg-[#121315] text-[#FAF8F5] min-h-screen transition-colors duration-300">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Minimal Editorial Header */}
         <div className="space-y-4 max-w-3xl border-b border-white/10 dark:border-white/10 light:border-[#DDD7CC] pb-8">
@@ -82,7 +82,7 @@ export default function PropertiesClient({ initialProperties }: PropertiesClient
 
         {/* Editorial Property Cards Grid */}
         {filtered.length === 0 ? (
-          <div className="p-16 text-center bg-[#101317] dark:bg-[#101317] light:bg-[#FFFFFF] border border-white/10 dark:border-white/10 light:border-[#DDD7CC] rounded-xl space-y-3 shadow-sm">
+          <div className="p-16 text-center bg-[#18191C] border border-white/10 rounded-xl space-y-3 shadow-sm">
             <h3 className="font-serif text-lg font-medium text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
               No residences match your criteria
             </h3>

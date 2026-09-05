@@ -114,7 +114,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
   };
 
   return (
-    <div className="bg-[#080A0C] dark:bg-[#080A0C] light:bg-[#F8F6F0] text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] min-h-screen transition-colors duration-300">
+    <div className="bg-[#121315] text-[#FAF8F5] min-h-screen transition-colors duration-300">
       {/* 1. MINIMAL HERO */}
       <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto border-b border-white/10 dark:border-white/10 light:border-[#DDD7CC]">
         <div className="max-w-4xl space-y-4">

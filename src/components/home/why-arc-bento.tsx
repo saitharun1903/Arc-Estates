@@ -44,7 +44,7 @@ export default function WhyArcBento() {
     <section
       ref={sectionRef}
       id="why-arc"
-      className="py-20 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#161513] text-[#FBF9F5] border-b border-white/10 relative overflow-hidden"
+      className="py-20 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#141518] section-charcoal text-[#FBF9F5] border-b border-white/[0.08] relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Header */}
@@ -63,7 +63,7 @@ export default function WhyArcBento() {
         {/* Bento Grid Composition */}
         <div ref={bentoRef} className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-5 sm:gap-6">
           {/* Bento Item 1: Verified Google Reviews & Rating (Large Span) */}
-          <div className="lg:col-span-8 p-6 sm:p-12 rounded-2xl bg-[#1C1A17] border border-white/10 relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
+          <div className="lg:col-span-8 p-6 sm:p-12 rounded-2xl bg-[#18191C] border border-white/[0.08] relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
             <div className="space-y-4 z-10">
               <div className="flex items-center space-x-2 text-amber-400/90">
                 {[...Array(5)].map((_, i) => (
@@ -79,7 +79,7 @@ export default function WhyArcBento() {
               </p>
             </div>
 
-            <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 z-10 border-t border-white/10 mt-6">
+            <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 z-10 border-t border-white/[0.08] mt-6">
               <span className="text-xs font-mono text-[#C9A86A]">PUBLICLY AUDITED ON GOOGLE MAPS</span>
               <a
                 href="https://maps.app.goo.gl/kX7D8dJz9U1gYJ927"
@@ -99,9 +99,9 @@ export default function WhyArcBento() {
           </div>
 
           {/* Bento Item 2: Northern Corridor Focus (Stat Card) */}
-          <div className="lg:col-span-4 p-6 sm:p-10 rounded-2xl bg-[#1C1A17] border border-white/10 relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
+          <div className="lg:col-span-4 p-6 sm:p-10 rounded-2xl bg-[#18191C] border border-white/[0.08] relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
             <div className="space-y-4">
-              <div className="w-10 h-10 rounded-full bg-[#24221D] border border-white/10 flex items-center justify-center text-[#C9A86A]">
+              <div className="w-10 h-10 rounded-full bg-[#22242A] border border-white/10 flex items-center justify-center text-[#C9A86A]">
                 <MapPin className="w-5 h-5" />
               </div>
               <span className="text-4xl sm:text-5xl font-serif font-normal text-[#C9A86A] block">
@@ -115,15 +115,15 @@ export default function WhyArcBento() {
               </p>
             </div>
 
-            <div className="pt-6 border-t border-white/10 text-[11px] font-mono text-[#C9A86A]">
+            <div className="pt-6 border-t border-white/[0.08] text-[11px] font-mono text-[#C9A86A]">
               DAILY CHIEF ENGINEER ON-SITE
             </div>
           </div>
 
           {/* Bento Item 3: Direct Developer Delivery (No Brokers) */}
-          <div className="lg:col-span-4 p-6 sm:p-10 rounded-2xl bg-[#1C1A17] border border-white/10 relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
+          <div className="lg:col-span-4 p-6 sm:p-10 rounded-2xl bg-[#18191C] border border-white/[0.08] relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
             <div className="space-y-4">
-              <div className="w-10 h-10 rounded-full bg-[#24221D] border border-white/10 flex items-center justify-center text-[#C9A86A]">
+              <div className="w-10 h-10 rounded-full bg-[#22242A] border border-white/10 flex items-center justify-center text-[#C9A86A]">
                 <Users className="w-5 h-5" />
               </div>
               <span className="text-4xl sm:text-5xl font-serif font-normal text-[#C9A86A] block">
@@ -137,16 +137,16 @@ export default function WhyArcBento() {
               </p>
             </div>
 
-            <div className="pt-6 border-t border-white/10 text-[11px] font-mono text-[#C9A86A]">
+            <div className="pt-6 border-t border-white/[0.08] text-[11px] font-mono text-[#C9A86A]">
               DIRECT DEVELOPER TRANSPARENCY
             </div>
           </div>
 
           {/* Bento Item 4: Verified Structural Quality (Span 8) */}
-          <div className="lg:col-span-8 p-6 sm:p-10 rounded-2xl bg-[#1C1A17] border border-white/10 relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
+          <div className="lg:col-span-8 p-6 sm:p-10 rounded-2xl bg-[#18191C] border border-white/[0.08] relative overflow-hidden flex flex-col justify-between group hover:border-[#C9A86A]/50 transition-all duration-500 shadow-xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center">
               <div className="space-y-4">
-                <div className="w-10 h-10 rounded-full bg-[#24221D] border border-white/10 flex items-center justify-center text-[#C9A86A]">
+                <div className="w-10 h-10 rounded-full bg-[#22242A] border border-white/10 flex items-center justify-center text-[#C9A86A]">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <h4 className="font-serif text-2xl sm:text-3xl font-normal text-[#FBF9F5]">
@@ -167,22 +167,22 @@ export default function WhyArcBento() {
               </div>
 
               <div className="grid grid-cols-2 gap-3 sm:gap-4 text-xs font-mono">
-                <div className="p-3 sm:p-4 rounded-xl bg-[#24221D] border border-white/5 space-y-1">
+                <div className="p-3 sm:p-4 rounded-xl bg-[#202227] border border-white/5 space-y-1">
                   <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">CONCRETE TESTING</span>
                   <span className="text-[#FBF9F5] font-semibold block text-xs sm:text-sm">Cube Crushing 28-Day</span>
                   <span className="text-[#C9A86A] text-[9.5px] sm:text-[10px]">Verified Strength</span>
                 </div>
-                <div className="p-3 sm:p-4 rounded-xl bg-[#24221D] border border-white/5 space-y-1">
+                <div className="p-3 sm:p-4 rounded-xl bg-[#202227] border border-white/5 space-y-1">
                   <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">STEEL STANDARD</span>
                   <span className="text-[#FBF9F5] font-semibold block text-xs sm:text-sm">Fe-550D TMT</span>
                   <span className="text-[#C9A86A] text-[9.5px] sm:text-[10px]">Anti-Corrosive Coated</span>
                 </div>
-                <div className="p-3 sm:p-4 rounded-xl bg-[#24221D] border border-white/5 space-y-1">
+                <div className="p-3 sm:p-4 rounded-xl bg-[#202227] border border-white/5 space-y-1">
                   <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">WATERPROOFING</span>
                   <span className="text-[#FBF9F5] font-semibold block text-xs sm:text-sm">Elastomeric Membrane</span>
                   <span className="text-[#C9A86A] text-[9.5px] sm:text-[10px]">10-Year Guarantee</span>
                 </div>
-                <div className="p-3 sm:p-4 rounded-xl bg-[#24221D] border border-white/5 space-y-1">
+                <div className="p-3 sm:p-4 rounded-xl bg-[#202227] border border-white/5 space-y-1">
                   <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">PLUMBING LINES</span>
                   <span className="text-[#FBF9F5] font-semibold block text-xs sm:text-sm">Multi-Layer CPVC</span>
                   <span className="text-[#C9A86A] text-[9.5px] sm:text-[10px]">15-Bar Tested</span>

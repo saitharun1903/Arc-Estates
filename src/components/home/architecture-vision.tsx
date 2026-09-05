@@ -119,10 +119,10 @@ export default function ArchitectureVision() {
     <section
       ref={sectionRef}
       id="architecture"
-      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#161513] text-[#FBF9F5] border-b border-white/10 relative overflow-hidden"
+      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#141518] section-charcoal text-[#FBF9F5] border-b border-white/[0.08] relative overflow-hidden"
     >
       {/* Background Subtle Blueprint Grid Lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-20 relative z-10">
         {/* Section Header */}
@@ -143,7 +143,7 @@ export default function ArchitectureVision() {
         {/* Technical Blueprint Visual Diagram Card */}
         <div
           ref={diagramRef}
-          className="relative aspect-auto min-h-[460px] sm:min-h-0 sm:aspect-[16/9] lg:aspect-[16/8] rounded-2xl overflow-hidden border border-white/10 bg-[#1C1A17] shadow-2xl group"
+          className="relative aspect-auto min-h-[460px] sm:min-h-0 sm:aspect-[16/9] lg:aspect-[16/8] rounded-2xl overflow-hidden border border-white/[0.08] bg-[#18191C] shadow-2xl group"
         >
           {/* Architectural Drawing Background Image */}
           <div
@@ -153,7 +153,7 @@ export default function ArchitectureVision() {
                 "url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85')",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#161513]/98 via-[#161513]/85 sm:via-[#161513]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#141518]/98 via-[#141518]/85 sm:via-[#141518]/70 to-transparent" />
 
           {/* Technical Blueprint Overlay Callouts */}
           <div className="relative z-10 sm:absolute sm:inset-0 p-5 sm:p-10 flex flex-col justify-between h-full space-y-6 sm:space-y-0">
@@ -177,7 +177,7 @@ export default function ArchitectureVision() {
             </div>
 
             {/* Micro Blueprint Technical Specs */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/10 text-xs font-mono">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/[0.08] text-xs font-mono">
               <div>
                 <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">SLAB THICKNESS</span>
                 <span className="text-[#C9A86A] font-semibold text-xs">200mm Post-Tensioned</span>
@@ -205,7 +205,7 @@ export default function ArchitectureVision() {
             return (
               <div
                 key={p.num}
-                className="p-8 rounded-2xl bg-[#1C1A17] border border-white/10 space-y-5 flex flex-col justify-between hover:border-[#C9A86A]/50 transition-all duration-300 shadow-md group hover:-translate-y-1"
+                className="p-8 rounded-2xl bg-[#18191C] border border-white/[0.08] space-y-5 flex flex-col justify-between hover:border-[#C9A86A]/50 transition-all duration-300 shadow-md group hover:-translate-y-1"
                 data-cursor="explore"
               >
                 <div className="space-y-4">

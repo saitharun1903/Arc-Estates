@@ -8,6 +8,7 @@ import AIChatDrawer from "@/components/ai-chat-drawer";
 import VoiceAgentModal from "@/components/voice-agent-modal";
 import SiteVisitModal from "@/components/site-visit-modal";
 import PageIntro from "@/components/ui/page-intro";
+import PageTransition from "@/components/page-transition";
 import { usePathname } from "next/navigation";
 
 interface SettingsData {
@@ -71,7 +72,9 @@ export default function LayoutClientWrapper({
         onOpenAI={() => setAiOpen(true)}
       />
 
-      <main className="flex-1">{children}</main>
+      <PageTransition>
+        <main className="flex-1">{children}</main>
+      </PageTransition>
 
       <Footer settings={settings} />
 

@@ -141,7 +141,7 @@ export default function HeroSection({
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-[580px] h-[100svh] max-h-[1080px] overflow-hidden bg-[#131210] text-[#FBF9F5] select-none"
+      className="relative w-full min-h-[580px] h-[100svh] max-h-[1080px] overflow-hidden bg-[#121315] text-[#FBF9F5] select-none"
       aria-label="Arc Estates 3D Architectural Showcase"
     >
       {/* Interactive 3D WebGL Architectural Environment */}
@@ -154,8 +154,8 @@ export default function HeroSection({
       </div>
 
       {/* Cinematic Vignette & Ambient Architectural Overlays */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#131210] via-transparent to-[#131210]/60" />
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(19,18,16,0.65)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#121315] via-transparent to-[#121315]/60" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(18,19,21,0.70)_100%)]" />
 
       {/* Hero Foreground Content Overlay */}
       <div
@@ -164,7 +164,7 @@ export default function HeroSection({
       >
         {/* Top Architectural Coordinate Eyebrow */}
         <div ref={eyebrowRef} className="space-y-1.5 pt-1 pointer-events-auto">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1C1A17]/90 border border-white/10 backdrop-blur-md">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#18191C]/90 border border-white/10 backdrop-blur-md">
             <span className="w-1.5 h-1.5 rounded-full bg-[#C9A86A] animate-pulse shrink-0" />
             <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#C9A86A]">
               ARC ESTATES // RESIDENTIAL ARCHITECTURE
@@ -220,7 +220,7 @@ export default function HeroSection({
           <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3">
             <Link
               href="/projects"
-              className="group inline-flex items-center justify-center space-x-2 px-6 py-3 sm:py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(201,168,106,0.28)] hover:shadow-[0_6px_28px_rgba(201,168,106,0.42)] active:scale-[0.98] min-h-[46px]"
+              className="group inline-flex items-center justify-center space-x-2 px-6 py-3 sm:py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#121315] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(201,168,106,0.28)] hover:shadow-[0_6px_28px_rgba(201,168,106,0.42)] active:scale-[0.98] min-h-[46px]"
               data-cursor="explore"
             >
               <span>Explore Developments</span>
@@ -230,14 +230,14 @@ export default function HeroSection({
             <div className="flex items-center gap-2">
               <Link
                 href="/site-visit"
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-5 py-3 sm:py-3.5 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#1C1A17]/80 hover:bg-[#22201C]/90 text-[#FBF9F5] text-xs font-medium tracking-wider backdrop-blur-md transition-all duration-300 active:scale-[0.98] min-h-[46px]"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-5 py-3 sm:py-3.5 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#18191C]/80 hover:bg-[#24262B]/90 text-[#FBF9F5] text-xs font-medium tracking-wider backdrop-blur-md transition-all duration-300 active:scale-[0.98] min-h-[46px]"
               >
                 <span>Schedule Site Visit</span>
               </Link>
 
               <button
                 onClick={onOpenAI}
-                className="hidden sm:inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-white/10 hover:border-[#C9A86A]/60 bg-[#1C1A17]/70 text-[#C9A86A] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02] min-h-[46px]"
+                className="hidden sm:inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-white/10 hover:border-[#C9A86A]/60 bg-[#18191C]/70 text-[#C9A86A] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02] min-h-[46px]"
                 aria-label="Open AI Concierge"
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -250,7 +250,7 @@ export default function HeroSection({
         {/* Bottom 3D Controller & Mode Switcher Bar */}
         <div
           ref={controlsRef}
-          className="flex items-center justify-between pt-3 pb-1 border-t border-white/10 text-xs pointer-events-auto"
+          className="flex items-center justify-between pt-3 pb-1 border-t border-white/[0.08] text-xs pointer-events-auto"
         >
           {/* 3D Interaction Notice */}
           <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono text-[#8E887E]">
