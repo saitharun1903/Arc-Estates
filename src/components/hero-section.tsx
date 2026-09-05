@@ -1,11 +1,30 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Layers, Box, Sparkles, Compass, ShieldCheck, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+
+// Dynamically import 3D canvas with ssr: false for flawless hydration
+const ArchitecturalCanvas = dynamic(
+  () => import("@/components/3d/architectural-canvas"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="absolute inset-0 bg-[#0A0C0E] flex items-center justify-center">
+        <div className="flex flex-col items-center space-y-3">
+          <div className="w-8 h-8 rounded-full border border-[#C5A880]/30 border-t-[#C5A880] animate-spin" />
+          <span className="text-[10px] font-mono tracking-[0.25em] text-[#C5A880] uppercase">
+            INITIALIZING 3D ENVIRONMENT
+          </span>
+        </div>
+      </div>
+    ),
+  }
+);
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,364 +38,253 @@ interface HeroSectionProps {
 
 export default function HeroSection({
   onOpenAI,
-  headline = "BUILT WITH INTENTION.",
-  subhead = "Real Estate Builders & Construction Company — Bahadurpally, Hyderabad",
+  headline = "BUILT FOR THE WAY YOU LIVE.",
+  subhead = "Architectural Real Estate & Construction Studio — Bahadurpally, Hyderabad",
 }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const bgImageRef = useRef<HTMLDivElement>(null);
-  const eyebrowRef = useRef<HTMLDivElement>(null);
+  const contentOverlayRef = useRef<HTMLDivElement>(null);
   const titleLine1Ref = useRef<HTMLSpanElement>(null);
   const titleLine2Ref = useRef<HTMLSpanElement>(null);
+  const eyebrowRef = useRef<HTMLDivElement>(null);
   const metaRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const metricsBarRef = useRef<HTMLDivElement>(null);
+  const controlsRef = useRef<HTMLDivElement>(null);
 
-  // Coordinated Hero Sequence + Non-Conflicting Scroll Exit
+  const [blueprintMode, setBlueprintMode] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [assemblyComplete, setAssemblyComplete] = useState(false);
+
+  // GSAP ScrollTrigger Integration for 3D Camera & Text Handoff
   useGSAP(
     () => {
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReducedMotion) {
-        gsap.set(
-          [
-            titleLine1Ref.current,
-            titleLine2Ref.current,
-            eyebrowRef.current,
-            metaRef.current,
-            ctaRef.current,
-            scrollIndicatorRef.current,
-          ],
-          { opacity: 1, y: 0 }
-        );
-        gsap.set(bgImageRef.current, { opacity: 0.35, scale: 1 });
-        return;
-      }
+      if (!containerRef.current) return;
 
-      let alreadyViewed = false;
-      try {
-        alreadyViewed = sessionStorage.getItem("arc_intro_viewed") === "true";
-      } catch {
-        alreadyViewed = false;
-      }
-      const skipParam = typeof window !== "undefined" && window.location.search.includes("skip_intro=true");
+      const st = ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        onUpdate: (self) => {
+          setScrollProgress(self.progress);
+        },
+      });
 
-      let entranceStarted = false;
-      let entranceFinished = false;
-
-      // Initialize the scrubbed scroll exit ONLY after the hero is fully visible
-      const initScrollExit = () => {
-        if (!containerRef.current || !bgImageRef.current || !titleLine1Ref.current) return;
-        ScrollTrigger.getById("hero-scroll-handoff")?.kill();
-
-        const scrollTl = gsap.timeline({
-          id: "hero-scroll-handoff",
+      // Smooth text exit animation on scroll
+      if (contentOverlayRef.current) {
+        gsap.to(contentOverlayRef.current, {
+          y: -80,
+          opacity: 0.15,
+          ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "bottom top",
-            scrub: 0.6,
-            invalidateOnRefresh: true,
+            end: "65% top",
+            scrub: true,
           },
         });
-
-        // Background subtle scale & parallax with explicit baseline
-        scrollTl.fromTo(
-          bgImageRef.current,
-          { scale: 1, yPercent: 0, opacity: 0.35 },
-          { scale: 1.10, yPercent: 12, opacity: 0.16, ease: "none" },
-          0
-        );
-
-        // Headline subtle upward movement and soft fade with explicit baseline
-        scrollTl.fromTo(
-          [titleLine1Ref.current, titleLine2Ref.current],
-          { y: 0, opacity: 1 },
-          { y: -40, opacity: 0.18, ease: "none" },
-          0
-        );
-
-        // Eyebrow, subtitle, and CTAs gently fade out with explicit baseline
-        scrollTl.fromTo(
-          [eyebrowRef.current, metaRef.current, ctaRef.current, scrollIndicatorRef.current],
-          { y: 0, opacity: 1 },
-          { y: -28, opacity: 0, ease: "none" },
-          0
-        );
-      };
-
-      // Entrance animation routine
-      const runEntrance = () => {
-        if (entranceStarted) return;
-        entranceStarted = true;
-
-        const tl = gsap.timeline({
-          defaults: { ease: "power3.out" },
-          onComplete: () => {
-            entranceFinished = true;
-            initScrollExit();
-
-            if (scrollIndicatorRef.current) {
-              gsap.to(scrollIndicatorRef.current, {
-                y: 6,
-                duration: 1.8,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut",
-              });
-            }
-          },
-        });
-
-        // Background subtle scale settling
-        tl.fromTo(
-          bgImageRef.current,
-          { scale: 1.05, opacity: 0 },
-          { scale: 1, opacity: 0.35, duration: 0.9, ease: "power2.out" },
-          0
-        );
-
-        // Eyebrow and hairlines
-        tl.fromTo(
-          eyebrowRef.current,
-          { opacity: 0, y: -10 },
-          { opacity: 1, y: 0, duration: 0.45 },
-          0.05
-        );
-
-        // Headline lines rise smoothly
-        tl.fromTo(
-          titleLine1Ref.current,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.55 },
-          0.12
-        );
-        tl.fromTo(
-          titleLine2Ref.current,
-          { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 0.55 },
-          0.20
-        );
-
-        // Meta subtitle
-        tl.fromTo(
-          metaRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.4 },
-          0.28
-        );
-
-        // CTAs rise
-        tl.fromTo(
-          ctaRef.current,
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.4 },
-          0.36
-        );
-
-        // Scroll indicator
-        tl.fromTo(
-          scrollIndicatorRef.current,
-          { opacity: 0, y: -6 },
-          { opacity: 1, y: 0, duration: 0.4 },
-          0.44
-        );
-      };
-
-      // FAST PATH: If already viewed in current session or skip requested, show immediately!
-      if (alreadyViewed || skipParam) {
-        entranceStarted = true;
-        entranceFinished = true;
-        gsap.set(
-          [
-            titleLine1Ref.current,
-            titleLine2Ref.current,
-            eyebrowRef.current,
-            metaRef.current,
-            ctaRef.current,
-            scrollIndicatorRef.current,
-          ],
-          { opacity: 1, y: 0 }
-        );
-        gsap.set(bgImageRef.current, { opacity: 0.35, scale: 1 });
-        initScrollExit();
-
-        if (scrollIndicatorRef.current) {
-          gsap.to(scrollIndicatorRef.current, {
-            y: 6,
-            duration: 1.8,
-            repeat: -1,
-            yoyo: true,
-            ease: "power1.inOut",
-          });
-        }
-        return;
       }
 
-      // FIRST-VISIT PATH: Initial invisible state until curtain lifts
-      gsap.set(
-        [
-          titleLine1Ref.current,
-          titleLine2Ref.current,
-          eyebrowRef.current,
-          metaRef.current,
-          ctaRef.current,
-          scrollIndicatorRef.current,
-          bgImageRef.current,
-        ],
-        { opacity: 0 }
-      );
-
-      // Listen for intro reveal signal from PageIntro
-      const handleIntroSignal = () => {
-        runEntrance();
-      };
-
-      window.addEventListener("arc-intro-reveal", handleIntroSignal, { once: true });
-      window.addEventListener("arc-intro-complete", handleIntroSignal, { once: true });
-
-      // ZERO-HANG FAILSAFE 1: If no signal within 750ms, start entrance automatically
-      const safetyTimer = setTimeout(() => {
-        runEntrance();
-      }, 750);
-
-      // ZERO-HANG FAILSAFE 2: Hard recovery at 1200ms guarantees 100% visibility under ANY circumstance
-      const hardRecoveryTimer = setTimeout(() => {
-        if (!entranceFinished) {
-          entranceStarted = true;
-          entranceFinished = true;
-          gsap.set(
-            [
-              titleLine1Ref.current,
-              titleLine2Ref.current,
-              eyebrowRef.current,
-              metaRef.current,
-              ctaRef.current,
-              scrollIndicatorRef.current,
-            ],
-            { opacity: 1, y: 0, clearProps: "transform" }
-          );
-          gsap.set(bgImageRef.current, { opacity: 0.35, scale: 1 });
-          initScrollExit();
-        }
-      }, 1200);
-
       return () => {
-        clearTimeout(safetyTimer);
-        clearTimeout(hardRecoveryTimer);
-        window.removeEventListener("arc-intro-reveal", handleIntroSignal);
-        window.removeEventListener("arc-intro-complete", handleIntroSignal);
-        ScrollTrigger.getById("hero-scroll-handoff")?.kill();
+        st.kill();
       };
     },
     { scope: containerRef }
   );
 
-  const handleOpenVisitModal = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(
-        new CustomEvent("open-site-visit", {
-          detail: { projectSlug: "arc-vista" },
-        })
-      );
-    }
-  };
+  // Initial Content Entrance Animation
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.3 });
+
+      tl.fromTo(
+        eyebrowRef.current,
+        { opacity: 0, y: -15 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      )
+        .fromTo(
+          [titleLine1Ref.current, titleLine2Ref.current],
+          { opacity: 0, y: 35, clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)" },
+          {
+            opacity: 1,
+            y: 0,
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+            duration: 1.1,
+            stagger: 0.18,
+            ease: "power3.out",
+          },
+          "-=0.4"
+        )
+        .fromTo(
+          metaRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.5"
+        )
+        .fromTo(
+          metricsBarRef.current,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.4"
+        )
+        .fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.4"
+        )
+        .fromTo(
+          controlsRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 1.0, ease: "power1.out" },
+          "-=0.2"
+        );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
-      id="hero"
       ref={containerRef}
-      className="relative min-h-[100dvh] flex items-center justify-center pt-28 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0A0C0E] dark:bg-[#0A0C0E] light:bg-[#F8F6F0] transition-colors duration-300"
+      className="relative w-full min-h-screen h-[100svh] overflow-hidden bg-[#0A0C0E] text-[#F4F1EA] select-none"
+      aria-label="Arc Estates 3D Architectural Showcase"
     >
-      {/* Full-width Architectural Image Background */}
-      <div
-        ref={bgImageRef}
-        className="absolute inset-0 opacity-30 scale-100 pointer-events-none select-none"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=85"
-          alt="ARC Avenue Architectural Residences"
-          className="w-full h-full object-cover object-center"
+      {/* Interactive 3D WebGL Architectural Environment */}
+      <div className="absolute inset-0 z-0">
+        <ArchitecturalCanvas
+          blueprintMode={blueprintMode}
+          scrollProgress={scrollProgress}
+          onAssemblyComplete={() => setAssemblyComplete(true)}
         />
       </div>
 
-      {/* Layered Architectural Gradient Overlays & Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0C0E]/90 dark:from-[#0A0C0E]/90 light:from-[#F8F6F0]/90 via-[#0A0C0E]/75 dark:via-[#0A0C0E]/75 light:via-[#F8F6F0]/80 to-[#0A0C0E] dark:to-[#0A0C0E] light:to-[#F8F6F0] pointer-events-none transition-colors duration-300" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#0A0C0E_85%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_0%,#0A0C0E_85%)] light:bg-[radial-gradient(ellipse_at_center,transparent_0%,#F8F6F0_85%)] pointer-events-none transition-colors duration-300" />
-      <div className="absolute inset-0 bg-blueprint-grid opacity-15 light:opacity-20 pointer-events-none" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-[#C5A880]/5 dark:bg-[#C5A880]/5 light:bg-[#A88858]/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Cinematic Vignette & Ambient Overlays */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#0A0C0E] via-transparent to-[#0A0C0E]/70" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,12,14,0.6)_100%)]" />
 
-      <div className="max-w-5xl mx-auto w-full relative z-10 text-center flex flex-col items-center space-y-6 sm:space-y-8">
-        {/* Brand & Category Hierarchy */}
-        <div ref={eyebrowRef} className="flex flex-col items-center space-y-2">
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <div className="h-[1px] w-10 sm:w-16 bg-gradient-to-r from-transparent to-[#C5A880] dark:to-[#C5A880] light:to-[#A88858]" />
-            <span className="text-xs sm:text-sm font-mono uppercase tracking-[0.35em] text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858] select-none whitespace-nowrap">
-              ARC AVENUE
-            </span>
-            <div className="h-[1px] w-10 sm:w-16 bg-gradient-to-l from-transparent to-[#C5A880] dark:to-[#C5A880] light:to-[#A88858]" />
-          </div>
-          <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] select-none">
-            REAL ESTATE BUILDERS &amp; CONSTRUCTION • BAHADURPALLY, HYDERABAD
-          </p>
-        </div>
-
-        {/* Main Architectural Headline */}
-        <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-normal tracking-tight text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] leading-[0.98] max-w-4xl select-none">
-          <span ref={titleLine1Ref} className="block">
-            BUILDING
-          </span>
-          <span ref={titleLine2Ref} className="block italic text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858]">
-            FOR LIVING.
-          </span>
-        </h1>
-
-        {/* Small Supporting Line */}
-        <p
-          ref={metaRef}
-          className="text-xs sm:text-sm md:text-base text-[#CCC7BC] dark:text-[#CCC7BC] light:text-[#5F5B53] max-w-xl mx-auto leading-relaxed font-light font-mono tracking-wide"
-        >
-          Builders &amp; Construction • Bahadurpally, Hyderabad
-        </p>
-
-        {/* Clean Editorial CTAs */}
-        <div
-          ref={ctaRef}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-md pt-2"
-        >
-          <a
-            href="#projects"
-            className="h-12 inline-flex items-center justify-center w-full sm:w-auto px-8 bg-[#C5A880] dark:bg-[#C5A880] light:bg-[#A88858] hover:bg-[#D4B992] dark:hover:bg-[#D4B992] light:hover:bg-[#967644] text-[#0C0E10] text-xs font-mono uppercase tracking-[0.2em] font-bold rounded-[3px] shadow-lg transition-all duration-300 text-center whitespace-nowrap select-none group"
-          >
-            <span>Explore Projects</span>
-            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
-
-          <button
-            type="button"
-            onClick={handleOpenVisitModal}
-            className="h-12 inline-flex items-center justify-center w-full sm:w-auto px-7 border border-white/20 dark:border-white/20 light:border-[#DDD7CC] hover:border-[#C5A880] dark:hover:border-[#C5A880] light:hover:border-[#A88858] bg-[#14171C]/80 dark:bg-[#14171C]/80 light:bg-[#FAF8F5]/90 hover:bg-[#1E232B] dark:hover:bg-[#1E232B] light:hover:bg-[#EAE6DE] text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] text-xs font-mono uppercase tracking-[0.18em] font-medium rounded-[3px] transition-all duration-300 text-center whitespace-nowrap select-none group"
-          >
-            <span>Book a Visit</span>
-            <span className="ml-2 text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858] transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Subtle Scroll Indicator */}
+      {/* Hero Foreground Content Overlay */}
       <div
-        ref={scrollIndicatorRef}
-        className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-1.5 text-[#787570] dark:text-[#787570] light:text-[#858076] hover:text-[#C5A880] dark:hover:text-[#C5A880] light:hover:text-[#A88858] transition-colors cursor-pointer select-none"
-        onClick={() => {
-          const nextSection = document.getElementById("projects") || document.getElementById("hero");
-          if (nextSection) {
-            nextSection.scrollIntoView({ behavior: "smooth" });
-          } else {
-            window.scrollTo({ top: window.innerHeight - 80, behavior: "smooth" });
-          }
-        }}
+        ref={contentOverlayRef}
+        className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between pt-28 pb-10 pointer-events-none"
       >
-        <span className="text-[9px] font-mono uppercase tracking-[0.25em]">Scroll to Explore</span>
-        <ArrowDown className="w-3.5 h-3.5 text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858]" />
+        {/* Top Architectural Coordinate Eyebrow */}
+        <div ref={eyebrowRef} className="opacity-0 space-y-1.5 pt-2 pointer-events-auto">
+          <div className="inline-flex items-center space-x-2.5 px-3 py-1 rounded-full bg-[#14171A]/80 border border-white/10 backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] animate-pulse" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#C5A880]">
+              ARC ESTATES // RESIDENTIAL ARCHITECTURE
+            </span>
+            <span className="text-white/30 font-mono text-[9px] hidden sm:inline">•</span>
+            <span className="text-[9px] font-mono tracking-wider text-white/50 hidden sm:inline">
+              BAHADURPALLY, HYDERABAD
+            </span>
+          </div>
+        </div>
+
+        {/* Center Editorial Title & Narrative */}
+        <div className="max-w-3xl space-y-6 my-auto pointer-events-auto">
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-white leading-[1.05]">
+            <span ref={titleLine1Ref} className="block opacity-0">
+              BUILT FOR
+            </span>
+            <span
+              ref={titleLine2Ref}
+              className="block opacity-0 text-[#C5A880] italic font-light font-serif tracking-normal"
+            >
+              THE WAY YOU LIVE.
+            </span>
+          </h1>
+
+          <p
+            ref={metaRef}
+            className="opacity-0 text-sm sm:text-base lg:text-lg text-[#CCC7BC] max-w-2xl font-light leading-relaxed drop-shadow"
+          >
+            {subhead}
+          </p>
+
+          {/* Key Metric Indicators Pill */}
+          <div
+            ref={metricsBarRef}
+            className="opacity-0 flex flex-wrap items-center gap-4 sm:gap-6 pt-1 text-xs font-mono text-[#A09D96]"
+          >
+            <div className="flex items-center space-x-1.5">
+              <Box className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>4 Flagship Projects</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
+              <Compass className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>2,400 – 5,200 SQ.FT</span>
+            </div>
+            <div className="flex items-center space-x-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span>Verified Structural Quality</span>
+            </div>
+          </div>
+
+          {/* Action Call-to-Actions */}
+          <div ref={ctaRef} className="opacity-0 flex flex-wrap items-center gap-3 pt-3">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#C5A880] hover:bg-[#B38F5B] text-[#0A0C0E] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(197,168,128,0.25)] hover:shadow-[0_0_35px_rgba(197,168,128,0.45)] hover:scale-[1.02]"
+              data-cursor="explore"
+            >
+              <span>Explore Developments</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+
+            <Link
+              href="/site-visit"
+              className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full border border-white/20 hover:border-[#C5A880] bg-[#121519]/60 hover:bg-[#121519]/90 text-white text-xs font-semibold tracking-wider backdrop-blur-md transition-all duration-300"
+            >
+              <span>Schedule Site Visit</span>
+            </Link>
+
+            <button
+              onClick={onOpenAI}
+              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-[#C5A880]/30 hover:border-[#C5A880] bg-[#14171A]/70 text-[#C5A880] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>AI Concierge</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Bottom 3D Controller & Mode Switcher Bar */}
+        <div
+          ref={controlsRef}
+          className="opacity-0 flex items-center justify-between pt-4 border-t border-white/10 text-xs pointer-events-auto"
+        >
+          {/* 3D Interaction Notice */}
+          <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono text-[#8C8983]">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="hidden sm:inline">3D INTERACTIVE ARCHITECTURE</span>
+            <span className="sm:hidden">3D VIEW</span>
+            <span className="text-white/20">•</span>
+            <span className="text-[#CCC7BC]/70">DRAG TO ROTATE MODEL</span>
+          </div>
+
+          {/* Blueprint Mode Switcher */}
+          <button
+            onClick={() => setBlueprintMode((prev) => !prev)}
+            className={`inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 backdrop-blur-md ${
+              blueprintMode
+                ? "bg-[#061B2E] border-[#56CCF2] text-[#56CCF2] shadow-[0_0_15px_rgba(86,204,242,0.3)]"
+                : "bg-[#14171A]/80 border-white/20 text-[#C5A880] hover:border-[#C5A880]"
+            }`}
+            aria-pressed={blueprintMode}
+            title="Toggle Architectural Blueprint Mode"
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>{blueprintMode ? "Blueprint Mode: Active" : "View Blueprint Mode"}</span>
+          </button>
+
+          {/* Scroll Down Hint */}
+          <div className="hidden md:flex items-center space-x-2 text-[10px] font-mono text-[#8C8983]">
+            <span>SCROLL TO EXPLORE</span>
+            <ArrowDown className="w-3 h-3 text-[#C5A880] animate-bounce" />
+          </div>
+        </div>
       </div>
     </section>
   );

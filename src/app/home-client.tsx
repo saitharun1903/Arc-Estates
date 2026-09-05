@@ -12,11 +12,18 @@ import {
   Compass,
   Layers,
   Sparkles,
+  ChevronDown,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+
 import HeroSection from "@/components/hero-section";
+import ArchitectureVision from "@/components/home/architecture-vision";
+import LifestyleSection from "@/components/home/lifestyle-section";
+import WhyArcBento from "@/components/home/why-arc-bento";
+import TestimonialsSection from "@/components/home/testimonials-section";
+import ContactChapter from "@/components/home/contact-chapter";
 import { ProjectCard, FeaturedProjectCard, SiteVisitCard, ProjectCardData } from "@/components/cards";
 import LocationMap from "@/components/location-map";
 import AIChatDrawer from "@/components/ai-chat-drawer";
@@ -61,13 +68,6 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
   const discoverHeaderRef = useRef<HTMLDivElement>(null);
   const discoverCardRef = useRef<HTMLDivElement>(null);
 
-  const craftSectionRef = useRef<HTMLElement>(null);
-  const craftHeaderRef = useRef<HTMLDivElement>(null);
-  const craftGridRef = useRef<HTMLDivElement>(null);
-
-  const advisorySectionRef = useRef<HTMLElement>(null);
-  const advisoryGridRef = useRef<HTMLDivElement>(null);
-
   // Conversational Property Finder State
   const [finderType, setFinderType] = useState("ALL");
   const [finderBhk, setFinderBhk] = useState("ALL");
@@ -97,9 +97,9 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (prefersReducedMotion) return;
 
-      // 1. Signature Moment #4: Thesis / Building Philosophy Section
+      // 1. Thesis / Statement Section
       if (thesisSectionRef.current) {
-        const tl = gsap.timeline({
+        const thesisTl = gsap.timeline({
           scrollTrigger: {
             trigger: thesisSectionRef.current,
             start: "top 80%",
@@ -109,7 +109,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         });
 
         if (thesisLineRef.current) {
-          tl.fromTo(
+          thesisTl.fromTo(
             thesisLineRef.current,
             { scaleX: 0, transformOrigin: "left center" },
             { scaleX: 1, duration: 0.8 },
@@ -118,56 +118,30 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         }
 
         if (thesisQuoteRef.current) {
-          tl.fromTo(
+          thesisTl.fromTo(
             thesisQuoteRef.current,
             { opacity: 0, y: 28 },
-            { opacity: 1, y: 0, duration: 0.75 },
+            { opacity: 1, y: 0, duration: 0.9 },
             0.15
           );
         }
 
         if (thesisImageRef.current) {
-          tl.fromTo(
+          thesisTl.fromTo(
             thesisImageRef.current,
-            { clipPath: "inset(6% 6% 6% 6%)", opacity: 0.7 },
-            { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 0.9, ease: "power2.out" },
-            0.2
+            { opacity: 0, scale: 0.96 },
+            { opacity: 1, scale: 1, duration: 0.9 },
+            0.25
           );
-
-          const imgEl = thesisImageRef.current.querySelector("img");
-          if (imgEl) {
-            tl.fromTo(
-              imgEl,
-              { scale: 1.08 },
-              { scale: 1, duration: 1, ease: "power2.out" },
-              0.2
-            );
-
-            // Subtle parallax on scroll
-            gsap.fromTo(
-              imgEl,
-              { yPercent: -5 },
-              {
-                yPercent: 5,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: thesisSectionRef.current,
-                  start: "top bottom",
-                  end: "bottom top",
-                  scrub: 0.8,
-                },
-              }
-            );
-          }
         }
       }
 
-      // 2. Signature Moment #2: Featured Developments Section
+      // 2. Featured Projects Section
       if (projectsSectionRef.current) {
         const projTl = gsap.timeline({
           scrollTrigger: {
             trigger: projectsSectionRef.current,
-            start: "top 82%",
+            start: "top 78%",
             toggleActions: "play none none reverse",
           },
           defaults: { ease: "power2.out" },
@@ -185,41 +159,29 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         if (projectsHeaderRef.current) {
           projTl.fromTo(
             projectsHeaderRef.current,
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 0.65 },
-            0.12
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.6 },
+            0.1
           );
         }
 
         if (flagshipCardRef.current) {
           projTl.fromTo(
             flagshipCardRef.current,
-            { opacity: 0, y: 28, scale: 0.98 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.75, ease: "power2.out" },
-            0.25
+            { opacity: 0, y: 35, scale: 0.98 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power2.out" },
+            0.2
           );
         }
-      }
 
-      // Secondary Projects 3-Card Stagger
-      if (secondaryGridRef.current) {
-        const cards = secondaryGridRef.current.children;
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.12,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: secondaryGridRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+        if (secondaryGridRef.current) {
+          projTl.fromTo(
+            secondaryGridRef.current.children,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: "power2.out" },
+            0.35
+          );
+        }
       }
 
       // 3. Property Discovery Section
@@ -227,7 +189,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         const discTl = gsap.timeline({
           scrollTrigger: {
             trigger: discoverSectionRef.current,
-            start: "top 82%",
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
           defaults: { ease: "power2.out" },
@@ -251,63 +213,6 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
           );
         }
       }
-
-      // 4. Construction Rigor 4-Card Stagger
-      if (craftGridRef.current) {
-        if (craftHeaderRef.current) {
-          gsap.fromTo(
-            craftHeaderRef.current,
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              scrollTrigger: {
-                trigger: craftSectionRef.current,
-                start: "top 82%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        }
-
-        gsap.fromTo(
-          craftGridRef.current.children,
-          { opacity: 0, y: 25 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.09,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: craftGridRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
-      // 5. Digital Advisory & Site Visit 2-Card Stagger
-      if (advisoryGridRef.current) {
-        gsap.fromTo(
-          advisoryGridRef.current.children,
-          { opacity: 0, y: 26 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.14,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: advisoryGridRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
     },
     { scope: pageContainerRef }
   );
@@ -329,44 +234,57 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
   const origin = projects.find((p) => p.slug === "arc-origin") || projects[3];
 
   return (
-    <div ref={pageContainerRef} className="space-y-0">
-      {/* CHAPTER 01: THE OPENING (Hero) */}
+    <div ref={pageContainerRef} className="space-y-0 bg-[#0C0E10] text-[#F4F1EA]">
+      {/* 1. CINEMATIC 3D ARCHITECTURAL OPENING & HERO */}
       <HeroSection
         onOpenAI={() => setAiOpen(true)}
         headline={settings.heroHeadline}
         subhead={settings.heroSubhead}
       />
 
-      {/* CHAPTER: THE STATEMENT (Editorial Thesis) */}
-      <section ref={thesisSectionRef} className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 bg-background border-b border-border relative overflow-hidden transition-colors duration-300">
+      {/* 2. THE THESIS / EDITORIAL STATEMENT */}
+      <section
+        ref={thesisSectionRef}
+        className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 bg-background border-b border-border relative overflow-hidden transition-colors duration-300"
+      >
         <div ref={thesisLineRef} className="max-w-6xl mx-auto h-[1px] bg-border mb-12 sm:mb-16 origin-left" />
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-8 space-y-6 sm:space-y-8">
-            <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-accent font-semibold">
-              <span>BUILDING PHILOSOPHY</span>
+            <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-[#C5A880] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+              <span>BUILDING PHILOSOPHY // NORTHERN CORRIDOR</span>
             </div>
 
-            <blockquote ref={thesisQuoteRef} className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-foreground leading-[1.15]">
-              “Good spaces don’t ask for attention. <br />
-              <span className="italic text-accent">They earn it.</span>”
+            <blockquote
+              ref={thesisQuoteRef}
+              className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-foreground leading-[1.15]"
+            >
+              “Good spaces don&apos;t ask for attention. <br />
+              <span className="italic text-[#C5A880]">They earn it.</span>”
             </blockquote>
 
             <p className="text-sm sm:text-base md:text-lg text-foreground-secondary max-w-2xl leading-relaxed font-light">
-              We build homes and commercial landmarks in Bahadurpally shaped around how people actually live: how natural daylight reaches a living room, how breeze circulates through central corridors, and how solid engineering outlasts passing trends.
+              We build residences and commercial landmarks in Bahadurpally shaped around how people actually live: how natural daylight enters the living suite, how breeze circulates through open breezeways, and how solid engineering outlasts passing trends.
             </p>
 
             <div className="pt-2 flex items-center space-x-4 text-xs font-mono text-foreground-muted uppercase tracking-wider">
               <span>Bahadurpally Corridor</span>
               <span>•</span>
               <span>Direct Developer Presence</span>
+              <span>•</span>
+              <span>Zero Intermediary Barriers</span>
             </div>
           </div>
 
-          <div ref={thesisImageRef} className="lg:col-span-4 relative aspect-[3/4] rounded-lg overflow-hidden border border-border shadow-xl">
+          <div
+            ref={thesisImageRef}
+            className="lg:col-span-4 relative aspect-[3/4] rounded-2xl overflow-hidden border border-border shadow-2xl group"
+            data-cursor="view"
+          >
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85"
-              alt="ARC Avenue Architectural Detail"
-              className="w-full h-full object-cover object-center"
+              alt="ARC Estates Architectural Detail"
+              className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
             <div className="absolute bottom-4 left-4 right-4 text-[10.5px] font-mono text-foreground-muted uppercase tracking-wider">
@@ -376,14 +294,18 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         </div>
       </section>
 
-      {/* CHAPTER: FEATURED DEVELOPMENTS (Asymmetric Architectural Portfolio) */}
-      <section id="projects" ref={projectsSectionRef} className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 bg-background border-b border-border space-y-16 transition-colors duration-300">
+      {/* 3. FEATURED DEVELOPMENTS (Asymmetric Showcase) */}
+      <section
+        id="projects"
+        ref={projectsSectionRef}
+        className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 bg-background border-b border-border space-y-16 transition-colors duration-300"
+      >
         <div className="max-w-7xl mx-auto space-y-8 sm:space-y-10">
           <div ref={projectsLineRef} className="h-[1px] w-full bg-border origin-left" />
           <div ref={projectsHeaderRef} className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-border/40">
             <div className="space-y-2">
-              <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-accent font-semibold">
-                <span>PORTFOLIO ARCHIVE</span>
+              <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-[#C5A880] font-semibold">
+                <span>PORTFOLIO ARCHIVE // 4 DEVELOPMENTS</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-foreground">
                 Featured Developments
@@ -394,7 +316,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
             </p>
           </div>
 
-          {/* Asymmetric Showcase: 1. Flagship Presentation Card (01 ARC Vista) */}
+          {/* Flagship Presentation Card (01 ARC Vista) */}
           {vista && (
             <div ref={flagshipCardRef}>
               <FeaturedProjectCard
@@ -406,33 +328,17 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
             </div>
           )}
 
-          {/* Asymmetric Showcase: 2. Secondary Developments in Editorial Cards (02, 03, 04) */}
+          {/* Secondary Developments (02 ARC Haven, 03 ARC Terrace, 04 ARC Origin) */}
           <div ref={secondaryGridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-            {haven && (
-              <ProjectCard
-                project={haven}
-                index={2}
-              />
-            )}
-            {terrace && (
-              <ProjectCard
-                project={terrace}
-                index={3}
-              />
-            )}
-            {origin && (
-              <ProjectCard
-                project={origin}
-                index={4}
-              />
-            )}
+            {haven && <ProjectCard project={haven} index={2} />}
+            {terrace && <ProjectCard project={terrace} index={3} />}
+            {origin && <ProjectCard project={origin} index={4} />}
           </div>
 
-          {/* Link to Dedicated Projects Archive */}
-          <div className="pt-2 flex justify-center">
+          <div className="pt-4 flex justify-center">
             <Link
               href="/projects"
-              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-accent hover:text-accent-hover transition-colors group"
+              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#C5A880] hover:text-[#B38F5B] transition-colors group"
             >
               <span>Explore All Developments</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -441,29 +347,39 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         </div>
       </section>
 
-      {/* CHAPTER: PROPERTY DISCOVERY (Conversational Property Selector) */}
-      <section id="discover" ref={discoverSectionRef} className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-background-secondary border-t border-border relative transition-colors duration-300">
+      {/* 4. ARCHITECTURE SECTION (Designed with Intention) */}
+      <ArchitectureVision />
+
+      {/* 5. FLOATING PROPERTY DISCOVERY INTERFACE */}
+      <section
+        id="discover"
+        ref={discoverSectionRef}
+        className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-[#0E1013] border-t border-b border-white/10 relative"
+      >
         <div className="max-w-5xl mx-auto space-y-10">
           <div ref={discoverHeaderRef} className="text-center space-y-3">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-accent font-semibold">
-              PROPERTY DISCOVERY
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#C5A880] font-semibold">
+              PROPERTY DISCOVERY // REAL-TIME INVENTORY
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-foreground">
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-white">
               Find Your Place in Bahadurpally
             </h2>
-            <p className="text-sm text-foreground-muted max-w-xl mx-auto font-light">
-              Select your preferences below to immediately view matching residential and commercial opportunities.
+            <p className="text-sm text-[#8C8983] max-w-xl mx-auto font-light">
+              Select your typology preferences below to immediately discover matching residences across our active developments.
             </p>
           </div>
 
-          <div ref={discoverCardRef} className="p-8 sm:p-12 rounded-xl bg-card border border-border shadow-lg space-y-8">
-            <div className="font-serif text-xl sm:text-2xl md:text-3xl text-foreground-secondary leading-relaxed">
+          <div
+            ref={discoverCardRef}
+            className="p-8 sm:p-12 rounded-2xl bg-[#14171D] border border-white/10 shadow-2xl space-y-8 backdrop-blur-md"
+          >
+            <div className="font-serif text-xl sm:text-2xl md:text-3xl text-[#CCC7BC] leading-relaxed">
               <span>“I am exploring </span>
               <span className="relative inline-block mx-1">
                 <select
                   value={finderType}
                   onChange={(e) => setFinderType(e.target.value)}
-                  className="appearance-none bg-surface-elevated border-b border-accent text-foreground font-serif font-semibold px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
+                  className="appearance-none bg-[#1C2027] border-b-2 border-[#C5A880] text-white font-serif font-semibold px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
                 >
                   <option value="ALL">residential or commercial</option>
                   <option value="High-Rise">a sky residence</option>
@@ -477,7 +393,7 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 <select
                   value={finderBhk}
                   onChange={(e) => setFinderBhk(e.target.value)}
-                  className="appearance-none bg-surface-elevated border-b border-accent text-foreground font-serif font-semibold px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
+                  className="appearance-none bg-[#1C2027] border-b-2 border-[#C5A880] text-white font-serif font-semibold px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
                 >
                   <option value="ALL">any configuration</option>
                   <option value="2 BHK">2 bedrooms</option>
@@ -491,9 +407,9 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                 <select
                   value={finderStatus}
                   onChange={(e) => setFinderStatus(e.target.value)}
-                  className="appearance-none bg-surface-elevated border-b border-accent text-foreground font-serif font-semibold px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
+                  className="appearance-none bg-[#1C2027] border-b-2 border-[#C5A880] text-white font-serif font-semibold px-3 py-1 pr-6 rounded focus:outline-none cursor-pointer"
                 >
-                  <option value="ALL">available now or in progress</option>
+                  <option value="ALL">available now or under build</option>
                   <option value="Ready to Move">ready for possession</option>
                   <option value="Ongoing">under active construction</option>
                   <option value="Upcoming">an upcoming launch</option>
@@ -502,12 +418,12 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
               <span>.”</span>
             </div>
 
-            <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center space-x-2 text-xs font-mono text-foreground-muted">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center space-x-2 text-xs font-mono text-[#8C8983]">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>
                   Found{" "}
-                  <strong className="text-accent font-bold text-sm">
+                  <strong className="text-[#C5A880] font-bold text-sm">
                     {animatedCount}
                   </strong>{" "}
                   matching developments
@@ -522,14 +438,15 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
                       setFinderBhk("ALL");
                       setFinderStatus("ALL");
                     }}
-                    className="text-xs text-foreground-muted hover:text-foreground underline font-mono"
+                    className="text-xs text-[#8C8983] hover:text-white underline font-mono"
                   >
-                    Reset
+                    Reset Filter
                   </button>
                 )}
                 <Link
                   href="/properties"
-                  className="block px-6 py-2.5 bg-accent hover:bg-accent-hover text-accent-foreground text-xs font-mono uppercase tracking-wider font-bold rounded-[3px] transition-colors text-center shadow-md"
+                  className="block px-6 py-3 bg-[#C5A880] hover:bg-[#B38F5B] text-[#0A0C0E] text-xs font-mono uppercase tracking-wider font-bold rounded-full transition-colors text-center shadow-lg"
+                  data-cursor="explore"
                 >
                   Browse Floor Plans →
                 </Link>
@@ -539,133 +456,65 @@ export default function HomeClient({ projects, settings }: HomeClientProps) {
         </div>
       </section>
 
-      {/* CHAPTER: CONSTRUCTION RIGOR (How Spaces Are Made) */}
-      <section id="craft" ref={craftSectionRef} className="py-24 sm:py-36 px-4 sm:px-6 lg:px-12 bg-background border-t border-border relative transition-colors duration-300">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div ref={craftHeaderRef} className="max-w-3xl space-y-3">
-            <div className="flex items-center space-x-3 text-xs font-mono uppercase tracking-[0.25em] text-accent font-semibold">
-              <span>CONSTRUCTION RIGOR</span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-foreground">
-              How Spaces Are Made
-            </h2>
-            <p className="text-sm sm:text-base text-foreground-muted font-light leading-relaxed">
-              We replace marketing slogans with physical execution. This is how every ARC Avenue development moves from architectural blueprint to completed home.
-            </p>
-          </div>
+      {/* 6. LIFESTYLE SECTION (The Architecture of Living) */}
+      <LifestyleSection />
 
-          <div ref={craftGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Step 1 */}
-            <div className="p-8 rounded-lg bg-card border border-border space-y-4 flex flex-col justify-between hover:border-accent/50 transition-all duration-300 shadow-sm">
-              <div className="space-y-4">
-                <span className="font-mono text-3xl font-light text-accent/40">01</span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal text-foreground">
-                  Design &amp; Daylight
-                </h3>
-                <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed font-light">
-                  Solar orientation mapping ensures all primary rooms receive natural light without harsh afternoon heat. Cross-ventilation breezeways reduce air conditioning dependency.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-border text-[11px] font-mono text-accent">
-                Spatial Clarity
-              </div>
-            </div>
+      {/* 7. WHY ARC ESTATES (Interactive Bento Composition) */}
+      <WhyArcBento />
 
-            {/* Step 2 */}
-            <div className="p-8 rounded-lg bg-card border border-border space-y-4 flex flex-col justify-between hover:border-accent/50 transition-all duration-300 shadow-sm">
-              <div className="space-y-4">
-                <span className="font-mono text-3xl font-light text-accent/40">02</span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal text-foreground">
-                  Structural Build
-                </h3>
-                <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed font-light">
-                  High-ductility Fe-550D rebar and calibrated ready-mix concrete. Precision formwork ensures smooth, rectilinear surfaces without column bulges or uneven plaster.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-border text-[11px] font-mono text-accent">
-                Certified Materials
-              </div>
-            </div>
+      {/* 8. TESTIMONIALS SECTION (Resident Voices) */}
+      <TestimonialsSection />
 
-            {/* Step 3 */}
-            <div className="p-8 rounded-lg bg-card border border-border space-y-4 flex flex-col justify-between hover:border-accent/50 transition-all duration-300 shadow-sm">
-              <div className="space-y-4">
-                <span className="font-mono text-3xl font-light text-accent/40">03</span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal text-foreground">
-                  Finish &amp; Services
-                </h3>
-                <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed font-light">
-                  Concealed plumbing and electrical conduits pressure-tested before enclosing. Acoustic decoupling between shared walls ensures quiet, private residences.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-border text-[11px] font-mono text-accent">
-                Pressure-Tested MEP
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="p-8 rounded-lg bg-card border border-border space-y-4 flex flex-col justify-between hover:border-accent/50 transition-all duration-300 shadow-sm">
-              <div className="space-y-4">
-                <span className="font-mono text-3xl font-light text-accent/40">04</span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal text-foreground">
-                  Direct Delivery
-                </h3>
-                <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed font-light">
-                  Clear statutory documentation, transparent milestone schedules, and direct developer communication with no intermediary barriers throughout possession.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-border text-[11px] font-mono text-accent">
-                Direct Developer Access
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CHAPTER: THE CONVERSATION & THE VISIT (AI Concierge + On-Site Briefing) */}
-      <section ref={advisorySectionRef} className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-background border-t border-border relative transition-colors duration-300">
-        <div ref={advisoryGridRef} className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      {/* 9. DIGITAL ADVISORY & SITE VISIT SECTION */}
+      <section className="py-24 sm:py-32 px-4 sm:px-6 lg:px-12 bg-[#0A0C0E] border-b border-white/10 relative">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Card A: Gemini AI Concierge */}
-          <div id="concierge" className="p-8 sm:p-12 rounded-xl bg-card border border-border flex flex-col justify-between space-y-6 hover:border-accent/40 transition-all duration-300 shadow-md">
+          <div
+            id="concierge"
+            className="p-8 sm:p-12 rounded-2xl bg-[#121519] border border-white/10 flex flex-col justify-between space-y-6 hover:border-[#C5A880]/50 transition-all duration-300 shadow-xl"
+          >
             <div className="space-y-4">
-              <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-accent font-semibold">
-                <MessageSquareCode className="w-3.5 h-3.5" />
-                <span>DIGITAL ADVISORY</span>
+              <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#C5A880] font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>DIGITAL ADVISORY // GROUNDED IN REAL DATA</span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl font-normal text-foreground">
+              <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white">
                 ARC AI Property Concierge
               </h3>
-              <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed font-light">
-                Ask specific questions regarding floor plans, price breakdowns, structural materials, or current progress across our Bahadurpally developments.
+              <p className="text-xs sm:text-sm text-[#8C8983] leading-relaxed font-light">
+                Consult our verified AI assistant regarding real-time unit pricing, floor plate specifications, construction milestones, and statutory clearances across our Bahadurpally portfolio.
               </p>
             </div>
             <div>
               <button
                 type="button"
                 onClick={() => setAiOpen(true)}
-                className="inline-flex items-center space-x-2 px-6 py-3.5 bg-surface-elevated hover:bg-surface-muted border border-border hover:border-accent text-xs font-mono uppercase tracking-[0.18em] text-foreground rounded-[3px] transition-all duration-300 shadow-sm"
+                className="inline-flex items-center space-x-2 px-7 py-3.5 bg-[#181C22] hover:bg-[#20252D] border border-white/15 hover:border-[#C5A880] text-xs font-mono uppercase tracking-[0.18em] text-white rounded-full transition-all duration-300 shadow-sm"
               >
                 <span>Consult AI Assistant</span>
-                <ArrowRight className="w-3.5 h-3.5 text-accent" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#C5A880]" />
               </button>
             </div>
           </div>
 
-          {/* Card B: Personal On-Site Walkthrough (Editorial Site Visit Card) */}
+          {/* Card B: Personal On-Site Walkthrough */}
           <div id="visit" className="flex">
             <SiteVisitCard onOpenModal={() => handleOpenVisitModal("arc-vista")} />
           </div>
         </div>
       </section>
 
-      {/* CHAPTER: THE CONTACT & MAP */}
+      {/* 10. CLOSING CHAPTER: CONTACT & HEADQUARTERS */}
+      <ContactChapter settings={settings} />
+
+      {/* 11. MAP & LOCATION SECTION */}
       <LocationMap
         address={settings.address}
         phone={settings.phone}
         whatsapp={settings.whatsapp}
       />
 
-      {/* Standalone AI Drawer Trigger */}
+      {/* Standalone AI Concierge Drawer */}
       <AIChatDrawer isOpen={aiOpen} onClose={() => setAiOpen(false)} />
     </div>
   );

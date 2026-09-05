@@ -88,11 +88,11 @@ export default function Navbar({
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-5 xl:px-8">
           <div className="flex items-center justify-between gap-2 sm:gap-3 lg:gap-4">
-            {/* ARC AVENUE Brand Hierarchy */}
+            {/* ARC ESTATES Brand Hierarchy */}
             <Link
               href="/"
               className="group flex items-center space-x-2 sm:space-x-3 select-none shrink-0"
-              aria-label="ARC Avenue Homepage"
+              aria-label="ARC Estates Homepage"
             >
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded border border-[#C5A880]/50 light:border-[#9E7D4C]/60 flex items-center justify-center bg-[#14171A] light:bg-[#FAF8F5] group-hover:border-[#C5A880] transition-colors duration-300 shadow-inner shrink-0">
                 <span className="font-serif font-semibold text-sm sm:text-base text-[#C5A880] light:text-[#9E7D4C] select-none">
@@ -101,7 +101,7 @@ export default function Navbar({
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="font-serif text-base sm:text-xl xl:text-2xl font-medium tracking-[0.16em] sm:tracking-[0.2em] text-[#F4F1EA] light:text-[#181A1D] group-hover:text-white light:group-hover:text-[#0C0E10] transition-colors duration-300 whitespace-nowrap leading-none">
-                  ARC AVENUE
+                  ARC ESTATES
                 </span>
                 <span className="hidden sm:block text-[8px] sm:text-[9px] uppercase tracking-[0.24em] text-[#8C8983] light:text-[#6B6862] group-hover:text-[#C5A880]/90 light:group-hover:text-[#9E7D4C] transition-colors duration-300 font-mono whitespace-nowrap mt-1 leading-none">
                   Bahadurpally • Hyderabad
@@ -175,7 +175,7 @@ export default function Navbar({
                 className="h-8.5 xl:h-9 inline-flex items-center space-x-1.5 xl:space-x-2 px-3.5 xl:px-5 bg-[#C5A880] hover:bg-[#D4B992] light:bg-[#9E7D4C] light:hover:bg-[#88693B] text-[#0C0E10] light:text-white text-[10.5px] xl:text-xs font-mono uppercase tracking-[0.14em] xl:tracking-[0.15em] font-semibold rounded-[3px] transition-all duration-300 shadow-md hover:shadow-[0_4px_18px_rgba(197,168,128,0.3)] hover:-translate-y-0.5 group shrink-0 whitespace-nowrap select-none"
               >
                 <Calendar className="w-3.5 h-3.5 text-[#0C0E10] light:text-white transition-transform duration-300 group-hover:scale-110" />
-                <span>Book Visit</span>
+                <span>Schedule a Visit</span>
                 <ArrowUpRight className="w-3 h-3 text-[#0C0E10]/70 light:text-white/80 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
