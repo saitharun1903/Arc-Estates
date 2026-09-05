@@ -136,7 +136,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
         <div className="space-y-8">
           {/* Exhibition Controls / Project Selector */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 border-b border-white/10 dark:border-white/10 light:border-[#DDD7CC] pb-6">
+          <div className="flex overflow-x-auto no-scrollbar sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 border-b border-white/10 light:border-[#DDD7CC] -mx-4 px-4 sm:mx-0 sm:px-0 pb-4 sm:pb-6">
             {projects.map((proj, idx) => {
               const isActive = idx === activeExhibitionIndex;
               const pMeta = ARCHITECTURAL_METADATA[proj.slug];
@@ -144,25 +144,25 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
                 <button
                   key={proj.id}
                   onClick={() => setActiveExhibitionIndex(idx)}
-                  className={`text-left p-4 rounded-xl transition-all duration-300 border flex flex-col justify-between space-y-3 ${
+                  className={`text-left p-4 rounded-xl transition-all duration-300 border flex flex-col justify-between space-y-3 min-w-[210px] sm:min-w-0 shrink-0 active:scale-[0.98] ${
                     isActive
-                      ? "bg-[#14171D] dark:bg-[#14171D] light:bg-[#EAE6DE] border-[#C5A880] dark:border-[#C5A880] light:border-[#A88858] shadow-lg"
-                      : "bg-[#0E1014] dark:bg-[#0E1014] light:bg-[#F2EFEB] border-white/5 dark:border-white/5 light:border-[#DDD7CC] opacity-60 hover:opacity-90"
+                      ? "bg-[#1C1A17] light:bg-[#EAE6DE] border-[#C9A86A] light:border-[#A88858] shadow-lg"
+                      : "bg-[#131210] light:bg-[#F2EFEB] border-white/5 light:border-[#DDD7CC] opacity-60 hover:opacity-90"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858] tracking-widest font-semibold">
+                    <span className="font-mono text-xs text-[#C9A86A] light:text-[#A88858] tracking-widest font-semibold">
                       {getProjectNumber(proj.slug)}
                     </span>
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] dark:bg-[#C5A880] light:bg-[#A88858]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A86A] light:bg-[#A88858]" />
                     )}
                   </div>
                   <div>
-                    <h2 className="font-serif text-base sm:text-lg font-medium text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
+                    <h2 className="font-serif text-base sm:text-lg font-medium text-[#FBF9F5] light:text-[#181A1D]">
                       {proj.name}
                     </h2>
-                    <p className="text-[11px] font-mono text-[#8C8983] dark:text-[#8C8983] light:text-[#5F5B53] truncate">
+                    <p className="text-[11px] font-mono text-[#8E887E] light:text-[#5F5B53] truncate">
                       {pMeta?.exhibitionSubtitle || proj.tagline}
                     </p>
                   </div>
@@ -172,7 +172,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
           </div>
 
           {/* Exhibition Stage Canvas (75% Visual / 25% Information) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#101317] dark:bg-[#101317] light:bg-[#EFECE5] border border-white/10 dark:border-white/10 light:border-[#DDD7CC] rounded-2xl p-4 sm:p-8 overflow-hidden shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#1C1A17] light:bg-[#EFECE5] border border-white/10 light:border-[#DDD7CC] rounded-2xl p-4 sm:p-8 overflow-hidden shadow-2xl">
             {/* Visual Canvas (8 Cols) */}
             <div className="lg:col-span-8 relative aspect-[16/10] sm:aspect-[16/9] rounded-xl overflow-hidden group">
               <div
@@ -183,12 +183,12 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
               {/* Floating Architectural HUD Badge */}
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
+              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-end justify-between text-white">
                 <div className="space-y-1">
-                  <div className="text-[11px] font-mono tracking-widest text-[#C5A880] uppercase">
+                  <div className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#C9A86A] uppercase">
                     {meta.chapterNumber} // {currentExhibition.location}
                   </div>
-                  <div className="font-serif text-2xl sm:text-3xl font-medium tracking-tight">
+                  <div className="font-serif text-xl sm:text-3xl font-medium tracking-tight">
                     {currentExhibition.name}
                   </div>
                 </div>
@@ -204,30 +204,30 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
             <div className="lg:col-span-4 flex flex-col justify-between space-y-6 h-full py-2">
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <div className="text-[11px] font-mono uppercase tracking-widest text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858]">
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-[#C9A86A] light:text-[#A88858]">
                     {currentExhibition.projectType}
                   </div>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#FBF9F5] light:text-[#181A1D]">
                     {meta.exhibitionSubtitle}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#8C8983] dark:text-[#8C8983] light:text-[#5F5B53] leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-[#8E887E] light:text-[#5F5B53] leading-relaxed font-light">
                     {meta.philosophy}
                   </p>
                 </div>
 
                 {/* Grounded Technical Attributes */}
-                <div className="space-y-3 pt-4 border-t border-white/10 dark:border-white/10 light:border-[#DDD7CC] text-xs font-mono">
+                <div className="space-y-3 pt-4 border-t border-white/10 light:border-[#DDD7CC] text-xs font-mono">
                   <div>
-                    <span className="text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] block text-[10px] uppercase tracking-wider">Structural Grid</span>
-                    <span className="text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D]">{meta.structuralGrid}</span>
+                    <span className="text-[#8E887E] light:text-[#656056] block text-[10px] uppercase tracking-wider">Structural Grid</span>
+                    <span className="text-[#DDD8CE] light:text-[#181A1D]">{meta.structuralGrid}</span>
                   </div>
                   <div>
-                    <span className="text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] block text-[10px] uppercase tracking-wider">Daylight & Solar Axis</span>
-                    <span className="text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D]">{meta.daylightAxis}</span>
+                    <span className="text-[#8E887E] light:text-[#656056] block text-[10px] uppercase tracking-wider">Daylight & Solar Axis</span>
+                    <span className="text-[#DDD8CE] light:text-[#181A1D]">{meta.daylightAxis}</span>
                   </div>
                   <div>
-                    <span className="text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] block text-[10px] uppercase tracking-wider">Material System</span>
-                    <span className="text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D]">{meta.materialPalette}</span>
+                    <span className="text-[#8E887E] light:text-[#656056] block text-[10px] uppercase tracking-wider">Material System</span>
+                    <span className="text-[#DDD8CE] light:text-[#181A1D]">{meta.materialPalette}</span>
                   </div>
                 </div>
               </div>
@@ -235,7 +235,7 @@ export default function ProjectsClient({ initialProjects }: ProjectsClientProps)
               {/* Direct Link to Project Detail */}
               <Link
                 href={`/projects/${currentExhibition.slug}`}
-                className="inline-flex items-center justify-between w-full px-5 py-3.5 rounded-xl bg-[#C5A880] dark:bg-[#C5A880] light:bg-[#A88858] text-[#0C0E10] hover:bg-[#D4B58C] font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 group shadow-md"
+                className="inline-flex items-center justify-between w-full min-h-[46px] px-5 py-3.5 rounded-xl bg-[#C9A86A] text-[#131210] hover:bg-[#D8B77D] font-mono text-xs font-semibold uppercase tracking-wider transition-all duration-300 group shadow-md active:scale-[0.98]"
               >
                 <span>EXPLORE ARCHITECTURE</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

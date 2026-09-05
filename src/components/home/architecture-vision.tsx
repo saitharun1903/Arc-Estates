@@ -143,7 +143,7 @@ export default function ArchitectureVision() {
         {/* Technical Blueprint Visual Diagram Card */}
         <div
           ref={diagramRef}
-          className="relative aspect-[16/8] rounded-2xl overflow-hidden border border-white/10 bg-[#1C1A17] shadow-2xl group"
+          className="relative aspect-auto min-h-[460px] sm:min-h-0 sm:aspect-[16/9] lg:aspect-[16/8] rounded-2xl overflow-hidden border border-white/10 bg-[#1C1A17] shadow-2xl group"
         >
           {/* Architectural Drawing Background Image */}
           <div
@@ -153,22 +153,22 @@ export default function ArchitectureVision() {
                 "url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85')",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#161513]/95 via-[#161513]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#161513]/98 via-[#161513]/85 sm:via-[#161513]/70 to-transparent" />
 
           {/* Technical Blueprint Overlay Callouts */}
-          <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-between">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center space-x-2 text-[10px] font-mono tracking-widest text-[#C9A86A] uppercase">
-                <span className="w-2 h-2 rounded-full bg-[#7E8D79] animate-pulse" />
+          <div className="relative z-10 sm:absolute sm:inset-0 p-5 sm:p-10 flex flex-col justify-between h-full space-y-6 sm:space-y-0">
+            <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+              <div className="flex items-center space-x-2 text-[9.5px] sm:text-[10px] font-mono tracking-widest text-[#C9A86A] uppercase">
+                <span className="w-2 h-2 rounded-full bg-[#7E8D79] animate-pulse shrink-0" />
                 <span>SPECIFICATION BLUEPRINT // LEVEL SECTION 04</span>
               </div>
-              <span className="text-[10px] font-mono text-[#8E887E]">
+              <span className="text-[9px] sm:text-[10px] font-mono text-[#8E887E]">
                 TOLERANCE: ±1.5MM • MONOLITHIC CASTING
               </span>
             </div>
 
-            <div className="max-w-md space-y-3">
-              <h3 className="font-serif text-2xl sm:text-3xl text-[#FBF9F5] font-normal">
+            <div className="max-w-md space-y-2.5 sm:space-y-3">
+              <h3 className="font-serif text-xl sm:text-3xl text-[#FBF9F5] font-normal leading-snug">
                 Cantilevered Floor Plates &amp; Thermal Buffer Balconies
               </h3>
               <p className="text-xs text-[#CCC5B9] leading-relaxed font-light">
@@ -177,22 +177,22 @@ export default function ArchitectureVision() {
             </div>
 
             {/* Micro Blueprint Technical Specs */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/10 text-xs font-mono">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-white/10 text-xs font-mono">
               <div>
-                <span className="text-[10px] text-[#8E887E] block">SLAB THICKNESS</span>
-                <span className="text-[#C9A86A] font-semibold">200mm Post-Tensioned</span>
+                <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">SLAB THICKNESS</span>
+                <span className="text-[#C9A86A] font-semibold text-xs">200mm Post-Tensioned</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#8E887E] block">CONCRETE GRADE</span>
-                <span className="text-[#C9A86A] font-semibold">M40 Self-Compacting</span>
+                <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">CONCRETE GRADE</span>
+                <span className="text-[#C9A86A] font-semibold text-xs">M40 Self-Compacting</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#8E887E] block">FACADE GLAZING</span>
-                <span className="text-[#C9A86A] font-semibold">Low-E Acoustic DGU</span>
+                <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">FACADE GLAZING</span>
+                <span className="text-[#C9A86A] font-semibold text-xs">Low-E Acoustic DGU</span>
               </div>
               <div>
-                <span className="text-[10px] text-[#8E887E] block">WARRANTY</span>
-                <span className="text-[#C9A86A] font-semibold">10-Year Structural</span>
+                <span className="text-[9.5px] sm:text-[10px] text-[#8E887E] block">WARRANTY</span>
+                <span className="text-[#C9A86A] font-semibold text-xs">10-Year Structural</span>
               </div>
             </div>
           </div>

@@ -104,12 +104,12 @@ export default function LifestyleSection() {
           </div>
 
           {/* Interactive Pillars Selector Tabs */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap pb-1">
             {pillars.map((p, idx) => (
               <button
                 key={p.id}
                 onClick={() => setActiveTab(idx)}
-                className={`px-4 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-300 ${
+                className={`min-h-[42px] px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider whitespace-nowrap shrink-0 transition-all duration-300 active:scale-[0.98] ${
                   activeTab === idx
                     ? "bg-[#C9A86A] text-[#131210] font-bold shadow-[0_4px_16px_rgba(201,168,106,0.25)]"
                     : "bg-[#EBE7DF] border border-[#DDD8CE] text-[#4E4942] hover:text-[#1A1815] hover:border-[#A88656]"
@@ -122,7 +122,7 @@ export default function LifestyleSection() {
         </div>
 
         {/* Dynamic Interactive Narrative Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Visual Showcase (Image & Floating Metrics) */}
           <div
             ref={imageRef}
@@ -134,17 +134,17 @@ export default function LifestyleSection() {
               className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105 animate-fade-in"
               style={{ backgroundImage: `url('${current.image}')` }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-            {/* Bottom Floating Metrics */}
-            <div className="absolute bottom-6 left-6 right-6 p-6 rounded-xl bg-[#FFFFFF]/90 backdrop-blur-md border border-[#E2DDD3] shadow-lg">
-              <div className="grid grid-cols-3 gap-4 text-center">
+            {/* Bottom Floating Metrics (Compact on Mobile, Spacious on Tablet/Desktop) */}
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 p-3 sm:p-6 rounded-xl bg-[#FFFFFF]/95 sm:bg-[#FFFFFF]/90 backdrop-blur-md border border-[#E2DDD3] shadow-lg">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
                 {current.metrics.map((m, idx) => (
-                  <div key={idx} className="space-y-1">
-                    <span className="text-[10px] font-mono text-[#7D776C] uppercase tracking-wider block">
+                  <div key={idx} className="space-y-0.5 sm:space-y-1">
+                    <span className="text-[9px] sm:text-[10px] font-mono text-[#7D776C] uppercase tracking-wider block truncate">
                       {m.label}
                     </span>
-                    <span className="text-sm sm:text-base font-serif font-normal text-[#1A1815] block">
+                    <span className="text-xs sm:text-base font-serif font-normal text-[#1A1815] block truncate">
                       {m.val}
                     </span>
                   </div>
@@ -154,12 +154,12 @@ export default function LifestyleSection() {
           </div>
 
           {/* Narrative Details */}
-          <div ref={contentRef} className="lg:col-span-5 space-y-8">
-            <div className="space-y-3">
+          <div ref={contentRef} className="lg:col-span-5 space-y-6 sm:space-y-8">
+            <div className="space-y-2.5 sm:space-y-3">
               <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-widest text-[#A88656] font-semibold">
                 <span>{current.badge}</span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl font-normal text-[#1A1815] leading-snug">
+              <h3 className="font-serif text-2xl sm:text-4xl font-normal text-[#1A1815] leading-snug">
                 {current.headline}
               </h3>
               <p className="text-xs sm:text-sm text-[#4E4942] font-light leading-relaxed">
@@ -167,17 +167,17 @@ export default function LifestyleSection() {
               </p>
             </div>
 
-            <div className="pt-2 flex items-center space-x-4">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
               <Link
                 href="/projects"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-bold font-mono uppercase tracking-wider transition-all duration-300 shadow-[0_4px_16px_rgba(201,168,106,0.22)]"
+                className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-bold font-mono uppercase tracking-wider transition-all duration-300 shadow-[0_4px_16px_rgba(201,168,106,0.22)] active:scale-[0.98] min-h-[44px]"
               >
                 <span>Explore Developments</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
                 href="/site-visit"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full border border-[#DDD8CE] hover:border-[#A88656] bg-[#FFFFFF] text-[#1A1815] text-xs font-mono uppercase tracking-wider transition-all duration-300 shadow-sm"
+                className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-full border border-[#DDD8CE] hover:border-[#A88656] bg-[#FFFFFF] text-[#1A1815] text-xs font-mono uppercase tracking-wider transition-all duration-300 shadow-sm active:scale-[0.98] min-h-[44px]"
               >
                 <span>Book Site Walkthrough</span>
               </Link>

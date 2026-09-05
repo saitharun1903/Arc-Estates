@@ -82,15 +82,33 @@ export default function ArchitecturalCanvas({
     scene.background = currentBg;
     scene.fog = new THREE.FogExp2(0x131210, 0.016);
 
+    // Helper to calculate responsive camera properties based on aspect ratio
+    const getResponsiveConfig = (w: number, h: number) => {
+      const aspect = w / h;
+      if (aspect < 0.85) {
+        // Portrait mobile (320px - 430px)
+        return { fov: 56, distance: 48, lookAtY: 10 };
+      } else if (aspect < 1.25) {
+        // Tablet / square viewports (600px - 1024px)
+        return { fov: 48, distance: 42, lookAtY: 9 };
+      } else {
+        // Desktop landscape (1280px+)
+        return { fov: 42, distance: 38, lookAtY: 8 };
+      }
+    };
+
+    const initialConfig = getResponsiveConfig(width, height);
+    cameraBaseDistanceRef.current = initialConfig.distance;
+
     // 2. Camera
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 150);
+    const camera = new THREE.PerspectiveCamera(initialConfig.fov, width / height, 0.1, 150);
     cameraRef.current = camera;
     camera.position.set(26, 18, 30);
-    camera.lookAt(0, 6, 0);
+    camera.lookAt(0, initialConfig.lookAtY, 0);
 
-    // 3. Renderer with strict DPR cap (Math.min(DPR, 1.25) saves >60% GPU fill-rate)
+    // 3. Renderer with mobile-optimized DPR (saves battery & ensures silky 60fps)
     const isMobile = window.innerWidth < 768;
-    const dprCap = isMobile ? 1.0 : Math.min(window.devicePixelRatio || 1, 1.25);
+    const dprCap = isMobile ? Math.min(window.devicePixelRatio || 1, 1.2) : Math.min(window.devicePixelRatio || 1, 1.5);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: !isMobile,
@@ -383,7 +401,10 @@ export default function ArchitecturalCanvas({
         if (!container || !renderer || !camera) return;
         const w = container.clientWidth;
         const h = container.clientHeight;
+        const cfg = getResponsiveConfig(w, h);
         camera.aspect = w / h;
+        camera.fov = cfg.fov;
+        cameraBaseDistanceRef.current = cfg.distance;
         camera.updateProjectionMatrix();
         renderer.setSize(w, h);
       }, 100);
@@ -435,10 +456,13 @@ export default function ArchitecturalCanvas({
       const pitch = orbitRotationRef.current.x;
       const yaw = orbitRotationRef.current.y + time * 0.015;
 
+      const isMobileView = (container?.clientWidth || window.innerWidth) < 768;
+      const targetLookY = (isMobileView ? 10 : 8) + currentScrollProgress * 2;
+
       camera.position.x = radius * Math.cos(pitch) * Math.sin(yaw);
-      camera.position.y = radius * Math.sin(pitch) + 4 - currentScrollProgress * 2;
+      camera.position.y = radius * Math.sin(pitch) + (isMobileView ? 5 : 4) - currentScrollProgress * 2;
       camera.position.z = radius * Math.cos(pitch) * Math.cos(yaw);
-      camera.lookAt(0, 8 + currentScrollProgress * 2, 0);
+      camera.lookAt(0, targetLookY, 0);
 
       // Particle subtle elevation animation (Run every 2nd frame for 50% CPU savings)
       if (particles && frameCounter % 2 === 0) {
@@ -509,7 +533,7 @@ export default function ArchitecturalCanvas({
   return (
     <div
       ref={mountRef}
-      className={`relative w-full h-full cursor-grab active:cursor-grabbing select-none overflow-hidden ${className}`}
+      className={`relative w-full h-full cursor-grab active:cursor-grabbing select-none overflow-hidden touch-pan-y ${className}`}
       data-cursor="3d"
       aria-label="Interactive 3D Architectural Visualization"
     />

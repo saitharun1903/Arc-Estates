@@ -69,7 +69,7 @@ export default function Footer({ settings }: FooterProps) {
     { scope: footerRef }
   );
 
-  const companyName = settings?.companyName || "ARC AVENUE";
+  const companyName = settings?.companyName || "ARC ESTATES";
   const tagline = settings?.tagline || "Real Estate Builders & Construction Company";
   const address =
     settings?.address ||
@@ -227,7 +227,7 @@ export default function Footer({ settings }: FooterProps) {
 
         {/* Closing Signature Bar */}
         <div className="pt-10 flex flex-col md:flex-row items-center justify-between text-xs text-foreground-muted space-y-4 md:space-y-0">
-          <p>© {new Date().getFullYear()} ARC AVENUE. Bahadurpally, Hyderabad, Telangana.</p>
+          <p>© {new Date().getFullYear()} ARC ESTATES. Bahadurpally, Hyderabad, Telangana.</p>
           <div className="font-serif italic text-sm tracking-wider text-accent">
             “Built with Intention.”
           </div>

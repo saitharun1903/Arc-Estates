@@ -180,20 +180,53 @@ export default function Navbar({
               </Link>
             </div>
 
+            {/* Tablet Navigation Links (768px - 1023px) */}
+            <nav className="hidden md:flex lg:hidden items-center space-x-4 shrink-0">
+              <Link
+                href="/projects"
+                className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#A8A298] hover:text-[#FBF9F5] transition-colors"
+              >
+                Projects
+              </Link>
+              <Link
+                href="/properties"
+                className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#A8A298] hover:text-[#FBF9F5] transition-colors"
+              >
+                Properties
+              </Link>
+              <Link
+                href="/about"
+                className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#A8A298] hover:text-[#FBF9F5] transition-colors"
+              >
+                Studio
+              </Link>
+            </nav>
+
             {/* Mobile / Tablet Actions (< 1024px) */}
-            <div className="flex lg:hidden items-center space-x-1.5 sm:space-x-2.5 shrink-0">
+            <div className="flex lg:hidden items-center space-x-1.5 sm:space-x-2 shrink-0">
+              <div className="hidden md:flex items-center space-x-2">
+                <ThemeToggle variant="navbar" />
+                <Link
+                  href="/site-visit"
+                  className="h-9 min-h-[36px] px-3 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] font-mono text-[10.5px] font-semibold uppercase tracking-wider flex items-center space-x-1.5 transition-all shadow-sm shrink-0"
+                >
+                  <Calendar className="w-3 h-3 text-[#131210]" />
+                  <span>Visit</span>
+                </Link>
+              </div>
+
               {onOpenAI && (
                 <button
                   type="button"
                   onClick={onOpenAI}
-                  className="h-8 px-2.5 rounded-full border border-white/10 light:border-black/10 hover:border-[#C9A86A]/50 bg-[#1C1A17] light:bg-[#EBE7DF] text-[#C9A86A] light:text-[#A88656] flex items-center space-x-1.5 transition-colors shrink-0"
+                  className="h-10 min-h-[44px] min-w-[44px] px-3 rounded-full border border-white/10 light:border-black/10 hover:border-[#C9A86A]/50 bg-[#1C1A17] light:bg-[#EBE7DF] text-[#C9A86A] light:text-[#A88656] flex items-center justify-center space-x-1.5 transition-colors shrink-0"
                   aria-label="Open AI Concierge"
                 >
-                  <span className="relative flex h-1.5 w-1.5">
+                  <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7E8D79] opacity-75" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#7E8D79]" />
                   </span>
-                  <span className="font-mono text-[9.5px] tracking-wider uppercase text-[#CCC5B9] light:text-[#1A1815]">
+                  <span className="font-mono text-[10px] sm:text-[11px] tracking-wider uppercase text-[#CCC5B9] light:text-[#1A1815]">
                     AI
                   </span>
                 </button>
@@ -202,12 +235,12 @@ export default function Navbar({
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="h-8 px-2.5 sm:px-3 rounded-full border border-white/10 light:border-black/10 hover:border-[#C9A86A]/50 bg-[#1C1A17] light:bg-[#EBE7DF] text-[#FBF9F5] light:text-[#1A1815] flex items-center space-x-1.5 font-mono text-[10.5px] uppercase tracking-wider transition-colors shrink-0"
+                className="h-10 min-h-[44px] min-w-[44px] px-3 sm:px-3.5 rounded-full border border-white/10 light:border-black/10 hover:border-[#C9A86A]/50 bg-[#1C1A17] light:bg-[#EBE7DF] text-[#FBF9F5] light:text-[#1A1815] flex items-center justify-center space-x-1.5 font-mono text-[11px] uppercase tracking-wider transition-colors shrink-0"
                 aria-label="Open Navigation Menu"
                 id="mobile-nav-toggle"
               >
-                <Menu className="w-3.5 h-3.5 text-[#C9A86A] light:text-[#A88656]" />
-                <span>MENU</span>
+                <Menu className="w-4 h-4 text-[#C9A86A] light:text-[#A88656]" />
+                <span className="text-[10px] sm:text-[11px]">MENU</span>
               </button>
             </div>
           </div>
@@ -218,14 +251,14 @@ export default function Navbar({
       {mobileMenuOpen && (
         <div
           id="mobile-editorial-overlay"
-          className="fixed inset-0 z-[60] bg-[#131210] text-[#FBF9F5] flex flex-col justify-between overflow-y-auto overflow-x-hidden animate-overlay-in"
+          className="fixed inset-0 z-[60] bg-[#131210] text-[#FBF9F5] flex flex-col justify-between overflow-y-auto overflow-x-hidden animate-overlay-in pb-[env(safe-area-inset-bottom,1rem)]"
           style={{ overscrollBehavior: "contain" }}
         >
           {/* Subtle architectural blueprint background */}
           <div className="absolute inset-0 bg-blueprint-grid opacity-20 pointer-events-none" />
 
           {/* Top Bar with Brand & Close Button */}
-          <div className="relative z-10 px-5 sm:px-8 py-5 border-b border-white/[0.08] flex items-center justify-between">
+          <div className="relative z-10 px-5 sm:px-8 py-4 sm:py-5 pt-[max(1rem,env(safe-area-inset-top))] border-b border-white/[0.08] flex items-center justify-between">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
@@ -236,7 +269,7 @@ export default function Navbar({
               </div>
               <div className="flex flex-col">
                 <span className="font-serif text-base font-normal tracking-[0.18em] text-[#FBF9F5]">
-                  ARC AVENUE
+                  ARC ESTATES
                 </span>
                 <span className="text-[7.5px] uppercase tracking-[0.2em] text-[#8E887E] font-mono">
                   Bahadurpally • Hyderabad
@@ -247,7 +280,7 @@ export default function Navbar({
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="h-9 px-3 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#1C1A17] text-xs font-mono uppercase tracking-widest flex items-center space-x-1.5 text-[#CCC5B9] hover:text-white transition-colors"
+              className="h-10 min-h-[44px] min-w-[44px] px-3.5 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#1C1A17] text-xs font-mono uppercase tracking-widest flex items-center justify-center space-x-1.5 text-[#CCC5B9] hover:text-white transition-colors"
               aria-label="Close navigation overlay"
               id="mobile-nav-close"
             >

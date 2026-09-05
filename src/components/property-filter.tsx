@@ -42,24 +42,24 @@ export default function PropertyFilter({
   return (
     <div className="space-y-4">
       {/* Search and Category Filter Bar */}
-      <div className="bg-[#101317] dark:bg-[#101317] light:bg-[#EFECE5] border border-white/10 dark:border-white/10 light:border-[#DDD7CC] rounded-2xl p-4 sm:p-5 shadow-lg space-y-4">
+      <div className="bg-[#1C1A17] light:bg-[#EFECE5] border border-white/10 light:border-[#DDD7CC] rounded-2xl p-3.5 sm:p-5 shadow-lg space-y-3.5 sm:space-y-4">
         {/* Search Input */}
         <div className="relative">
-          <Search className="w-4 h-4 text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] absolute left-4 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8E887E] light:text-[#656056] absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={currentFilters.search}
             onChange={(e) => updateFilter("search", e.target.value)}
             placeholder="Search residences, typologies, configurations..."
-            className="w-full bg-[#181C22] dark:bg-[#181C22] light:bg-[#FAF8F5] border border-white/10 dark:border-white/10 light:border-[#DDD7CC] focus:border-[#C5A880] dark:focus:border-[#C5A880] light:focus:border-[#A88858] rounded-xl pl-11 pr-4 py-3 text-sm text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D] placeholder-[#8C8983] dark:placeholder-[#8C8983] light:placeholder-[#858076] focus:outline-none transition-colors"
+            className="w-full bg-[#131210] light:bg-[#FAF8F5] border border-white/10 light:border-[#DDD7CC] focus:border-[#C9A86A] light:focus:border-[#A88656] rounded-xl pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3 text-xs sm:text-sm text-[#FBF9F5] light:text-[#181A1D] placeholder-[#8E887E] light:placeholder-[#858076] focus:outline-none transition-colors"
           />
         </div>
 
-        {/* Minimal Pill Filters */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-1">
+        {/* Responsive Filter Tracks */}
+        <div className="space-y-3 pt-0.5">
           {/* Typology Pills */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] mr-1 hidden sm:inline">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap pb-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E887E] light:text-[#656056] shrink-0 mr-1">
               Typology:
             </span>
             {[
@@ -73,10 +73,10 @@ export default function PropertyFilter({
                 <button
                   key={t.id}
                   onClick={() => updateFilter("propertyType", t.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                  className={`min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap shrink-0 transition-all active:scale-[0.98] ${
                     active
-                      ? "bg-[#C5A880] dark:bg-[#C5A880] light:bg-[#A88858] text-[#0C0E10] font-semibold shadow-sm"
-                      : "bg-[#181C22] dark:bg-[#181C22] light:bg-[#E4DFD5] text-[#8C8983] dark:text-[#8C8983] light:text-[#5F5B53] hover:text-white light:hover:text-[#181A1D]"
+                      ? "bg-[#C9A86A] text-[#131210] font-semibold shadow-sm"
+                      : "bg-[#131210] light:bg-[#E4DFD5] text-[#8E887E] light:text-[#5F5B53] hover:text-[#FBF9F5] hover:bg-[#252320]"
                   }`}
                 >
                   {t.label}
@@ -86,8 +86,8 @@ export default function PropertyFilter({
           </div>
 
           {/* Bedroom Pills */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#8C8983] dark:text-[#8C8983] light:text-[#656056] mr-1 hidden sm:inline">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 sm:mx-0 sm:px-0 sm:flex-wrap pb-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#8E887E] light:text-[#656056] shrink-0 mr-1">
               Bedrooms:
             </span>
             {[
@@ -101,10 +101,10 @@ export default function PropertyFilter({
                 <button
                   key={b.id}
                   onClick={() => updateFilter("bedrooms", b.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                  className={`min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap shrink-0 transition-all active:scale-[0.98] ${
                     active
-                      ? "bg-[#C5A880] dark:bg-[#C5A880] light:bg-[#A88858] text-[#0C0E10] font-semibold shadow-sm"
-                      : "bg-[#181C22] dark:bg-[#181C22] light:bg-[#E4DFD5] text-[#8C8983] dark:text-[#8C8983] light:text-[#5F5B53] hover:text-white light:hover:text-[#181A1D]"
+                      ? "bg-[#C9A86A] text-[#131210] font-semibold shadow-sm"
+                      : "bg-[#131210] light:bg-[#E4DFD5] text-[#8E887E] light:text-[#5F5B53] hover:text-[#FBF9F5] hover:bg-[#252320]"
                   }`}
                 >
                   {b.label}
@@ -116,15 +116,15 @@ export default function PropertyFilter({
       </div>
 
       {/* Result Count and Reset Strip */}
-      <div className="flex items-center justify-between px-2 text-xs font-mono text-[#8C8983] dark:text-[#8C8983] light:text-[#656056]">
+      <div className="flex items-center justify-between px-1 text-xs font-mono text-[#8E887E] light:text-[#656056]">
         <span>
-          Showing <strong className="text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">{totalResults}</strong> available residences
+          Showing <strong className="text-[#FBF9F5] light:text-[#181A1D]">{totalResults}</strong> available residences
         </span>
 
         {hasActiveFilters && (
           <button
             onClick={handleReset}
-            className="inline-flex items-center space-x-1 text-[#C5A880] dark:text-[#C5A880] light:text-[#A88858] hover:underline transition-colors"
+            className="inline-flex items-center space-x-1 text-[#C9A86A] light:text-[#A88656] hover:underline transition-colors min-h-[36px] py-1"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Clear filters</span>

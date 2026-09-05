@@ -95,48 +95,42 @@ export default function HeroSection({
   // Initial Content Entrance Animation
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.3 });
+      const tl = gsap.timeline({ delay: 0.1 });
 
       tl.fromTo(
         eyebrowRef.current,
-        { opacity: 0, y: -15 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
       )
         .fromTo(
           [titleLine1Ref.current, titleLine2Ref.current],
-          { opacity: 0, y: 35, clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)" },
+          { opacity: 0, y: 25, clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)" },
           {
             opacity: 1,
             y: 0,
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-            duration: 1.1,
-            stagger: 0.18,
+            duration: 0.6,
+            stagger: 0.1,
             ease: "power3.out",
           },
-          "-=0.4"
+          "-=0.2"
         )
         .fromTo(
-          metaRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          "-=0.5"
-        )
-        .fromTo(
-          metricsBarRef.current,
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          "-=0.4"
+          [metaRef.current, metricsBarRef.current],
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power2.out" },
+          "-=0.3"
         )
         .fromTo(
           ctaRef.current,
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          "-=0.4"
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          "-=0.3"
         )
         .fromTo(
           controlsRef.current,
           { opacity: 0 },
-          { opacity: 1, duration: 1.0, ease: "power1.out" },
+          { opacity: 1, duration: 0.5, ease: "power1.out" },
           "-=0.2"
         );
     }, containerRef);
@@ -147,7 +141,7 @@ export default function HeroSection({
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen h-[100svh] overflow-hidden bg-[#131210] text-[#FBF9F5] select-none"
+      className="relative w-full min-h-[580px] h-[100svh] max-h-[1080px] overflow-hidden bg-[#131210] text-[#FBF9F5] select-none"
       aria-label="Arc Estates 3D Architectural Showcase"
     >
       {/* Interactive 3D WebGL Architectural Environment */}
@@ -166,13 +160,13 @@ export default function HeroSection({
       {/* Hero Foreground Content Overlay */}
       <div
         ref={contentOverlayRef}
-        className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between pt-28 pb-10 pointer-events-none"
+        className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between pt-20 sm:pt-28 pb-4 sm:pb-8 pointer-events-none"
       >
         {/* Top Architectural Coordinate Eyebrow */}
-        <div ref={eyebrowRef} className="opacity-0 space-y-1.5 pt-2 pointer-events-auto">
-          <div className="inline-flex items-center space-x-2.5 px-3.5 py-1 rounded-full bg-[#1C1A17]/85 border border-white/10 backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A86A] animate-pulse" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#C9A86A]">
+        <div ref={eyebrowRef} className="space-y-1.5 pt-1 pointer-events-auto">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#1C1A17]/90 border border-white/10 backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A86A] animate-pulse shrink-0" />
+            <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#C9A86A]">
               ARC ESTATES // RESIDENTIAL ARCHITECTURE
             </span>
             <span className="text-white/30 font-mono text-[9px] hidden sm:inline">•</span>
@@ -183,14 +177,14 @@ export default function HeroSection({
         </div>
 
         {/* Center Editorial Title & Narrative */}
-        <div className="max-w-3xl space-y-6 my-auto pointer-events-auto">
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-tight text-[#FBF9F5] leading-[1.05]">
-            <span ref={titleLine1Ref} className="block opacity-0">
+        <div className="max-w-3xl space-y-2.5 sm:space-y-6 my-auto pointer-events-auto">
+          <h1 className="font-serif text-[clamp(2.1rem,6vw,5.5rem)] font-normal tracking-tight text-[#FBF9F5] leading-[1.05]">
+            <span ref={titleLine1Ref} className="block">
               BUILT FOR
             </span>
             <span
               ref={titleLine2Ref}
-              className="block opacity-0 text-[#C9A86A] italic font-light font-serif tracking-normal"
+              className="block text-[#C9A86A] italic font-light font-serif tracking-normal"
             >
               THE WAY YOU LIVE.
             </span>
@@ -198,7 +192,7 @@ export default function HeroSection({
 
           <p
             ref={metaRef}
-            className="opacity-0 text-sm sm:text-base lg:text-lg text-[#CCC5B9] max-w-2xl font-light leading-relaxed drop-shadow"
+            className="text-xs sm:text-base lg:text-lg text-[#CCC5B9] max-w-2xl font-light leading-relaxed drop-shadow line-clamp-2 sm:line-clamp-none"
           >
             {subhead}
           </p>
@@ -206,68 +200,71 @@ export default function HeroSection({
           {/* Key Metric Indicators Pill */}
           <div
             ref={metricsBarRef}
-            className="opacity-0 flex flex-wrap items-center gap-4 sm:gap-6 pt-1 text-xs font-mono text-[#8E887E]"
+            className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-[11px] sm:text-xs font-mono text-[#8E887E]"
           >
             <div className="flex items-center space-x-1.5">
-              <Box className="w-3.5 h-3.5 text-[#C9A86A]" />
+              <Box className="w-3.5 h-3.5 text-[#C9A86A] shrink-0" />
               <span>4 Flagship Projects</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <Compass className="w-3.5 h-3.5 text-[#C9A86A]" />
+              <Compass className="w-3.5 h-3.5 text-[#C9A86A] shrink-0" />
               <span>2,400 – 5,200 SQ.FT</span>
             </div>
-            <div className="flex items-center space-x-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C9A86A]" />
+            <div className="hidden sm:flex items-center space-x-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C9A86A] shrink-0" />
               <span>Verified Structural Quality</span>
             </div>
           </div>
 
           {/* Action Call-to-Actions */}
-          <div ref={ctaRef} className="opacity-0 flex flex-wrap items-center gap-3 pt-3">
+          <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3">
             <Link
               href="/projects"
-              className="group inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(201,168,106,0.28)] hover:shadow-[0_6px_28px_rgba(201,168,106,0.42)] hover:scale-[1.02]"
+              className="group inline-flex items-center justify-center space-x-2 px-6 py-3 sm:py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(201,168,106,0.28)] hover:shadow-[0_6px_28px_rgba(201,168,106,0.42)] active:scale-[0.98] min-h-[46px]"
               data-cursor="explore"
             >
               <span>Explore Developments</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
 
-            <Link
-              href="/site-visit"
-              className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#1C1A17]/70 hover:bg-[#22201C]/90 text-[#FBF9F5] text-xs font-medium tracking-wider backdrop-blur-md transition-all duration-300"
-            >
-              <span>Schedule Site Visit</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/site-visit"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center space-x-2 px-5 py-3 sm:py-3.5 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#1C1A17]/80 hover:bg-[#22201C]/90 text-[#FBF9F5] text-xs font-medium tracking-wider backdrop-blur-md transition-all duration-300 active:scale-[0.98] min-h-[46px]"
+              >
+                <span>Schedule Site Visit</span>
+              </Link>
 
-            <button
-              onClick={onOpenAI}
-              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-white/10 hover:border-[#C9A86A]/60 bg-[#1C1A17]/70 text-[#C9A86A] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>AI Concierge</span>
-            </button>
+              <button
+                onClick={onOpenAI}
+                className="hidden sm:inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-white/10 hover:border-[#C9A86A]/60 bg-[#1C1A17]/70 text-[#C9A86A] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02] min-h-[46px]"
+                aria-label="Open AI Concierge"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>AI Concierge</span>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Bottom 3D Controller & Mode Switcher Bar */}
         <div
           ref={controlsRef}
-          className="opacity-0 flex items-center justify-between pt-4 border-t border-white/10 text-xs pointer-events-auto"
+          className="flex items-center justify-between pt-3 pb-1 border-t border-white/10 text-xs pointer-events-auto"
         >
           {/* 3D Interaction Notice */}
           <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono text-[#8E887E]">
-            <span className="w-2 h-2 rounded-full bg-[#7E8D79] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#7E8D79] animate-pulse shrink-0" />
             <span className="hidden sm:inline">3D INTERACTIVE ARCHITECTURE</span>
             <span className="sm:hidden">3D VIEW</span>
             <span className="text-white/20">•</span>
-            <span className="text-[#CCC5B9]/70">DRAG TO ROTATE MODEL</span>
+            <span className="text-[#CCC5B9]/70">DRAG TO ROTATE</span>
           </div>
 
           {/* Blueprint Mode Switcher */}
           <button
             onClick={() => setBlueprintMode((prev) => !prev)}
-            className={`inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 backdrop-blur-md ${
+            className={`inline-flex items-center space-x-2 px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 backdrop-blur-md min-h-[38px] ${
               blueprintMode
                 ? "bg-[#0A1622] border-[#56CCF2] text-[#56CCF2] shadow-[0_0_15px_rgba(86,204,242,0.3)]"
                 : "bg-[#1C1A17]/80 border-white/15 text-[#C9A86A] hover:border-[#C9A86A]"
@@ -275,8 +272,8 @@ export default function HeroSection({
             aria-pressed={blueprintMode}
             title="Toggle Architectural Blueprint Mode"
           >
-            <Layers className="w-3.5 h-3.5" />
-            <span>{blueprintMode ? "Blueprint Mode: Active" : "View Blueprint Mode"}</span>
+            <Layers className="w-3.5 h-3.5 shrink-0" />
+            <span>{blueprintMode ? "Blueprint: Active" : "Blueprint Mode"}</span>
           </button>
 
           {/* Scroll Down Hint */}

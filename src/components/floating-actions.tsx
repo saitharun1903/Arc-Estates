@@ -45,21 +45,21 @@ export default function FloatingActions({
   }, [isOpen]);
 
   return (
-    <div ref={menuRef} className="fixed bottom-6 right-6 z-50">
+    <div ref={menuRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 pb-[env(safe-area-inset-bottom,0px)] pr-[env(safe-area-inset-right,0px)] z-50">
       {/* Expanded Popover Panel */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-[calc(100vw-2.5rem)] sm:w-[320px] max-w-[320px] bg-surface border border-border rounded-2xl p-4 shadow-2xl backdrop-blur-xl animate-slide-up space-y-3">
+        <div className="absolute bottom-16 right-0 w-[calc(100vw-2rem)] sm:w-[320px] max-w-[320px] bg-[#1C1A17] border border-white/10 rounded-2xl p-4 shadow-2xl backdrop-blur-xl animate-slide-up space-y-3">
           {/* Header */}
-          <div className="flex items-center justify-between pb-3 border-b border-border">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-mono text-[11px] uppercase tracking-widest text-accent font-semibold">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-[#C9A86A] font-semibold">
                 ARC ADVISORY DESK
               </span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-full text-foreground-muted hover:text-foreground hover:bg-surface-muted transition-colors"
+              className="p-1.5 rounded-full text-[#8E887E] hover:text-[#FBF9F5] hover:bg-white/5 transition-colors"
               aria-label="Close menu"
             >
               <X className="w-4 h-4" />
@@ -72,21 +72,21 @@ export default function FloatingActions({
               setIsOpen(false);
               onOpenAI();
             }}
-            className="w-full text-left p-3 rounded-xl bg-surface-elevated hover:bg-surface-muted border border-border hover:border-accent transition-all flex items-start space-x-3 group"
+            className="w-full text-left p-3 rounded-xl bg-[#131210] hover:bg-[#252320] border border-white/10 hover:border-[#C9A86A] transition-all flex items-start space-x-3 group min-h-[44px]"
           >
-            <div className="w-8 h-8 rounded-lg bg-accent/15 flex items-center justify-center text-accent shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+            <div className="w-8 h-8 rounded-lg bg-[#C9A86A]/15 flex items-center justify-center text-[#C9A86A] shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
               <MessageSquareCode className="w-4 h-4" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-foreground tracking-wide">
+                <span className="text-xs font-semibold text-[#FBF9F5] tracking-wide">
                   ARC AI Concierge
                 </span>
-                <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-accent/15 text-accent font-medium">
+                <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-[#C9A86A]/15 text-[#C9A86A] font-medium">
                   Instant
                 </span>
               </div>
-              <p className="text-[11px] text-foreground-muted mt-0.5 leading-relaxed">
+              <p className="text-[11px] text-[#8E887E] mt-0.5 leading-relaxed">
                 Inquire about floor plans, pricing &amp; unit availability
               </p>
             </div>
@@ -94,11 +94,11 @@ export default function FloatingActions({
 
           {/* Action 2: WhatsApp Advisory */}
           <a
-            href={`https://wa.me/${cleanWhatsApp}?text=Hello%20ARC%20Avenue,%20I%20am%20exploring%20your%20properties%20in%20Bahadurpally.`}
+            href={`https://wa.me/${cleanWhatsApp}?text=Hello%20ARC%20Estates,%20I%20am%20exploring%20your%20properties%20in%20Bahadurpally.`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
-            className="w-full text-left p-3 rounded-xl bg-surface-elevated hover:bg-surface-muted border border-border hover:border-[#1BD741]/40 transition-all flex items-start space-x-3 group"
+            className="w-full text-left p-3 rounded-xl bg-[#131210] hover:bg-[#252320] border border-white/10 hover:border-[#1BD741]/40 transition-all flex items-start space-x-3 group min-h-[44px]"
           >
             <div className="w-8 h-8 rounded-lg bg-[#1BD741]/15 flex items-center justify-center text-[#1BD741] shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -107,12 +107,12 @@ export default function FloatingActions({
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-foreground tracking-wide">
+                <span className="text-xs font-semibold text-[#FBF9F5] tracking-wide">
                   WhatsApp Direct
                 </span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-foreground-muted group-hover:text-foreground transition-colors" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#8E887E] group-hover:text-[#FBF9F5] transition-colors" />
               </div>
-              <p className="text-[11px] text-foreground-muted mt-0.5 leading-relaxed">
+              <p className="text-[11px] text-[#8E887E] mt-0.5 leading-relaxed">
                 Direct line to site engineers &amp; project leadership
               </p>
             </div>
@@ -121,13 +121,13 @@ export default function FloatingActions({
           {/* Action 3: Direct Phone Call */}
           <a
             href={`tel:${cleanPhone}`}
-            className="flex items-center justify-between p-2.5 rounded-lg bg-surface-muted hover:bg-surface-elevated border border-border text-xs text-foreground-secondary hover:text-foreground transition-colors"
+            className="flex items-center justify-between p-2.5 rounded-lg bg-[#131210] hover:bg-[#252320] border border-white/10 text-xs text-[#CCC5B9] hover:text-[#FBF9F5] transition-colors min-h-[44px]"
           >
             <div className="flex items-center space-x-2">
-              <Phone className="w-3.5 h-3.5 text-accent" />
+              <Phone className="w-3.5 h-3.5 text-[#C9A86A]" />
               <span className="font-mono text-[11px]">{phone}</span>
             </div>
-            <span className="text-[10px] uppercase font-mono text-foreground-muted">Direct Call</span>
+            <span className="text-[10px] uppercase font-mono text-[#8E887E]">Direct Call</span>
           </a>
         </div>
       )}
@@ -138,10 +138,10 @@ export default function FloatingActions({
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label="Open ARC Advisory Concierge"
-          className="relative z-10 flex items-center space-x-3 px-4 py-3 rounded-full bg-surface hover:bg-surface-elevated border border-border hover:border-accent text-foreground shadow-2xl transition-all select-none"
+          className="relative z-10 flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-full bg-[#1C1A17] hover:bg-[#252320] border border-[#C9A86A]/40 hover:border-[#C9A86A] text-[#FBF9F5] shadow-2xl transition-all select-none min-h-[44px] min-w-[44px]"
         >
           <div className="relative flex items-center justify-center">
-            <div className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center text-accent">
+            <div className="w-7 h-7 rounded-full bg-[#C9A86A]/20 flex items-center justify-center text-[#C9A86A]">
               {isOpen ? (
                 <X className="w-3.5 h-3.5" />
               ) : (
@@ -149,21 +149,21 @@ export default function FloatingActions({
               )}
             </div>
             {!isOpen && (
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-surface" />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-[#1C1A17]" />
             )}
           </div>
 
           <div className="text-left hidden sm:block pr-1">
-            <div className="text-xs font-semibold tracking-wide text-foreground">
+            <div className="text-xs font-semibold tracking-wide text-[#FBF9F5]">
               ARC Concierge
             </div>
-            <div className="text-[10px] text-accent font-mono leading-none mt-0.5">
+            <div className="text-[10px] text-[#C9A86A] font-mono leading-none mt-0.5">
               Advisory &amp; Inquiries
             </div>
           </div>
 
           <ChevronUp
-            className={`w-3.5 h-3.5 text-foreground-muted transition-transform duration-300 ${
+            className={`w-3.5 h-3.5 text-[#8E887E] transition-transform duration-300 ${
               isOpen ? "rotate-180" : ""
             }`}
           />
