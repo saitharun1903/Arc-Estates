@@ -14,10 +14,10 @@ const ArchitecturalCanvas = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="absolute inset-0 bg-[#0A0C0E] flex items-center justify-center">
+      <div className="absolute inset-0 bg-[#131210] flex items-center justify-center">
         <div className="flex flex-col items-center space-y-3">
-          <div className="w-8 h-8 rounded-full border border-[#C5A880]/30 border-t-[#C5A880] animate-spin" />
-          <span className="text-[10px] font-mono tracking-[0.25em] text-[#C5A880] uppercase">
+          <div className="w-8 h-8 rounded-full border border-[#C9A86A]/30 border-t-[#C9A86A] animate-spin" />
+          <span className="text-[10px] font-mono tracking-[0.25em] text-[#C9A86A] uppercase">
             INITIALIZING 3D ENVIRONMENT
           </span>
         </div>
@@ -147,7 +147,7 @@ export default function HeroSection({
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen h-[100svh] overflow-hidden bg-[#0A0C0E] text-[#F4F1EA] select-none"
+      className="relative w-full min-h-screen h-[100svh] overflow-hidden bg-[#131210] text-[#FBF9F5] select-none"
       aria-label="Arc Estates 3D Architectural Showcase"
     >
       {/* Interactive 3D WebGL Architectural Environment */}
@@ -159,9 +159,9 @@ export default function HeroSection({
         />
       </div>
 
-      {/* Cinematic Vignette & Ambient Overlays */}
-      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#0A0C0E] via-transparent to-[#0A0C0E]/70" />
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,12,14,0.6)_100%)]" />
+      {/* Cinematic Vignette & Ambient Architectural Overlays */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#131210] via-transparent to-[#131210]/60" />
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(19,18,16,0.65)_100%)]" />
 
       {/* Hero Foreground Content Overlay */}
       <div
@@ -170,13 +170,13 @@ export default function HeroSection({
       >
         {/* Top Architectural Coordinate Eyebrow */}
         <div ref={eyebrowRef} className="opacity-0 space-y-1.5 pt-2 pointer-events-auto">
-          <div className="inline-flex items-center space-x-2.5 px-3 py-1 rounded-full bg-[#14171A]/80 border border-white/10 backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] animate-pulse" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#C5A880]">
+          <div className="inline-flex items-center space-x-2.5 px-3.5 py-1 rounded-full bg-[#1C1A17]/85 border border-white/10 backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A86A] animate-pulse" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#C9A86A]">
               ARC ESTATES // RESIDENTIAL ARCHITECTURE
             </span>
             <span className="text-white/30 font-mono text-[9px] hidden sm:inline">•</span>
-            <span className="text-[9px] font-mono tracking-wider text-white/50 hidden sm:inline">
+            <span className="text-[9px] font-mono tracking-wider text-[#8E887E] hidden sm:inline">
               BAHADURPALLY, HYDERABAD
             </span>
           </div>
@@ -184,13 +184,13 @@ export default function HeroSection({
 
         {/* Center Editorial Title & Narrative */}
         <div className="max-w-3xl space-y-6 my-auto pointer-events-auto">
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-white leading-[1.05]">
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-normal tracking-tight text-[#FBF9F5] leading-[1.05]">
             <span ref={titleLine1Ref} className="block opacity-0">
               BUILT FOR
             </span>
             <span
               ref={titleLine2Ref}
-              className="block opacity-0 text-[#C5A880] italic font-light font-serif tracking-normal"
+              className="block opacity-0 text-[#C9A86A] italic font-light font-serif tracking-normal"
             >
               THE WAY YOU LIVE.
             </span>
@@ -198,7 +198,7 @@ export default function HeroSection({
 
           <p
             ref={metaRef}
-            className="opacity-0 text-sm sm:text-base lg:text-lg text-[#CCC7BC] max-w-2xl font-light leading-relaxed drop-shadow"
+            className="opacity-0 text-sm sm:text-base lg:text-lg text-[#CCC5B9] max-w-2xl font-light leading-relaxed drop-shadow"
           >
             {subhead}
           </p>
@@ -206,18 +206,18 @@ export default function HeroSection({
           {/* Key Metric Indicators Pill */}
           <div
             ref={metricsBarRef}
-            className="opacity-0 flex flex-wrap items-center gap-4 sm:gap-6 pt-1 text-xs font-mono text-[#A09D96]"
+            className="opacity-0 flex flex-wrap items-center gap-4 sm:gap-6 pt-1 text-xs font-mono text-[#8E887E]"
           >
             <div className="flex items-center space-x-1.5">
-              <Box className="w-3.5 h-3.5 text-[#C5A880]" />
+              <Box className="w-3.5 h-3.5 text-[#C9A86A]" />
               <span>4 Flagship Projects</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <Compass className="w-3.5 h-3.5 text-[#C5A880]" />
+              <Compass className="w-3.5 h-3.5 text-[#C9A86A]" />
               <span>2,400 – 5,200 SQ.FT</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C9A86A]" />
               <span>Verified Structural Quality</span>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default function HeroSection({
           <div ref={ctaRef} className="opacity-0 flex flex-wrap items-center gap-3 pt-3">
             <Link
               href="/projects"
-              className="group inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#C5A880] hover:bg-[#B38F5B] text-[#0A0C0E] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(197,168,128,0.25)] hover:shadow-[0_0_35px_rgba(197,168,128,0.45)] hover:scale-[1.02]"
+              className="group inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_4px_20px_rgba(201,168,106,0.28)] hover:shadow-[0_6px_28px_rgba(201,168,106,0.42)] hover:scale-[1.02]"
               data-cursor="explore"
             >
               <span>Explore Developments</span>
@@ -235,14 +235,14 @@ export default function HeroSection({
 
             <Link
               href="/site-visit"
-              className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full border border-white/20 hover:border-[#C5A880] bg-[#121519]/60 hover:bg-[#121519]/90 text-white text-xs font-semibold tracking-wider backdrop-blur-md transition-all duration-300"
+              className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full border border-white/15 hover:border-[#C9A86A] bg-[#1C1A17]/70 hover:bg-[#22201C]/90 text-[#FBF9F5] text-xs font-medium tracking-wider backdrop-blur-md transition-all duration-300"
             >
               <span>Schedule Site Visit</span>
             </Link>
 
             <button
               onClick={onOpenAI}
-              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-[#C5A880]/30 hover:border-[#C5A880] bg-[#14171A]/70 text-[#C5A880] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
+              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-full border border-white/10 hover:border-[#C9A86A]/60 bg-[#1C1A17]/70 text-[#C9A86A] text-xs font-mono tracking-wider backdrop-blur-md transition-all duration-300 hover:scale-[1.02]"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>AI Concierge</span>
@@ -256,12 +256,12 @@ export default function HeroSection({
           className="opacity-0 flex items-center justify-between pt-4 border-t border-white/10 text-xs pointer-events-auto"
         >
           {/* 3D Interaction Notice */}
-          <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono text-[#8C8983]">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="flex items-center space-x-2 text-[10px] sm:text-xs font-mono text-[#8E887E]">
+            <span className="w-2 h-2 rounded-full bg-[#7E8D79] animate-pulse" />
             <span className="hidden sm:inline">3D INTERACTIVE ARCHITECTURE</span>
             <span className="sm:hidden">3D VIEW</span>
             <span className="text-white/20">•</span>
-            <span className="text-[#CCC7BC]/70">DRAG TO ROTATE MODEL</span>
+            <span className="text-[#CCC5B9]/70">DRAG TO ROTATE MODEL</span>
           </div>
 
           {/* Blueprint Mode Switcher */}
@@ -269,8 +269,8 @@ export default function HeroSection({
             onClick={() => setBlueprintMode((prev) => !prev)}
             className={`inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full border text-[10px] sm:text-xs font-mono uppercase tracking-wider transition-all duration-300 backdrop-blur-md ${
               blueprintMode
-                ? "bg-[#061B2E] border-[#56CCF2] text-[#56CCF2] shadow-[0_0_15px_rgba(86,204,242,0.3)]"
-                : "bg-[#14171A]/80 border-white/20 text-[#C5A880] hover:border-[#C5A880]"
+                ? "bg-[#0A1622] border-[#56CCF2] text-[#56CCF2] shadow-[0_0_15px_rgba(86,204,242,0.3)]"
+                : "bg-[#1C1A17]/80 border-white/15 text-[#C9A86A] hover:border-[#C9A86A]"
             }`}
             aria-pressed={blueprintMode}
             title="Toggle Architectural Blueprint Mode"
@@ -280,9 +280,9 @@ export default function HeroSection({
           </button>
 
           {/* Scroll Down Hint */}
-          <div className="hidden md:flex items-center space-x-2 text-[10px] font-mono text-[#8C8983]">
+          <div className="hidden md:flex items-center space-x-2 text-[10px] font-mono text-[#8E887E]">
             <span>SCROLL TO EXPLORE</span>
-            <ArrowDown className="w-3 h-3 text-[#C5A880] animate-bounce" />
+            <ArrowDown className="w-3 h-3 text-[#C9A86A] animate-bounce" />
           </div>
         </div>
       </div>

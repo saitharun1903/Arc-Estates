@@ -76,11 +76,11 @@ export default function ArchitecturalCanvas({
     // 1. Scene & Atmosphere
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    const bgDark = new THREE.Color(0x0a0c0e);
-    const bgBlueprint = new THREE.Color(0x06111c);
+    const bgDark = new THREE.Color(0x131210);
+    const bgBlueprint = new THREE.Color(0x0a1622);
     const currentBg = bgDark.clone();
     scene.background = currentBg;
-    scene.fog = new THREE.FogExp2(0x0a0c0e, 0.018);
+    scene.fog = new THREE.FogExp2(0x131210, 0.016);
 
     // 2. Camera
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 150);
@@ -102,62 +102,62 @@ export default function ArchitecturalCanvas({
     renderer.setSize(width, height);
     renderer.setPixelRatio(dprCap);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.2;
     container.appendChild(renderer.domElement);
 
-    // 4. Lighting System (Streamlined)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+    // 4. Lighting System (Warm Dusk & Golden Hour Architectural Illumination)
+    const ambientLight = new THREE.AmbientLight(0xfff6ea, 0.65);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfffaed, 2.0);
+    const sunLight = new THREE.DirectionalLight(0xffebd2, 2.2);
     sunLight.position.set(24, 40, 20);
     scene.add(sunLight);
 
-    const rimLight = new THREE.DirectionalLight(0x8ab4f8, 1.1);
+    const rimLight = new THREE.DirectionalLight(0xd0d7de, 0.9);
     rimLight.position.set(-20, 25, -20);
     scene.add(rimLight);
 
-    const groundBounceLight = new THREE.DirectionalLight(0xc5a880, 0.5);
+    const groundBounceLight = new THREE.DirectionalLight(0xd4be99, 0.7);
     groundBounceLight.position.set(0, -10, 10);
     scene.add(groundBounceLight);
 
-    // 5. Materials (Shared & Optimized)
+    // 5. Materials (Warm Natural Stone, Smoked Glass, and Champagne Bronze)
     const concreteMaterial = new THREE.MeshStandardMaterial({
-      color: 0x22252a,
-      roughness: 0.85,
-      metalness: 0.1,
+      color: 0x32302b,
+      roughness: 0.82,
+      metalness: 0.05,
     });
 
     const darkPodiumMaterial = new THREE.MeshStandardMaterial({
-      color: 0x121518,
-      roughness: 0.9,
-      metalness: 0.2,
+      color: 0x1c1a17,
+      roughness: 0.88,
+      metalness: 0.15,
     });
 
     const bronzeTrimMaterial = new THREE.MeshStandardMaterial({
-      color: 0xc5a880,
-      roughness: 0.35,
-      metalness: 0.75,
+      color: 0xc9a86a,
+      roughness: 0.38,
+      metalness: 0.72,
     });
 
     const glassMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xd8e6f3,
+      color: 0xdce0db,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.32,
       roughness: 0.1,
       metalness: 0.1,
-      transmission: 0.6,
+      transmission: 0.65,
       ior: 1.5,
     });
 
     const poolMaterial = new THREE.MeshStandardMaterial({
-      color: 0x0e2433,
+      color: 0x12171c,
       roughness: 0.15,
-      metalness: 0.8,
+      metalness: 0.75,
     });
 
     const wireframeLineMaterial = new THREE.LineBasicMaterial({
-      color: 0xc5a880,
+      color: 0xc9a86a,
       transparent: true,
       opacity: 0,
     });
@@ -175,14 +175,14 @@ export default function ArchitecturalCanvas({
     };
 
     // 6. Ground Architectural Grid
-    const grid = new THREE.GridHelper(60, 40, 0xc5a880, 0x1c2229);
+    const grid = new THREE.GridHelper(60, 40, 0xc9a86a, 0x24221d);
     grid.position.y = 0;
     (grid.material as THREE.Material).transparent = true;
     (grid.material as THREE.Material).opacity = 0;
     scene.add(grid);
     animElementsRef.current.grid = grid;
 
-    // 7. Atmospheric Floating Particles (Reduced from 350 to 60/25 for max performance)
+    // 7. Atmospheric Floating Particles (Warm Champagne Ambient Dust)
     const particleCount = isMobile ? 25 : 60;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
@@ -193,7 +193,7 @@ export default function ArchitecturalCanvas({
     }
     particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0xc5a880,
+      color: 0xc9a86a,
       size: 0.15,
       transparent: true,
       opacity: 0,
@@ -329,7 +329,7 @@ export default function ArchitecturalCanvas({
       tl.to(f.glass.position, { y: f.targetY + 1.25, duration: 0.7, ease: "power2.out" }, delay + 0.1);
       tl.to((f.glass.material as THREE.Material), { opacity: 0.38, duration: 0.7, ease: "power1.inOut" }, delay + 0.15);
       if (f.interiorLight) {
-        tl.to(f.interiorLight, { intensity: 1.6, duration: 0.8, ease: "power2.in" }, delay + 0.3);
+        tl.to(f.interiorLight, { intensity: 2.2, duration: 0.8, ease: "power2.in" }, delay + 0.3);
       }
     });
 
@@ -462,7 +462,7 @@ export default function ArchitecturalCanvas({
         }
 
         // Wireframe glow in blueprint mode
-        const wireColor = bpVal > 0.5 ? 0x56ccf2 : 0xc5a880;
+        const wireColor = bpVal > 0.5 ? 0x56ccf2 : 0xc9a86a;
         const targetOpacity = THREE.MathUtils.lerp(0.04, 0.85, bpVal);
         animElementsRef.current.wireframeLines.forEach((line) => {
           const mat = line.material as THREE.LineBasicMaterial;

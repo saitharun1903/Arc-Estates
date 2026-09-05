@@ -24,11 +24,11 @@ export default function FeaturedProjectCard({
   const formattedIndex = String(index).padStart(2, "0");
 
   return (
-    <div className="relative rounded-2xl overflow-hidden bg-[#101317] dark:bg-[#101317] light:bg-[#FFFFFF] border border-white/10 dark:border-white/10 light:border-[#DDD7CC] shadow-lg group">
+    <div className="relative rounded-2xl overflow-hidden bg-[#181714] border border-white/10 shadow-xl group hover:border-[#C9A86A]/40 transition-all duration-300">
       {useGlow && (
         <GlowBorder
-          glowColor="#C5A880"
-          tailColor="rgba(197, 168, 128, 0.3)"
+          glowColor="#C9A86A"
+          tailColor="rgba(201, 168, 106, 0.22)"
           borderWidth={1.5}
           speed={10}
           rounded={16}
@@ -37,23 +37,23 @@ export default function FeaturedProjectCard({
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch p-6 sm:p-8">
         {/* Large Architectural Canvas */}
-        <div className="lg:col-span-7 relative aspect-[16/10] sm:aspect-[16/9] rounded-xl overflow-hidden bg-[#181C22]">
+        <div className="lg:col-span-7 relative aspect-[16/10] sm:aspect-[16/9] rounded-xl overflow-hidden bg-[#1C1A17]">
           <div
             className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.03]"
             style={{ backgroundImage: `url(${project.heroImage})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
           {/* Floating Badge */}
-          <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest px-3 py-1 rounded bg-black/70 backdrop-blur text-[#C5A880] uppercase flex items-center space-x-2">
+          <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest px-3 py-1 rounded bg-black/75 backdrop-blur text-[#C9A86A] uppercase flex items-center space-x-2">
             <span className="font-bold">{formattedIndex}</span>
             <span>•</span>
             <span>FLAGSHIP DEVELOPMENT</span>
           </div>
 
-          <div className="absolute bottom-4 left-4 right-4 text-white">
+          <div className="absolute bottom-4 left-4 right-4 text-[#FBF9F5]">
             <div className="text-xs font-mono opacity-80">{project.bedrooms} Sky Residences</div>
-            <div className="font-serif text-2xl sm:text-3xl font-medium tracking-tight">
+            <div className="font-serif text-2xl sm:text-3xl font-normal tracking-tight">
               {project.name}
             </div>
           </div>
@@ -64,52 +64,52 @@ export default function FeaturedProjectCard({
           <div className="space-y-4">
             <div className="space-y-2">
               <div className="flex items-center space-x-3">
-                <span className="font-mono text-xs text-[#C5A880] dark:text-[#C5A880] light:text-[#9E7D4C] tracking-widest font-semibold">
+                <span className="font-mono text-xs text-[#C9A86A] tracking-widest font-semibold">
                   {formattedIndex}
                 </span>
-                <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58]">
+                <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#8E887E]">
                   {project.projectType}
                 </span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl font-normal text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
+              <h3 className="font-serif text-3xl sm:text-4xl font-normal text-[#FBF9F5]">
                 {project.name}
               </h3>
-              <p className="text-xs sm:text-sm text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58] leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#8E887E] leading-relaxed font-light">
                 {project.tagline}
               </p>
             </div>
 
             {/* Architectural Intelligence */}
-            <div className="space-y-3 pt-3 border-t border-white/5 dark:border-white/5 light:border-[#EAE6DE] text-xs font-mono">
+            <div className="space-y-3 pt-3 border-t border-white/5 text-xs font-mono">
               <div>
-                <span className="text-[10px] uppercase text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58] block">Structural Grid</span>
-                <span className="text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D]">{structuralGrid}</span>
+                <span className="text-[10px] uppercase text-[#8E887E] block">Structural Grid</span>
+                <span className="text-[#CCC5B9]">{structuralGrid}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58] block">Daylight Aperture</span>
-                <span className="text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D]">{daylightAxis}</span>
+                <span className="text-[10px] uppercase text-[#8E887E] block">Daylight Aperture</span>
+                <span className="text-[#CCC5B9]">{daylightAxis}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58] block">Spatial Range</span>
-                <span className="text-[#DDD8CE] dark:text-[#DDD8CE] light:text-[#181A1D]">{project.areaRange}</span>
+                <span className="text-[10px] uppercase text-[#8E887E] block">Spatial Range</span>
+                <span className="text-[#CCC5B9]">{project.areaRange}</span>
               </div>
             </div>
           </div>
 
           {/* Action Row */}
-          <div className="pt-4 border-t border-white/5 dark:border-white/5 light:border-[#EAE6DE] flex items-center justify-between gap-4">
+          <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-4">
             <div>
-              <span className="text-[10px] font-mono text-[#8C8983] dark:text-[#8C8983] light:text-[#615E58] block uppercase">
+              <span className="text-[10px] font-mono text-[#8E887E] block uppercase">
                 Guide Valuation
               </span>
-              <div className="font-mono text-lg font-bold text-[#F4F1EA] dark:text-[#F4F1EA] light:text-[#181A1D]">
+              <div className="font-mono text-lg font-bold text-[#C9A86A]">
                 {project.priceRange}
               </div>
             </div>
 
             <Link
               href={`/projects/${project.slug}`}
-              className="inline-flex items-center space-x-2 px-5 py-3 rounded-xl bg-[#C5A880] dark:bg-[#C5A880] light:bg-[#9E7D4C] text-[#0C0E10] dark:text-[#0C0E10] light:text-white font-mono text-xs font-semibold uppercase tracking-wider hover:bg-[#D4B58C] transition-all shadow-md group/btn"
+              className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#C9A86A] hover:bg-[#D8B77D] text-[#131210] font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-[0_4px_16px_rgba(201,168,106,0.25)] group/btn"
             >
               <span>Explore Architecture</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />

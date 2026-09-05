@@ -52,16 +52,16 @@ export default function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#0A0C0E] text-[#F4F1EA] border-b border-white/10 relative overflow-hidden"
+      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#131210] text-[#FBF9F5] border-b border-white/10 relative overflow-hidden"
     >
       <div className="max-w-6xl mx-auto space-y-16 relative z-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 border-b border-white/10">
           <div className="space-y-3">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#C5A880]">
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#C9A86A]">
               RESIDENT VOICES // HYDERABAD
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white">
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-[#FBF9F5]">
               Enduring Trust, Built in Concrete.
             </h2>
           </div>
@@ -69,17 +69,17 @@ export default function TestimonialsSection() {
           <div className="flex items-center space-x-3">
             <button
               onClick={handlePrev}
-              className="w-11 h-11 rounded-full border border-white/20 hover:border-[#C5A880] flex items-center justify-center text-white hover:text-[#C5A880] transition-colors"
+              className="w-11 h-11 rounded-full border border-white/15 hover:border-[#C9A86A] flex items-center justify-center text-[#CCC5B9] hover:text-[#C9A86A] transition-colors"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <span className="text-xs font-mono text-[#8C8983]">
+            <span className="text-xs font-mono text-[#8E887E]">
               0{currentIndex + 1} / 0{reviews.length}
             </span>
             <button
               onClick={handleNext}
-              className="w-11 h-11 rounded-full border border-white/20 hover:border-[#C5A880] flex items-center justify-center text-white hover:text-[#C5A880] transition-colors"
+              className="w-11 h-11 rounded-full border border-white/15 hover:border-[#C9A86A] flex items-center justify-center text-[#CCC5B9] hover:text-[#C9A86A] transition-colors"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -88,34 +88,34 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Large Editorial Quote Composition */}
-        <div className="relative p-8 sm:p-14 lg:p-16 rounded-2xl bg-[#121519] border border-white/10 shadow-2xl">
-          <Quote className="w-12 h-12 text-[#C5A880]/30 mb-8" />
+        <div className="relative p-8 sm:p-14 lg:p-16 rounded-2xl bg-[#1C1A17] border border-white/10 shadow-2xl">
+          <Quote className="w-12 h-12 text-[#C9A86A]/25 mb-8" />
 
           <div className="space-y-8">
-            <blockquote className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white font-normal leading-relaxed">
+            <blockquote className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#FBF9F5] font-normal leading-relaxed">
               “{current.quote}”
             </blockquote>
 
             <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
-                <div className="flex items-center space-x-2 text-amber-400">
+                <div className="flex items-center space-x-2 text-amber-400/90">
                   {[...Array(current.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="w-4 h-4 fill-amber-400/90 text-amber-400/90" />
                   ))}
-                  <span className="text-[10px] font-mono text-white/50 ml-2">
+                  <span className="text-[10px] font-mono text-[#8E887E] ml-2">
                     {current.date}
                   </span>
                 </div>
-                <h3 className="font-serif text-xl font-bold text-white">
+                <h3 className="font-serif text-xl font-normal text-[#FBF9F5]">
                   {current.name}
                 </h3>
-                <p className="text-xs text-[#8C8983] font-mono">
-                  {current.role} • <span className="text-[#C5A880]">{current.project}</span>
+                <p className="text-xs text-[#8E887E] font-mono">
+                  {current.role} • <span className="text-[#C9A86A]">{current.project}</span>
                 </p>
               </div>
 
               <div className="text-right">
-                <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-3 py-1 rounded-full">
+                <span className="text-[10px] font-mono tracking-widest uppercase text-[#7E8D79] bg-[#7E8D79]/10 border border-[#7E8D79]/30 px-3 py-1 rounded-full">
                   VERIFIED BUYER
                 </span>
               </div>

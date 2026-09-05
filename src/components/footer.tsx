@@ -211,7 +211,7 @@ export default function Footer({ settings }: FooterProps) {
               </a>
               <Link
                 href="/site-visit"
-                className="block w-full text-center py-2.5 px-3 bg-accent hover:bg-accent-hover text-accent-foreground text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-sm"
+                className="block w-full text-center py-2.5 px-3 bg-accent hover:bg-accent-hover text-accent-foreground text-xs font-semibold uppercase tracking-wider rounded-full transition-colors shadow-sm"
               >
                 Schedule Visit
               </Link>

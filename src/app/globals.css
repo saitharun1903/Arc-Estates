@@ -7,76 +7,80 @@
    ============================================================ */
 
 :root, [data-theme="dark"], .dark {
-  --background: #0C0E10;
-  --background-secondary: #080A0C;
-  --surface: #121519;
-  --surface-elevated: #16191F;
-  --surface-muted: #1A1E24;
-  --card-background: #101317;
-  --footer-background: #08090B;
-  --footer-foreground: #CCC7BC;
-  --header-background: rgba(10, 12, 14, 0.95);
-  --header-gradient: linear-gradient(to bottom, rgba(10, 12, 14, 0.85), rgba(10, 12, 14, 0.40), transparent);
-  --foreground: #F4F1EA;
-  --foreground-secondary: #CCC7BC;
-  --foreground-muted: #8C8983;
-  --border: rgba(255, 255, 255, 0.10);
-  --border-strong: rgba(255, 255, 255, 0.18);
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --accent: #C5A880;
-  --accent-hover: #D4B992;
-  --accent-foreground: #0C0E10;
-  --accent-subtle: rgba(197, 168, 128, 0.15);
-  --input: #14171D;
-  --input-foreground: #F4F1EA;
-  --input-border: rgba(255, 255, 255, 0.12);
-  --overlay: rgba(0, 0, 0, 0.75);
-  --image-overlay: rgba(10, 12, 14, 0.65);
-  --hero-gradient-overlay: linear-gradient(to bottom, rgba(10, 12, 14, 0.90), rgba(10, 12, 14, 0.75), #0A0C0E);
-  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #0A0C0E 85%);
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 12px 32px 0 rgba(0, 0, 0, 0.55);
-  --glow-color: #C5A880;
-  --glow-tail-color: rgba(197, 168, 128, 0.35);
-  --glow-base-color: rgba(255, 255, 255, 0.04);
+  --background: #131210;
+  --background-secondary: #171613;
+  --surface: #1C1A17;
+  --surface-elevated: #22201C;
+  --surface-muted: #2A2722;
+  --card-background: #181714;
+  --footer-background: #0F0E0C;
+  --footer-foreground: #B5AFA6;
+  --header-background: rgba(19, 18, 16, 0.82);
+  --header-gradient: linear-gradient(to bottom, rgba(19, 18, 16, 0.90), rgba(19, 18, 16, 0.45), transparent);
+  --foreground: #FBF9F5;
+  --foreground-secondary: #CCC5B9;
+  --foreground-muted: #8E887E;
+  --border: rgba(225, 215, 200, 0.09);
+  --border-strong: rgba(225, 215, 200, 0.16);
+  --border-subtle: rgba(225, 215, 200, 0.04);
+  --accent: #C9A86A;
+  --accent-hover: #D8B77D;
+  --accent-foreground: #131210;
+  --accent-subtle: rgba(201, 168, 106, 0.12);
+  --accent-bronze: #A88656;
+  --accent-sage: #7E8D79;
+  --input: #1C1A17;
+  --input-foreground: #FBF9F5;
+  --input-border: rgba(225, 215, 200, 0.12);
+  --overlay: rgba(15, 14, 12, 0.75);
+  --image-overlay: rgba(19, 18, 16, 0.55);
+  --hero-gradient-overlay: linear-gradient(to bottom, rgba(19, 18, 16, 0.82), rgba(19, 18, 16, 0.50), #131210);
+  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #131210 85%);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 14px 0 rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px 0 rgba(0, 0, 0, 0.45);
+  --glow-color: #C9A86A;
+  --glow-tail-color: rgba(201, 168, 106, 0.28);
+  --glow-base-color: rgba(225, 215, 200, 0.04);
   --color-scheme: dark;
 }
 
 [data-theme="light"], .light {
-  --background: #F8F6F0;
+  --background: #F8F6F1;
   --background-secondary: #F2EFEB;
   --surface: #FFFFFF;
-  --surface-elevated: #FAF8F5;
-  --surface-muted: #EFECE5;
+  --surface-elevated: #FAF8F4;
+  --surface-muted: #EBE7DF;
   --card-background: #FFFFFF;
-  --footer-background: #EFECE5;
-  --footer-foreground: #3D4046;
-  --header-background: rgba(248, 246, 240, 0.95);
-  --header-gradient: linear-gradient(to bottom, rgba(248, 246, 240, 0.95), rgba(248, 246, 240, 0.60), transparent);
-  --foreground: #181A1D;
-  --foreground-secondary: #4A4740;
-  --foreground-muted: #6B6862;
-  --border: rgba(24, 26, 29, 0.10);
-  --border-strong: rgba(24, 26, 29, 0.20);
-  --border-subtle: rgba(24, 26, 29, 0.05);
-  --accent: #9E7D4C;
-  --accent-hover: #88693B;
+  --footer-background: #ECE8DE;
+  --footer-foreground: #4E4942;
+  --header-background: rgba(248, 246, 241, 0.90);
+  --header-gradient: linear-gradient(to bottom, rgba(248, 246, 241, 0.95), rgba(248, 246, 241, 0.60), transparent);
+  --foreground: #1A1815;
+  --foreground-secondary: #4E4942;
+  --foreground-muted: #7D776C;
+  --border: rgba(26, 24, 21, 0.09);
+  --border-strong: rgba(26, 24, 21, 0.18);
+  --border-subtle: rgba(26, 24, 21, 0.04);
+  --accent: #A88656;
+  --accent-hover: #967445;
   --accent-foreground: #FFFFFF;
-  --accent-subtle: rgba(158, 125, 76, 0.12);
-  --input: #FAF8F5;
-  --input-foreground: #181A1D;
-  --input-border: rgba(24, 26, 29, 0.15);
-  --overlay: rgba(24, 26, 29, 0.50);
-  --image-overlay: rgba(248, 246, 240, 0.35);
-  --hero-gradient-overlay: linear-gradient(to bottom, rgba(248, 246, 240, 0.85), rgba(248, 246, 240, 0.70), #F8F6F0);
-  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #F8F6F0 85%);
-  --shadow-sm: 0 1px 3px 0 rgba(24, 26, 29, 0.05);
-  --shadow-md: 0 4px 16px 0 rgba(24, 26, 29, 0.07);
-  --shadow-lg: 0 12px 32px 0 rgba(24, 26, 29, 0.09);
-  --glow-color: #9E7D4C;
-  --glow-tail-color: rgba(158, 125, 76, 0.22);
-  --glow-base-color: rgba(24, 26, 29, 0.04);
+  --accent-subtle: rgba(168, 134, 86, 0.12);
+  --accent-bronze: #8C6A3C;
+  --accent-sage: #6B7B66;
+  --input: #FFFFFF;
+  --input-foreground: #1A1815;
+  --input-border: rgba(26, 24, 21, 0.12);
+  --overlay: rgba(26, 24, 21, 0.40);
+  --image-overlay: rgba(248, 246, 241, 0.25);
+  --hero-gradient-overlay: linear-gradient(to bottom, rgba(248, 246, 241, 0.85), rgba(248, 246, 241, 0.65), #F8F6F1);
+  --hero-radial-overlay: radial-gradient(ellipse at center, transparent 0%, #F8F6F1 85%);
+  --shadow-sm: 0 1px 3px 0 rgba(26, 24, 21, 0.05);
+  --shadow-md: 0 4px 16px 0 rgba(26, 24, 21, 0.07);
+  --shadow-lg: 0 12px 32px 0 rgba(26, 24, 21, 0.09);
+  --glow-color: #A88656;
+  --glow-tail-color: rgba(168, 134, 86, 0.20);
+  --glow-base-color: rgba(26, 24, 21, 0.04);
   --color-scheme: light;
 }
 
@@ -346,14 +350,189 @@ button, input, select, textarea {
   border-color: var(--border);
 }
 
+/* Luxury Architectural Button Tokens */
+.btn-champagne-primary {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(201, 168, 106, 0.24);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-champagne-primary:hover {
+  background-color: var(--accent-hover);
+  box-shadow: 0 6px 26px rgba(201, 168, 106, 0.38);
+  transform: translateY(-1.5px);
+}
+
+.btn-charcoal-secondary {
+  background-color: rgba(28, 26, 23, 0.75);
+  border: 1px solid rgba(225, 215, 200, 0.16);
+  color: var(--foreground);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-charcoal-secondary:hover {
+  border-color: var(--accent);
+  background-color: rgba(36, 33, 29, 0.90);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.light .btn-charcoal-secondary {
+  background-color: rgba(255, 255, 255, 0.90) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--foreground) !important;
+}
+
+.light .btn-charcoal-secondary:hover {
+  border-color: var(--accent) !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Warm Stone Light Editorial Section Hierarchy */
+.section-light-stone {
+  background-color: #F5F2EB !important;
+  color: #1A1815 !important;
+  border-color: #E2DDD3 !important;
+}
+
+.section-light-stone .text-foreground,
+.section-light-stone h2,
+.section-light-stone h3 {
+  color: #1A1815 !important;
+}
+
+.section-light-stone .text-foreground-secondary,
+.section-light-stone p {
+  color: #4E4942 !important;
+}
+
+.section-light-stone .text-foreground-muted {
+  color: #7D776C !important;
+}
+
+.section-light-stone .border-border,
+.section-light-stone .border-white\/10,
+.section-light-stone .border-white\/5 {
+  border-color: rgba(26, 24, 21, 0.10) !important;
+}
+
+.section-light-stone .bg-background {
+  background-color: #F5F2EB !important;
+}
+
+.section-light-stone .bg-card,
+.section-light-stone .bg-\[\#101317\],
+.section-light-stone .bg-\[\#121519\],
+.section-light-stone .bg-\[\#14171D\] {
+  background-color: #FFFFFF !important;
+  border-color: #E2DDD3 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
 /* Shimmer effect */
 .shimmer-text {
-  background: linear-gradient(90deg, #F4F1EA 0%, #C5A880 50%, #F4F1EA 100%);
+  background: linear-gradient(90deg, #FBF9F5 0%, #C9A86A 50%, #FBF9F5 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   animation: shine 4s linear infinite;
+}
+
+/* ============================================================
+   ARCHITECTURAL BUTTON & SECTION UTILITIES
+   ============================================================ */
+
+.btn-champagne-primary {
+  background-color: #C9A86A;
+  color: #131210;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.25s ease;
+}
+.btn-champagne-primary:hover {
+  background-color: #D8B77D;
+  box-shadow: 0 4px 20px rgba(201, 168, 106, 0.25);
+}
+
+.btn-charcoal-secondary {
+  background-color: rgba(28, 26, 23, 0.7);
+  border: 1px solid rgba(225, 215, 200, 0.15);
+  color: #FBF9F5;
+  font-family: var(--font-jetbrains-mono), monospace;
+  transition: all 0.25s ease;
+}
+.btn-charcoal-secondary:hover {
+  background-color: rgba(36, 34, 29, 0.9);
+  border-color: rgba(201, 168, 106, 0.5);
+  color: #C9A86A;
+}
+
+/* Editorial Light Stone Chapter (Alternating Rhythm) */
+.section-light-stone {
+  background-color: #F5F2EB !important;
+  color: #1A1815;
+  border-color: #E2DDD3 !important;
+}
+.section-light-stone > div {
+  color: #1A1815;
+}
+.section-light-stone .text-foreground {
+  color: #1A1815 !important;
+}
+.section-light-stone .text-foreground-secondary {
+  color: #4A463F !important;
+}
+.section-light-stone .text-foreground-muted {
+  color: #7A756B !important;
+}
+.section-light-stone .border-border,
+.section-light-stone .border-border\/40 {
+  border-color: #E2DDD3 !important;
+}
+
+/* Ensure dark cards nested inside light stone chapters preserve their crisp light tones */
+.section-light-stone .bg-\[\#181714\],
+.section-light-stone .bg-\[\#1C1A17\] {
+  color: #FBF9F5;
+}
+.section-light-stone .bg-\[\#181714\] h3,
+.section-light-stone .bg-\[\#1C1A17\] h3 {
+  color: #FBF9F5 !important;
+}
+.section-light-stone .bg-\[\#181714\] .text-\[\#FBF9F5\],
+.section-light-stone .bg-\[\#1C1A17\] .text-\[\#FBF9F5\] {
+  color: #FBF9F5 !important;
+}
+.section-light-stone .bg-\[\#181714\] .text-\[\#8E887E\],
+.section-light-stone .bg-\[\#1C1A17\] .text-\[\#8E887E\] {
+  color: #8E887E !important;
+}
+.section-light-stone .bg-\[\#181714\] .text-\[\#CCC5B9\],
+.section-light-stone .bg-\[\#1C1A17\] .text-\[\#CCC5B9\] {
+  color: #CCC5B9 !important;
 }
 
 @keyframes shine {

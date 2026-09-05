@@ -119,7 +119,7 @@ export default function ArchitectureVision() {
     <section
       ref={sectionRef}
       id="architecture"
-      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#0C0E10] text-[#F4F1EA] border-b border-white/10 relative overflow-hidden"
+      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-12 bg-[#161513] text-[#FBF9F5] border-b border-white/10 relative overflow-hidden"
     >
       {/* Background Subtle Blueprint Grid Lines */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
@@ -127,15 +127,15 @@ export default function ArchitectureVision() {
       <div className="max-w-7xl mx-auto space-y-20 relative z-10">
         {/* Section Header */}
         <div ref={headerRef} className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.25em] text-[#C5A880]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880]" />
+          <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.25em] text-[#C9A86A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A86A]" />
             <span>ARCHITECTURAL METHODOLOGY // BAHADURPALLY</span>
           </div>
-          <h2 className="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
+          <h2 className="font-serif text-4xl sm:text-6xl font-normal tracking-tight text-[#FBF9F5] leading-tight">
             Designed with Intention. <br />
-            <span className="text-[#C5A880] italic font-light font-serif">Every line. Every material. Every space.</span>
+            <span className="text-[#C9A86A] italic font-light font-serif">Every line. Every material. Every space.</span>
           </h2>
-          <p className="text-sm sm:text-base text-[#9A968D] font-light leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-[#8E887E] font-light leading-relaxed max-w-2xl">
             We abandon superficial ornamentation in favor of architectural honesty: authentic materials, structural longevity, and residences shaped around human daily living.
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function ArchitectureVision() {
         {/* Technical Blueprint Visual Diagram Card */}
         <div
           ref={diagramRef}
-          className="relative aspect-[16/8] rounded-2xl overflow-hidden border border-white/15 bg-[#121519] shadow-2xl group"
+          className="relative aspect-[16/8] rounded-2xl overflow-hidden border border-white/10 bg-[#1C1A17] shadow-2xl group"
         >
           {/* Architectural Drawing Background Image */}
           <div
@@ -153,25 +153,25 @@ export default function ArchitectureVision() {
                 "url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85')",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0C0E10]/95 via-[#0C0E10]/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#161513]/95 via-[#161513]/70 to-transparent" />
 
           {/* Technical Blueprint Overlay Callouts */}
           <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-between">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center space-x-2 text-[10px] font-mono tracking-widest text-[#C5A880] uppercase">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <div className="flex items-center space-x-2 text-[10px] font-mono tracking-widest text-[#C9A86A] uppercase">
+                <span className="w-2 h-2 rounded-full bg-[#7E8D79] animate-pulse" />
                 <span>SPECIFICATION BLUEPRINT // LEVEL SECTION 04</span>
               </div>
-              <span className="text-[10px] font-mono text-white/40">
+              <span className="text-[10px] font-mono text-[#8E887E]">
                 TOLERANCE: ±1.5MM • MONOLITHIC CASTING
               </span>
             </div>
 
             <div className="max-w-md space-y-3">
-              <h3 className="font-serif text-2xl sm:text-3xl text-white font-semibold">
+              <h3 className="font-serif text-2xl sm:text-3xl text-[#FBF9F5] font-normal">
                 Cantilevered Floor Plates &amp; Thermal Buffer Balconies
               </h3>
-              <p className="text-xs text-[#CCC7BC] leading-relaxed font-light">
+              <p className="text-xs text-[#CCC5B9] leading-relaxed font-light">
                 Extended concrete overhangs cast calculated shade onto floor-to-ceiling glass assemblies, reducing solar heat gain by 32% while preserving uninterrupted horizon panoramas.
               </p>
             </div>
@@ -179,20 +179,20 @@ export default function ArchitectureVision() {
             {/* Micro Blueprint Technical Specs */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/10 text-xs font-mono">
               <div>
-                <span className="text-[10px] text-white/40 block">SLAB THICKNESS</span>
-                <span className="text-[#C5A880] font-semibold">200mm Post-Tensioned</span>
+                <span className="text-[10px] text-[#8E887E] block">SLAB THICKNESS</span>
+                <span className="text-[#C9A86A] font-semibold">200mm Post-Tensioned</span>
               </div>
               <div>
-                <span className="text-[10px] text-white/40 block">CONCRETE GRADE</span>
-                <span className="text-[#C5A880] font-semibold">M40 Self-Compacting</span>
+                <span className="text-[10px] text-[#8E887E] block">CONCRETE GRADE</span>
+                <span className="text-[#C9A86A] font-semibold">M40 Self-Compacting</span>
               </div>
               <div>
-                <span className="text-[10px] text-white/40 block">FACADE GLAZING</span>
-                <span className="text-[#C5A880] font-semibold">Low-E Acoustic DGU</span>
+                <span className="text-[10px] text-[#8E887E] block">FACADE GLAZING</span>
+                <span className="text-[#C9A86A] font-semibold">Low-E Acoustic DGU</span>
               </div>
               <div>
-                <span className="text-[10px] text-white/40 block">WARRANTY</span>
-                <span className="text-[#C5A880] font-semibold">10-Year Structural</span>
+                <span className="text-[10px] text-[#8E887E] block">WARRANTY</span>
+                <span className="text-[#C9A86A] font-semibold">10-Year Structural</span>
               </div>
             </div>
           </div>
@@ -205,30 +205,30 @@ export default function ArchitectureVision() {
             return (
               <div
                 key={p.num}
-                className="p-8 rounded-xl bg-[#13161A] border border-white/10 space-y-5 flex flex-col justify-between hover:border-[#C5A880]/60 transition-all duration-300 shadow-lg group hover:translate-y-[-4px]"
+                className="p-8 rounded-2xl bg-[#1C1A17] border border-white/10 space-y-5 flex flex-col justify-between hover:border-[#C9A86A]/50 transition-all duration-300 shadow-md group hover:-translate-y-1"
                 data-cursor="explore"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-2xl font-light text-[#C5A880]/50 group-hover:text-[#C5A880] transition-colors">
+                    <span className="font-mono text-2xl font-light text-[#8E887E] group-hover:text-[#C9A86A] transition-colors">
                       {p.num}
                     </span>
-                    <Icon className="w-5 h-5 text-[#C5A880]" />
+                    <Icon className="w-5 h-5 text-[#8E887E] group-hover:text-[#C9A86A] transition-colors" />
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#A09D96]">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#8E887E]">
                       {p.subtitle}
                     </span>
-                    <h4 className="font-serif text-xl font-bold text-white group-hover:text-[#C5A880] transition-colors">
+                    <h4 className="font-serif text-xl font-normal text-[#FBF9F5] group-hover:text-[#C9A86A] transition-colors">
                       {p.title}
                     </h4>
                   </div>
-                  <p className="text-xs text-[#8C8983] leading-relaxed font-light">
+                  <p className="text-xs text-[#8E887E] leading-relaxed font-light">
                     {p.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 text-[11px] font-mono text-[#C5A880]">
+                <div className="pt-4 border-t border-white/10 text-[11px] font-mono text-[#C9A86A]">
                   {p.metric}
                 </div>
               </div>
